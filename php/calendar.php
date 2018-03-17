@@ -1,5 +1,5 @@
 <?php
-echo 'cal';
+echo 'cale';
 
 
  ?>
