@@ -80,7 +80,7 @@
 						<div class="collapse navbar-collapse" id="navbarNavDropdown-navbarText">
 							<ul class="navbar-nav justify-content-center">
 								<li class="nav-item">
-									<a class="nav-link" href="../login.php" >Login <!--<span class="sr-only"></span>--></a>
+									<a class="nav-link" href="../php/login.php" >Login <!--<span class="sr-only"></span>--></a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="../php/developer.php">Developers</a>
