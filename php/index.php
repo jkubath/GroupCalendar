@@ -46,15 +46,14 @@
 			    <div class="collapse navbar-collapse" id="navbarNavDropdown-navbarText">
 			      <ul class="navbar-nav justify-content-center">
 			        <li class="nav-item">
-			          <a class="nav-link white" href="/" >Home <span class="sr-only"></span></a>
+			          <a class="nav-link white" href="#" >Home <span class="sr-only"></span></a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" href="/axeljeremy7/blog.html">About</a>
+			          <a class="nav-link" href="/php/about.php">About</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" href="#">Features</a>
+			          <a class="nav-link" href="/php/features.php">Features</a>
 			        </li>
-
 			      </ul>
 			    </div>
 			  </nav>
@@ -77,10 +76,10 @@
 						<div class="collapse navbar-collapse" id="navbarNavDropdown-navbarText">
 							<ul class="navbar-nav justify-content-center">
 								<li class="nav-item">
-									<a class="nav-link" href="login.php/" >Login <!--<span class="sr-only"></span>--></a>
+									<a class="nav-link" href="/login.php" >Login <!--<span class="sr-only"></span>--></a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="/developer.phph">Developers</a>
+									<a class="nav-link" href="/php/developer.php">Developers</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="/php/contact.php">Contact</a>
