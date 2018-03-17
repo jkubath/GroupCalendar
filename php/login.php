@@ -30,7 +30,7 @@
   }
 
 function login(){
-  	?>
+?>
   	<!--//Make the login box -->
     <div class='login'>
     	<h1 id="loginTitle">LOGIN</h1>
