@@ -5,8 +5,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <link rel="stylesheet" href="..\css\login.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+
+<div class="loginContainer">
 
 <?php
 
@@ -18,7 +22,6 @@
   $_SESSION["username"] = "";
   if(strcmp($_SESSION["login"], "") == 0 || strcmp($_SESSION["login"], "login") == 0) {
     //Make the login box
-    //echo "<h1> login </h1>";
     login();
   }
   //Are they trying to register
@@ -48,6 +51,8 @@ function login(){
     	<!-- Redirect to the create account -->
     	<button id="createAccountButton" onclick="changePageType()">Create an Account</button>
     </div>
+
+</div>
 
   	<?php
   } // End of login function
@@ -115,15 +120,16 @@ function login(){
 		</div> <!-- Close the table -->
 	</div> <!-- End of Register html -->
 
+</div>
+
 	<?php
 	}
 	?> <!-- End of register function -->
 
 	<script>
-
 	 function changePageType() {
+	 	//Call ChangeLoginPage.php to set the 
 		xmlhttp = new XMLHttpRequest();
-		
 		xmlhttp.open("GET", "ChangeLoginPage.php", true);
 		xmlhttp.send();
 		window.setTimeout(innerChangePageType, 10);
