@@ -17,14 +17,6 @@ body {
 	
 }
 
-h1 {
-	
-}
-
-p {
-	color: red;
-}
-
 input[type=text], input[type=password], textarea {
 	padding: 0.5rem 1rem;
 	min-width: 20rem;
@@ -54,6 +46,7 @@ button::-moz-focus-inner { border: 0; }
 	transform: translate(-50%, -50%);
 	background-color: rgba(20, 20, 50, 0.6);
 	box-shadow: 1px 1px 15px 2px;
+	color: rgba(250, 250, 250, 1); 
 }
 
 .clearFloat {
@@ -62,7 +55,11 @@ button::-moz-focus-inner { border: 0; }
 
 /*****IDS*****/
 #loginTitle {
-	color: rgba(250, 250, 250, 1) !important; 
+	color: rgba(250, 250, 250, 1); 
+}
+
+#registerTitle {
+	color: rgba(250, 250, 250, 1); 
 }
 
 #usernameBox {
@@ -137,4 +134,8 @@ button::-moz-focus-inner { border: 0; }
 
 #zipCode {
 	border-radius: 0 0 5px 5px;
+}
+
+::placeholder {
+	color: rgba(255, 255, 255, 0.7);
 }
