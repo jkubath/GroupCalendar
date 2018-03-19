@@ -33,24 +33,30 @@
 	function login() {
 	?>
 	  	<!--//Make the login box -->
-	    <div class='login'>
+	    <div class="login">
 	    	<h1 id="loginTitle">LOGIN</h1>
 
 	    	<!-- Username -->
-	    	<div class='username'><input type = 'text' id='usernameBox' placeholder = 'Username' name='username'></div>
+	    	<div class="username"><input type="text" id="usernameBox" placeholder="Username" name="username"></div>
 	    	<span id="usernameLoginError"></span>
 
 	    	<!-- Password -->
-	    	<div class='password'><input type = 'password' id='passwordBox' placeholder = 'Password' name='password'></div>
+	    	<div class="password"><input type="password" id="passwordBox" placeholder="Password" name="password"></div>
+	    	
 	    	<span id="passwordLoginError"></span>
 	    	<br />
 
-	    	<!-- Validate the login -->
-	    	<button id="loginButton" onclick="validateFormLogin()">Login</button>
-	    	<br />
+			
+			<div id="loginButtonWrapper">
+				<!-- Redirect to the create account -->
+				<a id="createAccountLink" onclick="changePageType()">No account? Create an Account.</a>
 
-	    	<!-- Redirect to the create account -->
-	    	<button id="createAccountButton" onclick="changePageType()">Create an Account</button>
+				<br />
+				<br />
+
+				<!-- Validate the login -->
+				<button id="loginButton" onclick="validateFormLogin()">Login</button>
+			</div>
 
 	    </div>
 
@@ -63,63 +69,93 @@
 	  function register() {
 	  	?>
 	  	<!-- Make the login box -->
-		<div class='register'>
-			<h1 id=\"registerTitle\">CREATE ACCOUNT</h1>
+		<div class="register">
+			<h1 id="registerTitle">CREATE ACCOUNT</h1>
+			
 			<!-- User Account table -->
-			<div class='myTable'>
+			<div class="myTable">
+				
 				<!-- First name -->
-				<div class='row'>
-					<div class='col-xs-12'><input style=\"width: 100%;\" type = 'text' id='firstName' placeholder = 'First Name' name='first'></div>
-					<span id=\"firstNameRegisterError\"></span>
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="text" id="firstName" placeholder="First Name" name="first">
+					</div>
+					<span id="firstNameRegisterError"></span>
 				</div>
+
 				<!-- Last name -->
-				<div class='row'>
-					<div class='col-xs-12'><input style=\"width: 100%;\" type = 'text' id='lastName' placeholder = 'Last Name' name='last'></div>
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="text" id="lastName" placeholder="Last Name" name="last">
+					</div>
 					<span id=\"lastNameRegisterError\"></span>
 				</div>
+				
 				<!-- Username -->
-				<div class='row'>
-					<div class='col-xs-12' ><input style=\"width: 100%;\" type = 'text' id='username' placeholder = 'Username' name='username'></div>
-					<span id=\"usernameRegisterError\"></span>
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="text" id="username" placeholder="Username" name="username">
+					</div>
+					<span id="usernameRegisterError"></span>
 				</div>
+
 				<!-- Password -->
-				<div class='row'>
-					<div class='col-xs-12' ><input style=\"width: 100%;\" type = 'password' id='password' placeholder = 'Password' name='password'></div>
-					<span id=\"passwordRegisterError\"></span>
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="password" id="password" placeholder="Password" name="password">
+					</div>
+					<span id="passwordRegisterError"></span>
 				</div>
+
 				<!-- Confirm Pasword -->
-				<div class='row'>
-					<div class='col-xs-12' id='confirm'><input style=\"width: 100%;\" type = 'password' id='confirmPassword' placeholder = 'Confirm Password' name='confirm'></div>
-					<span id=\"confirmPasswordRegisterError\"></span>
+				<div class="row">
+					<div class="col-xs-12" id="confirm">
+						<input type="password" id="confirmPassword" placeholder="Confirm Password" name="confirm">
+					</div>
+					<span id="confirmPasswordRegisterError"></span>
 				</div>
+
 				<!-- Address -->
-				<div class='row'>
-					<div id='tableAddress' class='col-xs-12'><input style=\"width: 100%;\" type = 'text' id='address' placeholder = 'Address' name='address'></div>
-					<span id=\"addressRegisterError\"></span>
+				<div class="row">
+					<div id="tableAddress" class="col-xs-12">
+						<input type="text" id="address" placeholder="Address" name="address">
+					</div>
+					<span id="addressRegisterError"></span>
 				</div>
+				
 				<!-- City -->
-				<div class='row'>
-					<div class='col-xs-12'><input style=\"width: 100%;\" type = 'text' id='city' placeholder = 'City' name='city'></div>
-					<span id=\"cityRegisterError\"></span>
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="text" id="city" placeholder="City" name="city">
+					</div>
+					<span id="cityRegisterError"></span>
 				</div>
+				
 				<!-- State -->
-				<div class='row'>
-					<div class='col-xs-12'><input style=\"width: 100%;\" type = 'text' id='state' placeholder = 'State' name='state'></div>
-					<span id=\"stateRegisterError\"></span>
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="text" id="state" placeholder="State" name="state">
+					</div>
+					<span id="stateRegisterError"></span>
 				</div>
+				
 				<!-- Zip Code -->
-				<div class='row'>
-					<div class='col-xs-12'><input style=\"width: 100%;\" type = 'text' id='zipCode' placeholder = 'Zip Code' name='zipCode'></div>
-					<span id=\"zipCodeRegisterError\"></span>
+				<div class="row">
+					<div class="col-xs-12">
+						<input type="text" id="zipCode" placeholder="Zip Code" name="zipCode">
+					</div>
+					<span id="zipCodeRegisterError"></span>
 				</div>
 
-				<!-- Validate the form -->
-				<button id=\"registerButton\" onclick=\"validateFormRegister();\">Register</button>
-				<br />
+				<div id="registerButtonWrapper">
+					<!-- Back to login -->
+					<a id="backToLoginLink" onclick="changePageType()">Back to Login.</a>
+				
+					<br />
 
-				<!-- Back to login -->
-				<button id=\"backToLoginButton\" onclick="changePageType()">Back to Login</button>
-
+					<!-- Validate the form -->
+					<button id="registerButton" onclick=\"validateFormRegister();\">Register</button>	
+				</div>
 			</div> <!-- Close the table -->
 		</div> <!-- End of Register html -->
 
