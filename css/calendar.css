@@ -1,0 +1,31 @@
+/*****GLOBAL*****/
+body, html {
+	overflow: hidden;
+}
+
+/*****IDs*****/
+#calendar {
+  margin: 2rem;
+}
+
+#toolbar {
+	border: 1px thick black;
+	border-bottom: solid;
+	height: 3rem;
+
+}
+
+/* Select the element immediately after the toolbar */
+#toolbar + #calendar-container {
+	top: 3rem;
+}
+
+#calendar-container {
+	/*margin: 1.5rem;*/
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
