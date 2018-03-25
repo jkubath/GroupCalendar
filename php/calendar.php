@@ -17,7 +17,8 @@
 
             $('#calendar').fullCalendar({
               // put your options and callbacks here
-              height: 'parent'
+              height: 'parent',
+              events: './getCalendarEvents.php'
               //contentHeight: 'auto'
             })
 
