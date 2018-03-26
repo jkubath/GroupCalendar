@@ -1,0 +1,25 @@
+/*****GLOBAL*****/
+body, html {
+	overflow: hidden;
+}
+
+/*****IDs*****/
+#calendar {
+	margin: 2rem;
+}
+
+#toolbar {
+	border: 1px thick black;
+	border-bottom: solid;
+	height: 3rem;
+
+}
+
+#calendar-container {
+	position: fixed;
+	top: 3rem;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
