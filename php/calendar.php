@@ -2,33 +2,16 @@
 <html>
     <head>
       <title>Calendar</title>
-      
+
       <link rel='stylesheet' href='../css/calendar.css' />
       <link rel='stylesheet' href='../includes/fullcalendar/fullcalendar.css' />
       <script src='../includes/jquery-3.3.1.min.js'></script>
       <script src='../includes/moment.min.js'></script>
       <script src='../includes/fullcalendar/fullcalendar.js'></script>
-      
-      
-      <script>
-        $(document).ready(function() {
-
-            // page is now ready, initialize the calendar...
-
-            $('#calendar').fullCalendar({
-              // put your options and callbacks here
-              height: 'parent',
-              events: './getCalendarEvents.php'
-              //contentHeight: 'auto'
-            })
+      <script src='../js/.js'></script>
 
 
 
-
-          });
-      </script>
-
-    
     </head>
     <body>
       <div id='toolbar'>
@@ -38,5 +21,21 @@
        <div id="calendar"></div>
      </div>
     </body>
+
+    <script>
+      $(document).ready(function() {
+
+          // page is now ready, initialize the calendar...
+
+          $('#calendar').fullCalendar({
+            // put your options and callbacks here
+            height: 'parent',
+            events: './getCalendarEvents.php'
+            //contentHeight: 'auto'
+          })
+
+
+        });
+    </script>
 
     </html>
