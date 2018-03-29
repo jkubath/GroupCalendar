@@ -86,7 +86,7 @@
             <h1>Best Place To Start</h1>
             <p class="flow-text">To create your calendar to the next level with our services</p>
             <br>
-            <a href="#about" class="btn btn-large white black-text">Sign Up</a>
+            <a href="signup.php" class="btn btn-large white black-text">Sign Up</a>
             <a href="#contact" class="white-text">
               <i class="material-icons medium scroll-icon">arrow_drop_down_circle</i>
             </a>
