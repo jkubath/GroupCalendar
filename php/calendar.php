@@ -1,29 +1,35 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <title>Calendar</title>
+<head>
+  <!-- Style meta data -->
+  <?php include "../includes/style-meta-data.inc.php"; ?>
+  <!-- End of style meta data -->
 
-      <link rel='stylesheet' href='../css/calendar.css' />
-      <link rel='stylesheet' href='../includes/fullcalendar/fullcalendar.css' />
-      <script src='../includes/jquery-3.3.1.min.js'></script>
-      <script src='../includes/moment.min.js'></script>
-      <script src='../includes/fullcalendar/fullcalendar.js'></script>
-      <script src='../js/.js'></script>
+  <link rel='stylesheet' href='../css/calendar.css' />
+  <link rel='stylesheet' href='../includes/fullcalendar/fullcalendar.css' />
+  <script src='../includes/jquery-3.3.1.min.js'></script>
+  <script src='../includes/moment.min.js'></script>
+  <script src='../includes/fullcalendar/fullcalendar.js'></script>
+  <script src='../js/.js'></script>
 
 
+  <title>Calendar</title>
+</head>
+<body>
+  <header class="main-header">
+    <div class="primary-overlay">
+      <!-- Navigation Bar -->
+      <?php include "../includes/navigation-bar.inc.php"; ?>
+      <!-- End of Navigation Bar -->
+    </div>
 
-    </head>
-    <body>
-      <div id='toolbar'>
-        This is the toolbar---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-      </div>
-      <div id='calendar-container'>
-       <div id="calendar"></div>
-     </div>
-    </body>
+  </header>
+  <div class="container" id='calendar-container'>
+   <div id="calendar"></div>
+ </div>
 
-    <script>
-      $(document).ready(function() {
+<script>
+  $(document).ready(function() {
 
           // page is now ready, initialize the calendar...
 
@@ -36,6 +42,8 @@
 
 
         });
-    </script>
+      </script>
+    </body>
+
 
     </html>

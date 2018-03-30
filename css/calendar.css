@@ -8,13 +8,6 @@ body, html {
 	margin: 2rem;
 }
 
-#toolbar {
-	border: 1px thick black;
-	border-bottom: solid;
-	height: 3rem;
-
-}
-
 #calendar-container {
 	position: fixed;
 	top: 3rem;

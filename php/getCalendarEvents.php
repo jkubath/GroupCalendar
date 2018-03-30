@@ -9,7 +9,7 @@
 	 *	Step 3: Select the data from the database
 	 *	Step 4: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object
 	 *	Step 5: Convert the data into Event objects to be returned to the client
-	 *	Step 6:  Send JSON to the client
+	 *	Step 6: Send JSON to the client
 
 	//This can be used to add events to the calendar_events table for testing
 	INSERT INTO `calendar_events`(`calendar_id`, `name`, `start_date`, `end_date`) VALUES ("1","4430 Assignment","2018-03-29 08:20:20", "2018-03-30 08:20:20")
