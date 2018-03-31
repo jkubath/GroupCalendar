@@ -1,5 +1,5 @@
 <!-- Start of Navigation bar-->
-<div class="navbar-fixed">
+<div class="navbar-fixed" id="navbar-switch">
   <nav class="transparent" id="navbar">
     <div class="container">
       <div class="nav-wrapper">

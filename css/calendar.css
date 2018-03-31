@@ -9,10 +9,33 @@ body, html {
 .main-header {
 }
 
+
+
 /*****IDs*****/
-#calendar {
-	background: rgba(230, 230, 230, 0.85);
-	border-radius: 5px;
-	padding: 2rem;
-	/*margin: 2rem;*/
+#container-width {
+	margin: 0 auto;
+	max-width: 100%;
+	width: 100%;
+}
+
+
+#calendar-left {
+	border-radius: 1px;
+	padding: 0.4rem;
+}
+
+#calendar-right {
+	border-radius: 1px;
+	padding: 0.4rem;
+}
+
+#calendar-container {
+	margin: 0;
+}
+
+#calendar-section {
+	padding: 0;
+}
+
+.page-footer {
 }

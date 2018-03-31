@@ -4,26 +4,20 @@
 	 * Summary: getCalendarEvents will query the database for all the events (dates) that should be
 	 * 	displayed on the calendar for the user.
 	 * 
-	 * 	Step 1: Initialize the connection to the database: group_calendar
-	 *	Step 2: Set local variables to start and end date ranges
-	 *	Step 3: Select the data from the database
-	 *	Step 4: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object
-	 *	Step 5: Convert the data into Event objects to be returned to the client
-	 *	Step 6: Send JSON to the client
+	 *	Step 1: Set local variables to start and end date ranges
+	 *	Step 2: Select the data from the database
+	 *	Step 3: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object
+	 *	Step 4: Convert the data into Event objects to be returned to the client
+	 *	Step 5: Send JSON to the client
 
 	//This can be used to add events to the calendar_events table for testing
 	INSERT INTO `calendar_events`(`calendar_id`, `name`, `start_date`, `end_date`) VALUES ("1","4430 Assignment","2018-03-29 08:20:20", "2018-03-30 08:20:20")
-
-
 	*/
 
-	include('../includes/databaseConnection.php'); //Make the connection to the database
-	include('../php/fullCalendarUtil.php'); //Includes the Event class and the datetime utilities (provided by FullCalendar.io)
-
-	/* Step 1: Initialize the connection to the database */
-	$conn = dbConnection();
+	require_once('../includes/databaseConnection.php'); //Make the connection to the database
+	require_once('../php/fullCalendarUtil.php'); //Includes the Event class and the datetime utilities (provided by FullCalendar.io)
 	
-	/* Step 2: Set variables for start and end date ranges */
+	/* Step 1: Set variables for start and end date ranges */
 	//Short-circuit if the client did not give us a date range.
 	if (!isset($_GET['start']) || !isset($_GET['end'])) {
 		die("Please provide a date range.");
@@ -46,7 +40,7 @@
 	}
 
 
-	/* Step 3: Select the data from the database */
+	/* Step 2: Select the data from the database */
 	$sql = "SELECT * FROM calendar_events";
 
 	try {
@@ -56,19 +50,19 @@
 		//echo "Error".$e;
 	}
 
-	/* Step 4: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object */
+	/* Step 3: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object */
 	$results = array();
 	while ($row = $stmt->fetch()) {
 			// echo $row['name'];
 			// echo $row['calendar_id'];
 			$results[] = array(
-				"id"=>$row['event_id'], 
-				"title"=>$row['name'], 
-				"start"=>$row['start_date'], 
-				"end"=>$row['end_date']);
+				"id"	=> $row['event_id'], 
+				"title"	=> $row['title'], 
+				"start"	=> $row['start_date'], 
+				"end"	=> $row['end_date']);
 	}
 
-	/* Step 5: Convert the data into Event objects to be returned to the client */
+	/* Step 4: Convert the data into Event objects to be returned to the client */
 	// Accumulate an output array of event data arrays.
 	$output_arrays = array();
 	foreach ($results as $array) {
@@ -81,10 +75,7 @@
 	  	}
 
 	}
-
-	/* Step 6:  Send JSON to the client */
+	/* Step 5:  Send JSON to the client */
 	echo json_encode($output_arrays);
-
-
 
 ?>

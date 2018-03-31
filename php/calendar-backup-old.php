@@ -1,6 +1,3 @@
-<?php
-require_once('../includes/databaseConnection.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,20 +44,20 @@ require_once('../includes/databaseConnection.php');
       $("#navbar-switch").addClass("navbar");
 
 
-      // page is now ready, initialize the calendar...
-      $('#calendar-left').fullCalendar({
-        header :{
-          left: 'title',
-          right: 'prev,next'
-        },
-        dayClick: function(date, jsEvent, view) {
-          // FOR TESTING
-          $(this).css('background-color', 'grey');
-        },
+    //   // page is now ready, initialize the calendar...
+    //   $('#calendar-left').fullCalendar({
+    //     header :{
+    //       left: 'title',
+    //       right: 'prev,next'
+    //     },
+    //     dayClick: function(date, jsEvent, view) {
+    //       // FOR TESTING
+    //       $(this).css('background-color', 'grey');
+    //     },
 
-        height: "auto",
-        // events: './getCalendarEvents.php'
-    }),
+    //     height: "auto",
+    //     events: './getCalendarEvents.php'
+    // }),
 
 
       $('#calendar-right').fullCalendar({
@@ -74,25 +71,15 @@ require_once('../includes/databaseConnection.php');
             text: 'add event...',
             click: function() {
               var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-              var titleStr = prompt('Enter a name for the event');
               var date = moment(dateStr);
-              var allDayBool = true;
 
               if (date.isValid()) {
-                $('#calendar-right').fullCalendar('renderEvent', {
-                  title: titleStr,
+                $('#calendar').fullCalendar('renderEvent', {
+                  title: 'dynamic event',
                   start: date,
-                  allDay: allDayBool
+                  allDay: true
                 });
                 alert('Great. Now, update your database...');
-                $.ajax({
-                    url: "./addCalendarEvents.php",
-                    type: POST,
-                    data: {'dateStr': dateStr, 'title': titleStr, 'allDay': allDayBool },
-                    success: function () {
-                      alert("Added successfully!");
-                    }
-                  });
               } else {
                 alert('Invalid date.');
               }
@@ -132,14 +119,14 @@ require_once('../includes/databaseConnection.php');
     //               allDay: allDayBool
     //             });
     //             alert('Great. Now, update your database...');
-                // $.ajax(
-                //     url: "addCalendarEvents.php",
-                //     type: POST,
-                //     data: {'dateStr': dateStr, 'title': titleStr, 'allDay': allDayBool },
-                //     success: function () {
-                //       alert("Added successfully!");
-                //     }
-                //   );
+    //             $.ajax(
+    //                 url: "addCalendarEvents.php",
+    //                 type: POST,
+    //                 data: {'dateStr': dateStr, 'title': titleStr, 'allDay': allDayBool },
+    //                 success: function () {
+    //                   alert("Added successfully!");
+    //                 }
+    //               );
     //           } else {
     //             alert('Invalid date.');
     //           }
@@ -155,7 +142,7 @@ require_once('../includes/databaseConnection.php');
     //     events: './getCalendarEvents.php'
     //   })
 
-    
+    // });
 
   </script>
 </body>

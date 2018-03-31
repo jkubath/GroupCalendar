@@ -9,9 +9,11 @@ function dbConnection() {
   try {
     return new PDO("mysql:host=$servername;dbname=$database", $username, $password);
   } catch(PDOException $e) {
-    // handle exceptions accordingly
+  // handle exceptions accordingly
     echo "Error".$e;
   }
+
 }
 
+$conn = dbConnection();
 ?>

@@ -10,12 +10,12 @@ CREATE TABLE user_info (
 	last_name VARCHAR(128),
 	email VARCHAR(128) NOT NULL,
 	phone VARCHAR(10),
-	FOREIGN KEY (username) REFERENCES users(username)
+	CONSTRAINT FK_user_info_username FOREIGN KEY (username) REFERENCES users(username)
 );
 
 CREATE TABLE calendar (
 	calendar_id INT AUTO_INCREMENT PRIMARY KEY,
-	calendar_name VARCHAR(128),
+	calendar_name VARCHAR(128) NOT NULL,
 	calendar_group VARCHAR(128) DEFAULT NULL
 );
 
@@ -24,16 +24,17 @@ CREATE TABLE calendar_rights (
 	rights_id INT AUTO_INCREMENT PRIMARY KEY,
 	calendar_id INT NOT NULL,
 	username VARCHAR(128) NOT NULL,
-	permission INT,
-	FOREIGN KEY (username) REFERENCES users(username),
-	FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
+	permission BIT,
+	CONSTRAINT FK_calendar_rights_username FOREIGN KEY (username) REFERENCES users(username),
+	CONSTRAINT FK_calendar_rights_calendar_id FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
 );
 
 CREATE TABLE calendar_events (
 	event_id INT AUTO_INCREMENT PRIMARY KEY,
 	calendar_id INT,
-	calendar_name VARCHAR(128),
+	title VARCHAR(255),	
 	start_date DATETIME,
 	end_date DATETIME,
-	FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
+	all_day BIT,
+	CONSTRAINT FK_calendar_events_calendar_id FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
 );
