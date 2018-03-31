@@ -54,7 +54,7 @@
 
 
   <!-- Section: Features -->
-  <section id="Features" class="section section-about grey lighten-3 center scrollspy">
+  <section id="features" class="section section-about grey lighten-3 center scrollspy">
     <div class="container">
       <h3>We bring you ...</h2>
         <p class="flow-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis odit, at repellendus consequatur neque placeat
@@ -131,13 +131,13 @@
     <!--  End of Body Section -->
 
     <!-- Footer -->
-    <footer class="page-footer blue-grey darken-1">  
+    <footer class="page-footer blue-grey darken-1">
       <?php include "../includes/footer.inc.php"; ?>
     </footer>
     <!-- End of footer-->
 
 
-    
+
     <!--JavaScript at end of body for optimized loading-->
     <?php include "../includes/js-meta-data.inc.php"; ?>
     <script>

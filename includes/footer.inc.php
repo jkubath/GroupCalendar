@@ -27,7 +27,7 @@
 <div class="footer-copyright blue-grey darken-4">
   <div class="container">
     Calendar © 2018
-    <a class="grey-text text-lighten-4 right" href="#home">
+    <a class="grey-text text-lighten-4 right" href="../">
       <i class="material-icons left">keyboard_arrow_up</i> Back To Top
     </a>
   </div>
