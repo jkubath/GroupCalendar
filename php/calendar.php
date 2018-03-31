@@ -22,14 +22,12 @@
       <!-- End of Navigation Bar -->
     </div>
   </header>
-  <section id="calendario" class="section center scrollspy">
-  <div class="container" id='calendar-container'>
-    <div class = "row">
-      <div class="col s12 " id="calendar"></div>
+  <section class="section center scrollspy" id="calendario">
+    <div class="container">
+      <div class="row" id="calendar-container">
+        <div class="col s12" id="calendar"></div>
+      </div>
     </div>
-
-
-  </div>
   </section>
 
   <!-- Footer -->
@@ -55,15 +53,15 @@
           right: 'month,agendaWeek,agendaDay, basicDay,basicWeek'
         },
         dayClick: function(date, jsEvent, view) {
-          alert('Clicked on: ' + date.format());
-          alert('Coordinates: ' + jsEvent.pageX + ', ' + jsEvent.pageY);
-          alert('Current view: ' + view.name);
+          // alert('Clicked on: ' + date.format());
+          // alert('Coordinates: ' + jsEvent.pageX + ', ' + jsEvent.pageY);
+          // alert('Current view: ' + view.name);
           $(this).css('background-color', 'grey');
-        }
-
-      //  height: 'parent',
+        },
+        
+        height: "auto"
       //  events: './getCalendarEvents.php'
-      })
+    })
 
     });
 
