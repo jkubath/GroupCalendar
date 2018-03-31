@@ -1,25 +1,26 @@
 /*****GLOBAL*****/
 body, html {
-	overflow: hidden;
+	background:linear-gradient(0deg,rgba(63, 57,77, 0.7),rgba(63, 57, 77, 0.7)), url(../img/dance.jpg);
+	background-size: cover;
+	background-position: center;
+}
+
+/*****CLASSES*****/
+.main-header {
 }
 
 /*****IDs*****/
 #calendar {
-	margin: 2rem;
-}
-
-#toolbar {
-	border: 1px thick black;
-	border-bottom: solid;
-	height: 3rem;
-
+	background: rgba(230, 230, 230, 0.85);
+	border-radius: 5px;
+	/*margin: 2rem;*/
 }
 
 #calendar-container {
-	position: fixed;
-	top: 3rem;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	margin: 1rem auto 2rem auto;
+	min-height: 30rem;
+	height: 60rem;
 }
 
+#navbar {
+}
