@@ -4,30 +4,36 @@ CREATE TABLE users (
 );
 
 CREATE TABLE user_info (
-	username VARCHAR(128) PRIMARY KEY,
+	info_id INT AUTO_INCREMENT PRIMARY KEY,	
+	username VARCHAR(128) NOT NULL,
 	first_name VARCHAR(128),
 	last_name VARCHAR(128),
-	email VARCHAR(128),
-	phone VARCHAR(10)
+	email VARCHAR(128) NOT NULL,
+	phone VARCHAR(10),
+	FOREIGN KEY (username) REFERENCES users(username)
 );
 
 CREATE TABLE calendar (
 	calendar_id INT AUTO_INCREMENT PRIMARY KEY,
 	calendar_name VARCHAR(128),
-	calendar_group VARCHAR(128)
+	calendar_group VARCHAR(128) DEFAULT NULL
 );
 
 
 CREATE TABLE calendar_rights (
-	calendar_id INT AUTO_INCREMENT PRIMARY KEY,
-	username VARCHAR(128),
-	permission INT
+	rights_id INT AUTO_INCREMENT PRIMARY KEY,
+	calendar_id INT NOT NULL,
+	username VARCHAR(128) NOT NULL,
+	permission INT,
+	FOREIGN KEY (username) REFERENCES users(username),
+	FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
 );
 
 CREATE TABLE calendar_events (
 	event_id INT AUTO_INCREMENT PRIMARY KEY,
 	calendar_id INT,
-	name VARCHAR(128),
+	calendar_name VARCHAR(128),
 	start_date DATETIME,
-	end_date DATETIME
+	end_date DATETIME,
+	FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
 );

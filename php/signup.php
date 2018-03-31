@@ -31,19 +31,23 @@
                 <div class="col s12 m6 offset-m3 transparent">
                   <form>
                     <div class="input-field">
-                      <input type="text" id="first-name">
+                      <input type="text" id="first-name" name="firstName">
                       <label for="first-name" id="first-name-label">First Name</label>
                     </div>
                     <div class="input-field">
-                      <input type="text" id="last-name">
+                      <input type="text" id="last-name" name="lastName">
                       <label for="last-name" id="last-name-label">Last Name</label>
                     </div>
                     <div class="input-field">
-                      <input type="email" id="email">
+                      <input type="email" id="email" name="email">
                       <label for="email" id="email-label">Email</label>
                     </div>
                     <div class="input-field">
-                      <input type="password" id="password">
+                      <input type="text" id="username" name="username">
+                      <label for="username" id="username-label">First Name</label>
+                    </div>
+                    <div class="input-field">
+                      <input type="password" id="password" name="password">
                       <label for="password" id="password-label">Password</label>
                     </div>
 
@@ -95,11 +99,11 @@
       },
 
       ];
-      
+
       Materialize.scrollFire(options);
       
     });
-    
+
     $(document).ready(function () {
       // First name field
       $("#first-name").focus(function() {
@@ -116,13 +120,21 @@
       $("#last-name").focusout(function() {
         $("#last-name-label").removeClass("active");
       }); 
-      
+
       // Email field
       $("#email").focus(function() {
         $("#email-label").addClass("active");
       }); 
       $("#email").focusout(function() {
         $("#email-label").removeClass("active");
+      }); 
+
+      // Username field
+      $("#username").focus(function() {
+        $("#username-label").addClass("active");
+      }); 
+      $("#username").focusout(function() {
+        $("#username-label").removeClass("active");
       }); 
       
       // Password field

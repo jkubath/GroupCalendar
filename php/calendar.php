@@ -23,7 +23,7 @@
     </div>
   </header>
   
-  <div class="container" id='calendar-container'>
+  <div class="" id='calendar-container'>
     <div id="calendar"></div>
   </div>
   

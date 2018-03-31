@@ -105,19 +105,19 @@
               <h4>Contact Us</h4>
               <div class="input-field">
                 <input type="text" id="name" placeholder="Name">
-                <label for="name">Name</label>
+                <label for="name" id="name-label">Name</label>
               </div>
               <div class="input-field">
                 <input type="email" id="email" placeholder="Email">
-                <label for="email">Email</label>
+                <label for="email" id="email-label">Email</label>
               </div>
               <div class="input-field">
                 <input type="text" id="phone" placeholder="Phone Number">
-                <label for="phone">Phone</label>
+                <label for="phone" id="phone-label">Phone Number</label>
               </div>
               <div class="input-field">
                 <textarea class="materialize-textarea" id="message" placeholder="Message"></textarea>
-                <label for="message">Message</label>
+                <label for="message" id="message-label">Message</label>
               </div>
               <input type="submit" value="Submit" class="btn blue-grey">
             </div>
@@ -166,6 +166,39 @@
 
       Materialize.scrollFire(options);
 
+    });
+      $(document).ready(function () {
+      // First name field
+      $("#name").focus(function() {
+        $("#name-label").addClass("active");
+      }); 
+      $("#name").focusout(function() {
+        $("#name-label").removeClass("active");
+      }); 
+
+      // Last name field
+      $("#email").focus(function() {
+        $("#email-label").addClass("active");
+      }); 
+      $("#email").focusout(function() {
+        $("#email-label").removeClass("active");
+      }); 
+      
+      // Email field
+      $("#phone").focus(function() {
+        $("#phone-label").addClass("active");
+      }); 
+      $("#phone").focusout(function() {
+        $("#phone-label").removeClass("active");
+      }); 
+      
+      // Password field
+      $("#message").focus(function() {
+        $("#message-label").addClass("active");
+      }); 
+      $("#message").focusout(function() {
+        $("#message-label").removeClass("active");
+      }); 
     });
   </script>
 </body>
