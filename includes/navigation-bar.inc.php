@@ -1,6 +1,6 @@
 <!-- Start of Navigation bar-->
 <div class="navbar-fixed">
-  <nav class="transparent">
+  <nav class="transparent" id="navbar">
     <div class="container">
       <div class="nav-wrapper">
         <a href="../php/calendar.php" class="brand-logo">Calendar</a>

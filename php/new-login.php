@@ -31,11 +31,11 @@
                   <form>
                     <div class="input-field">
                       <input type="email" id="email">
-                      <label for="email">Email</label>
+                      <label for="email" id="email-label">Email</label>
                     </div>
                     <div class="input-field">
                       <input type="password" id="password">
-                      <label for="password">Password</label>
+                      <label for="password" id="password-label">Password</label>
                     </div>
                     <input type="submit" value="Sing in" class="btn btn-large purple btn-extend">
                   </form>
@@ -58,6 +58,25 @@
   <!-- End of footer-->
 
   <!--JavaScript at end of body for optimized loading-->
-  <script type="text/javascript" src="../js/materialize.min.js"></script>
+  <?php include "../includes/js-meta-data.inc.php"; ?>  
+  <script type="text/javascript">
+    $(document).ready(function () {
+      // Email field
+      $("#email").focus(function() {
+        $("#email-label").addClass("active");
+      }); 
+      $("#email").focusout(function() {
+        $("#email-label").removeClass("active");
+      }); 
+      
+      // Password field
+      $("#password").focus(function() {
+        $("#password-label").addClass("active");
+      }); 
+      $("#password").focusout(function() {
+        $("#password-label").removeClass("active");
+      });
+    }); 
+  </script>
 </body>
 </html>

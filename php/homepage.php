@@ -43,7 +43,7 @@
 
   <!-- Section: About -->
   <section id="about" class="section blue darken-3 center scrollspy">
-    <div class="container ">
+    <div class="container">
       <h2>About Calendar</h2>
       <p class="flow-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis odit, at repellendus consequatur neque placeat
       esse explicabo voluptas reprehenderit nobis?</p>
@@ -61,7 +61,7 @@
         esse explicabo voluptas reprehenderit nobis?</p>
         <div class="row">
           <div class="col s12 m6">
-            <img src="img/iron1.jpg" alt="" class="responsive-img circle">
+            <img src="../img/iron1.jpg" alt="" class="responsive-img circle">
           </div>
           <div class="col s12 m5 offset-m1">
             <br>
@@ -137,9 +137,9 @@
     <!-- End of footer-->
 
 
-    <!-- Script to initialize -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/materialize.js"></script>
+    
+    <!--JavaScript at end of body for optimized loading-->
+    <?php include "../includes/js-meta-data.inc.php"; ?>
     <script>
       $(document).ready(function () {
       // Init Sidenav

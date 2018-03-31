@@ -31,25 +31,24 @@
                 <div class="col s12 m6 offset-m3 transparent">
                   <form>
                     <div class="input-field">
-                      <input type="text" id="first_name">
-                      <label for="first_name">First Name</label>
+                      <input type="text" id="first-name">
+                      <label for="first-name" id="first-name-label">First Name</label>
                     </div>
                     <div class="input-field">
-                      <input type="text" id="last_name">
-                      <label for="last_name">Last Name</label>
+                      <input type="text" id="last-name">
+                      <label for="last-name" id="last-name-label">Last Name</label>
                     </div>
                     <div class="input-field">
                       <input type="email" id="email">
-                      <label for="email">Email</label>
+                      <label for="email" id="email-label">Email</label>
                     </div>
                     <div class="input-field">
                       <input type="password" id="password">
-                      <label for="password">Password</label>
+                      <label for="password" id="password-label">Password</label>
                     </div>
 
                     <input type="submit" value="Sign up" class="btn btn-large purple btn-extend">
                   </form>
-
                 </div>
               </div>
             </div>
@@ -70,9 +69,9 @@
   </footer>
   <!-- End of footer-->
 
-  <!-- Script to initialize -->
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/materialize.js"></script>
+  
+  <!--JavaScript at end of body for optimized loading-->
+  <?php include "../includes/js-meta-data.inc.php"; ?>
   <script>
     $(document).ready(function () {
       // Init Sidenav
@@ -96,9 +95,43 @@
       },
 
       ];
-
+      
       Materialize.scrollFire(options);
+      
+    });
+    
+    $(document).ready(function () {
+      // First name field
+      $("#first-name").focus(function() {
+        $("#first-name-label").addClass("active");
+      }); 
+      $("#first-name").focusout(function() {
+        $("#first-name-label").removeClass("active");
+      }); 
 
+      // Last name field
+      $("#last-name").focus(function() {
+        $("#last-name-label").addClass("active");
+      }); 
+      $("#last-name").focusout(function() {
+        $("#last-name-label").removeClass("active");
+      }); 
+      
+      // Email field
+      $("#email").focus(function() {
+        $("#email-label").addClass("active");
+      }); 
+      $("#email").focusout(function() {
+        $("#email-label").removeClass("active");
+      }); 
+      
+      // Password field
+      $("#password").focus(function() {
+        $("#password-label").addClass("active");
+      }); 
+      $("#password").focusout(function() {
+        $("#password-label").removeClass("active");
+      }); 
     });
   </script>
 </body>
