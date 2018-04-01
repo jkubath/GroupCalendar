@@ -104,19 +104,19 @@
             <div class="card-panel">
               <h4>Contact Us</h4>
               <div class="input-field">
-                <input type="text" id="name" placeholder="Name">
+                <input type="text" id="name">
                 <label for="name" id="name-label">Name</label>
               </div>
               <div class="input-field">
-                <input type="email" id="email" placeholder="Email">
+                <input type="email" id="email">
                 <label for="email" id="email-label">Email</label>
               </div>
               <div class="input-field">
-                <input type="text" id="phone" placeholder="Phone Number">
+                <input type="text" id="phone">
                 <label for="phone" id="phone-label">Phone Number</label>
               </div>
               <div class="input-field">
-                <textarea class="materialize-textarea" id="message" placeholder="Message"></textarea>
+                <textarea class="materialize-textarea" id="message"></textarea>
                 <label for="message" id="message-label">Message</label>
               </div>
               <input type="submit" value="Submit" class="btn blue-grey">
@@ -172,15 +172,19 @@
         $("#name-label").addClass("active");
       }); 
       $("#name").focusout(function() {
-        $("#name-label").removeClass("active");
-      }); 
+        if ($("#name").val() == '') {
+          $("#name-label").removeClass("active");
+        }
+      });
 
       // Email field
       $("#email").focus(function() {
         $("#email-label").addClass("active");
       }); 
       $("#email").focusout(function() {
-        $("#email-label").removeClass("active");
+        if ($("#email").val() == '') {
+          $("#email-label").removeClass("active");
+        }
       }); 
 
       // Last name field
@@ -188,7 +192,9 @@
         $("#phone-label").addClass("active");
       }); 
       $("#phone").focusout(function() {
-        $("#phone-label").removeClass("active");
+        if ($("#phone").val() == '') {
+          $("#phone-label").removeClass("active");
+        }
       }); 
       
       // Username field
@@ -196,7 +202,9 @@
         $("#message-label").addClass("active");
       }); 
       $("#message").focusout(function() {
-        $("#message-label").removeClass("active");
+        if ($("#message").val() == '') {
+          $("#message-label").removeClass("active");
+        }
       }); 
 
       });

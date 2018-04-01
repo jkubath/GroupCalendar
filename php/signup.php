@@ -110,7 +110,9 @@
         $("#first-name-label").addClass("active");
       }); 
       $("#first-name").focusout(function() {
-        $("#first-name-label").removeClass("active");
+        if ($("#first-name").val() == '') {
+          $("#first-name-label").removeClass("active");
+        }
       }); 
 
       // Last name field
@@ -118,7 +120,9 @@
         $("#last-name-label").addClass("active");
       }); 
       $("#last-name").focusout(function() {
-        $("#last-name-label").removeClass("active");
+        if ($("#last-name").val() == '') {
+          $("#last-name-label").removeClass("active");
+        }
       }); 
 
       // Email field
@@ -126,7 +130,9 @@
         $("#email-label").addClass("active");
       }); 
       $("#email").focusout(function() {
-        $("#email-label").removeClass("active");
+        if ($("#email").val() == '') {
+          $("#email-label").removeClass("active");
+        }
       }); 
 
       // Username field
@@ -134,7 +140,9 @@
         $("#username-label").addClass("active");
       }); 
       $("#username").focusout(function() {
-        $("#username-label").removeClass("active");
+        if ($("#username").val() == '') {
+          $("#username-label").removeClass("active");
+        }
       }); 
       
       // Password field
@@ -142,7 +150,9 @@
         $("#password-label").addClass("active");
       }); 
       $("#password").focusout(function() {
-        $("#password-label").removeClass("active");
+        if ($("#password").val() == '') {
+          $("#password-label").removeClass("active");
+        }
       }); 
     });
   </script>

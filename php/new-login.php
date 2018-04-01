@@ -30,8 +30,8 @@
                 <div class="col s12 m6 offset-m3 transparent">
                   <form>
                     <div class="input-field">
-                      <input type="email" id="email">
-                      <label for="email" id="email-label">Email</label>
+                      <input type="text" id="username">
+                      <label for="username" id="username-label">Username</label>
                     </div>
                     <div class="input-field">
                       <input type="password" id="password">
@@ -62,11 +62,13 @@
   <script type="text/javascript">
     $(document).ready(function () {
       // Email field
-      $("#email").focus(function() {
-        $("#email-label").addClass("active");
+      $("#username").focus(function() {
+        $("#username-label").addClass("active");
       });
-      $("#email").focusout(function() {
-        $("#email-label").removeClass("active");
+      $("#username").focusout(function() {
+        if ($("#username").val() == '') {
+          $("#username-label").removeClass("active");
+        }
       });
 
       // Password field
@@ -74,7 +76,9 @@
         $("#password-label").addClass("active");
       });
       $("#password").focusout(function() {
-        $("#password-label").removeClass("active");
+        if ($("#password").val() == '') {
+          $("#password-label").removeClass("active");
+        }
       });
     });
   </script>
