@@ -2,13 +2,14 @@
 	require_once('../includes/databaseConnection.php'); //Make the connection to the database
 	require_once('../php/fullCalendarUtil.php'); //Includes the Event class and the datetime utilities (provided by FullCalendar.io)	
 
-	$start_date = $_POST["dateStr"];
+	$startDate = $_POST["dateStr"];
 	$title = $_POST["title"];
 	$allDay = $_POST["allDay"];
+	$calendarId = 1;
 
 
 	if ($allDay) {
-		$end_date = $date;
+		$endDate = $startDate;
 	}
 
 	if ($allDay) {
@@ -17,8 +18,20 @@
 		$allDay = 0;
 	}
 
-	$stmt = $conn->query("
-		INSERT INTO calendar_events(calendar_id, title, start_date, end_date, allDay)
-		VALUES(1, $title, $start_date, $end_date, $allDay);
-		");
-?>
+	try {
+		$stmt = $conn->prepare("
+			INSERT INTO calendar_events(calendar_id, title, start_date, end_date, all_day)
+			VALUES(:calendarId, :title, :startDate, :endDate, :allDay);
+			");	
+
+		$stmt->bindParam(":calendarId", $calendarId);
+		$stmt->bindParam(":title", $title);
+		$stmt->bindParam(":startDate", $startDate);
+		$stmt->bindParam(":endDate", $endDate);
+		$stmt->bindParam(":allDay", $allDay);
+
+		$stmt->execute();
+	} catch (PDOException $e) {
+		echo "Erro: $e";
+	}
+	?>

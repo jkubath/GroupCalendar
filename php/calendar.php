@@ -60,7 +60,7 @@ require_once('../includes/databaseConnection.php');
 
         height: "auto",
         // events: './getCalendarEvents.php'
-    }),
+      }),
 
 
       $('#calendar-right').fullCalendar({
@@ -73,26 +73,29 @@ require_once('../includes/databaseConnection.php');
           addEventButton: {
             text: 'add event...',
             click: function() {
-              var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-              var titleStr = prompt('Enter a name for the event');
+              var dateStr = prompt("Enter a date in YYYY-MM-DD format");
+              var titleStr = prompt("Enter a name for the event");
               var date = moment(dateStr);
               var allDayBool = true;
 
               if (date.isValid()) {
-                $('#calendar-right').fullCalendar('renderEvent', {
+                $("#calendar-right").fullCalendar("renderEvent", {
                   title: titleStr,
                   start: date,
                   allDay: allDayBool
                 });
-                alert('Great. Now, update your database...');
+                alert("Great. Now, update your database...");
                 $.ajax({
-                    url: "./addCalendarEvents.php",
-                    type: POST,
-                    data: {'dateStr': dateStr, 'title': titleStr, 'allDay': allDayBool },
-                    success: function () {
-                      alert("Added successfully!");
-                    }
-                  });
+                  url: "./addCalendarEvents.php",
+                  type: "POST",
+                  data: {"dateStr": dateStr, "title": titleStr, "allDay": allDayBool },
+                  success: function () {
+                    alert("Added successfully!");
+                  },
+                  error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("some error");
+                  }
+                });
               } else {
                 alert('Invalid date.');
               }
@@ -108,53 +111,9 @@ require_once('../includes/databaseConnection.php');
         events: './getCalendarEvents.php'
       })
 
+      
+
     });
-
-    // $('#calendar-right').fullCalendar({
-    //     header :{
-    //       left: 'today,prev,next',
-    //       center: 'addEventButton',
-    //       right: 'month,agendaWeek,agendaDay, basicDay,basicWeek'
-    //     },
-    //     customButtons: {
-    //       addEventButton: {
-    //         text: 'add event...',
-    //         click: function() {
-    //           var dateStr = prompt('Enter a date in YYYY-MM-DD format');
-    //           var titleStr = prompt('Enter a name for the event');
-    //           var date = moment(dateStr);
-    //           var allDayBool = true;
-
-    //           if (date.isValid()) {
-    //             $('#calendar-right').fullCalendar('renderEvent', {
-    //               title: titleStr,
-    //               start: date,
-    //               allDay: allDayBool
-    //             });
-    //             alert('Great. Now, update your database...');
-                // $.ajax(
-                //     url: "addCalendarEvents.php",
-                //     type: POST,
-                //     data: {'dateStr': dateStr, 'title': titleStr, 'allDay': allDayBool },
-                //     success: function () {
-                //       alert("Added successfully!");
-                //     }
-                //   );
-    //           } else {
-    //             alert('Invalid date.');
-    //           }
-    //         }
-    //       }
-    //     },
-    //     dayClick: function(date, jsEvent, view) {
-    //       // FOR TESTING
-    //       $(this).css('background-color', 'grey');
-    //     },
-
-    //     height: "auto",
-    //     events: './getCalendarEvents.php'
-    //   })
-
     
 
   </script>
