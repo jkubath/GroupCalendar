@@ -16,12 +16,14 @@
 			FROM users
 			WHERE username = '" . $username . "' AND password = '" . $password . "';";
 
+	//Use the $pdo object from the databaseConnection.php file
 	$result = $pdo->query($sql);
 
 	if (!$result->fetch()) {
 		echo "fail";
 	} else {
 		$result = $pdo->query($sql);
+		//If there are results, then the username and password were found
 		while ($row = $result->fetch()) {
 			if ($row["username"] != NULL) {
 				$_SESSION["username"] = $username;
