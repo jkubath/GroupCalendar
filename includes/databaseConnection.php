@@ -3,17 +3,17 @@
 function dbConnection() {
 	$servername = "localhost";
 	$username = "root";
-	$password = "";
+	$password = "root";
 	$database = "group_calendar";
 
   try {
     return new PDO("mysql:host=$servername;dbname=$database", $username, $password);
   } catch(PDOException $e) {
-  // handle exceptions accordingly
+    // handle exceptions accordingly
     echo "Error".$e;
   }
 
 }
 
-$conn = dbConnection();
+$pdo = dbConnection();
 ?>

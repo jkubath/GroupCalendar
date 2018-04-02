@@ -19,7 +19,7 @@
 	}
 
 	try {
-		$stmt = $conn->prepare("
+		$stmt = $pdo->prepare("
 			INSERT INTO calendar_events(calendar_id, title, start_date, end_date, all_day)
 			VALUES(:calendarId, :title, :startDate, :endDate, :allDay);
 			");	

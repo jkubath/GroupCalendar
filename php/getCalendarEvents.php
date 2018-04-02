@@ -44,7 +44,7 @@
 	$sql = "SELECT * FROM calendar_events";
 
 	try {
-		$stmt = $conn->query($sql);
+		$stmt = $pdo->query($sql);
 	}
 	catch(PDOException $e){
 		//echo "Error".$e;
