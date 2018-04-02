@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!-- Start of Navigation bar-->
 <div class="navbar-fixed" id="navbar-switch">
   <nav class="transparent" id="navbar">
@@ -23,10 +25,13 @@
           <li>
             <a href="../php/signup.php">Sign Up</a>
           </li>
-          <li>
-            <a href="../php/new-login.php" class="btn blue">Log In</a>
-          </li>
-
+            <?php if(isset($_SESSION["username"])) {
+              echo '<li><div class="btn blue" style="cursor:default;">' . $_SESSION['username']. '</div></li>';
+            }
+            else {
+              echo '<li><a href="../php/new-login.php" class="btn blue">Log In</a></li>';
+            }
+            ?>
         </ul>
       </div>
     </div>

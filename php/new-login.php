@@ -111,7 +111,6 @@
 
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            alert("Response " + this.responseText);
             if (this.responseText == "fail") {
               alert("failed");
               document.getElementById('username').style.backgroundColor = '#bb3333';
