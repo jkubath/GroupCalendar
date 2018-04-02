@@ -184,4 +184,49 @@
 
   	</script>
 
+<?php
+  	function validateFormLogin() {
+	  var errorFlag = false;
+	  //Only allow letters and numbers for the username and password
+      var usernameBoxTest = /^[a-zA-Z0-9]{1,40}$/;
+	  var passwordBoxTest = /^[a-zA-Z0-9]{8,40}$/;
+	  
+	  if(!usernameBoxTest.test(usernameBox.value)) {
+		document.getElementById('usernameBox').style.backgroundColor = '#bb3333';
+		document.getElementById('usernameBox').style.color = 'white';
+		document.getElementById('usernameLoginError').innerHTML = 'Invalid Username.  Can only contain letters and numbers.';
+		document.getElementById('usernameLoginError').style.color = '#FFFFFF';
+		errorFlag = true;
+	  }
+	  
+	  if(!passwordBoxTest.test(passwordBox.value)) {
+		document.getElementById('passwordBox').style.backgroundColor = '#bb3333';
+		document.getElementById('passwordBox').style.color = 'white';
+		document.getElementById('passwordLoginError').innerHTML = 'Invalid Password.  Can only contain letters and numbers. Must be at least 8 characters in length.';
+		document.getElementById('passwordLoginError').style.color = '#FFFFFF';
+		errorFlag = true;
+	  }
+	  
+	  if (!errorFlag) {
+		    xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+					if (this.responseText == "fail") {
+						document.getElementById('usernameBox').style.backgroundColor = '#bb3333';
+						document.getElementById('usernameBox').style.color = 'white';
+						document.getElementById('usernameLoginError').innerHTML = 'Invalid Login.  Username/Password do not exist.';
+						document.getElementById('usernameLoginError').style.color = '#FFFFFF';
+						
+						document.getElementById('passwordBox').style.backgroundColor = '#bb3333';
+						document.getElementById('passwordBox').style.color = 'white'
+					} else {
+						document.location.href = "./Main.php";
+					}
+				}
+			};
+			xmlhttp.open("GET", "CheckLogin.php?enteredUsername=" + usernameBox.value + "&enteredPassword=" + passwordBox.value, true);
+			xmlhttp.send();
+	  }
+	}
 
+?>
