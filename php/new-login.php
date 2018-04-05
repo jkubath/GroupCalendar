@@ -39,7 +39,7 @@
                       <label for="password" id="password-label">Password</label>
                     </div>
                     <!-- Added the onclick function to validate the form, onclick="validateFormLogin()"-->
-                    <input id="submitButton" onclick="validateFormLogin()" type="submit" value="Sign In" class="btn btn-large purple btn-extend">
+                    <input id="submitButton" onclick="validateFormLogin(); return false;" type="submit" value="Sign In" class="btn btn-large purple btn-extend">
                   </form>
                 </div>
               </div>

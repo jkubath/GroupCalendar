@@ -22,14 +22,17 @@
           <li>
             <a href="../index.php#contact">Contact</a>
           </li>
-          <li>
+          <!-- <li>
             <a href="../php/signup.php">Sign Up</a>
-          </li>
+          </li> -->
             <?php if(isset($_SESSION["username"])) {
               //echo '<li><div class="btn blue" ">' . $_SESSION['username']. '</div></li>';
+
+              echo '<li><a onclick="logOut()">Log Out</a></li>';
               echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
             }
             else {
+              echo '<li><a href="../php/signup.php">Sign Up</a></li>';
               echo '<li><a href="../php/new-login.php" class="btn blue">Log In</a></li>';
             }
             ?>
@@ -69,3 +72,13 @@
   </li>
 </ul>
 <!-- End of side nav for mobile devies-->
+
+<!-- Log out function -->
+<script>
+  function logOut() {
+    <?php $_SESSION['username'] = NULL; ?>
+    document.location.href = "./homepage.php";
+
+  }
+</script>
+
