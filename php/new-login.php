@@ -112,7 +112,7 @@
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             if (this.responseText == "fail") {
-              alert("failed");
+              //alert("failed");
               document.getElementById('username').style.backgroundColor = '#bb3333';
               document.getElementById('username').style.color = 'white';
               // document.getElementById('usernameLoginError').innerHTML = 'Invalid Login.  Username/Password do not exist.';

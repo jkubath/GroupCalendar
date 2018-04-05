@@ -13,15 +13,17 @@
 	//This can be used to add events to the calendar_events table for testing
 	INSERT INTO `calendar_events`(`calendar_id`, `name`, `start_date`, `end_date`) VALUES ("1","4430 Assignment","2018-03-29 08:20:20", "2018-03-30 08:20:20")
 	*/
+	//Start the session to access the array
+	session_start();
 
 	require_once('../includes/databaseConnection.php'); //Make the connection to the database
 	require_once('../php/fullCalendarUtil.php'); //Includes the Event class and the datetime utilities (provided by FullCalendar.io)
 	
 	/* Step 1: Set variables for start and end date ranges */
 	//Short-circuit if the client did not give us a date range.
-	if (!isset($_GET['start']) || !isset($_GET['end'])) {
-		die("Please provide a date range.");
-	}
+	// if (!isset($_GET['start']) || !isset($_GET['end'])) {
+	// 	die("Please provide a date range.");
+	// }
 
 	// Parse the start/end parameters.
 	// These are assumed to be ISO8601 strings with no time nor timezone, like "2013-12-29".
@@ -30,8 +32,9 @@
 	$range_end = parseDateTime($_GET['end']);
 
 	/* Test start and end ranges */
-	// $range_start = parseDateTime("2018-03-01");
-	// $range_end = parseDateTime("2018-03-30");
+	$range_start = parseDateTime("2018-04-01");
+	$range_end = parseDateTime("2018-04-30");
+	$_SESSION['username'] = 'user1';
 
 	// Parse the timezone parameter if it is present.
 	$timezone = null;
@@ -41,25 +44,43 @@
 
 
 	/* Step 2: Select the data from the database */
-	$sql = "SELECT * FROM calendar_events";
+	$all_events = array(); //Holds all the events for the user
 
+	/* Step 2a: Get the calendars the user has access to */
+	$sql = "SELECT calendar_id FROM calendar_rights WHERE username = '" . $_SESSION['username'] . "'";
 	try {
-		$stmt = $pdo->query($sql);
+		$userCalendars = $pdo->query($sql);
 	}
 	catch(PDOException $e){
 		//echo "Error".$e;
 	}
 
-	/* Step 3: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object */
-	$results = array();
-	while ($row = $stmt->fetch()) {
-			// echo $row['name'];
-			// echo $row['calendar_id'];
-			$results[] = array(
-				"id"	=> $row['event_id'], 
-				"title"	=> $row['title'], 
-				"start"	=> $row['start_date'], 
-				"end"	=> $row['end_date']);
+	//print_r($userCalendars);
+
+	/* Step 2b: Iterate through the calendars and add all events for those calendars to the $all_events array */
+	$results = array(); // Holds all the events that are found for the user
+	while($singleCalendar = $userCalendars->fetch()){
+
+		$sql = "SELECT * FROM calendar_events WHERE calendar_id = '" . $singleCalendar['calendar_id'] . "'";
+
+		try {
+			$allEvents = $pdo->query($sql);
+		}
+		catch(PDOException $e){
+			//echo "Error".$e;
+		}
+
+		/* Step 3: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object */
+		while ($row = $allEvents->fetch()) {
+				// echo $row['name'];
+				// echo $row['calendar_id'];
+				$results[] = array(
+					"id"	=> $row['event_id'], 
+					"title"	=> $row['name'], 
+					"start"	=> $row['start_date'], 
+					"end"	=> $row['end_date']);
+		}
+
 	}
 
 	/* Step 4: Convert the data into Event objects to be returned to the client */
