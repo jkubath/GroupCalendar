@@ -31,10 +31,14 @@
 	$range_start = parseDateTime($_GET['start']);
 	$range_end = parseDateTime($_GET['end']);
 
+	//Set the $_SESSION parameters for the side bar in calendar.php
+	$_SESSION['start'] = $_GET['start'];
+	$_SESSION['end'] = $_GET['end'];
+
 	/* Test start and end ranges */
-	$range_start = parseDateTime("2018-04-01");
-	$range_end = parseDateTime("2018-04-30");
-	$_SESSION['username'] = 'user1';
+	// $range_start = parseDateTime("2018-04-01");
+	// $range_end = parseDateTime("2018-04-30");
+	// $_SESSION['username'] = 'user1';
 
 	// Parse the timezone parameter if it is present.
 	$timezone = null;
@@ -52,10 +56,10 @@
 		$userCalendars = $pdo->query($sql);
 	}
 	catch(PDOException $e){
-		//echo "Error".$e;
+		// echo "Error".$e;
 	}
 
-	//print_r($userCalendars);
+	// print_r($userCalendars);
 
 	/* Step 2b: Iterate through the calendars and add all events for those calendars to the $all_events array */
 	$results = array(); // Holds all the events that are found for the user
