@@ -1,5 +1,3 @@
-<?php session_start(); ?>
-
 <!-- Start of Navigation bar-->
 <div class="navbar-fixed" id="navbar-switch">
   <nav class="transparent" id="navbar">
@@ -25,10 +23,10 @@
           <!-- <li>
             <a href="../php/signup.php">Sign Up</a>
           </li> -->
-            <?php if(isset($_SESSION["username"])) {
+            <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
               //echo '<li><div class="btn blue" ">' . $_SESSION['username']. '</div></li>';
 
-              echo '<li><a onclick="logOut()">Log Out</a></li>';
+              echo '<li ><a href="#" id="logOutButton">Log Out</a></li>';
               echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
             }
             else {
@@ -74,11 +72,21 @@
 <!-- End of side nav for mobile devies-->
 
 <!-- Log out function -->
-<script>
-  function logOut() {
-    <?php $_SESSION['username'] = NULL; ?>
-    document.location.href = "./homepage.php";
-
-  }
+<script type='text/javascript'>
+    $("#logOutButton").click(function logOut() {
+      $.ajax({
+        type: "POST",
+         url: './resetSessionUsername.php',
+         dataType: "JSON", //tell jQuery to expect JSON encoded response
+         success: function (response){
+          if(response.success === 'success'){
+            //alert("User Logged Out");
+            window.location.href = "../php/new-login.php";
+          }
+          else {
+            alert("Log out failed");
+          }
+         }
+      });
+    });
 </script>
-
