@@ -10,7 +10,7 @@ function dbConnection() {
     return new PDO("mysql:host=$servername;dbname=$database", $username, $password);
   } catch(PDOException $e) {
     // handle exceptions accordingly
-    echo "Error".$e;
+    echo "<h1>Database Error</h1>";
   }
 
 }
