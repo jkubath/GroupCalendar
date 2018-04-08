@@ -1,5 +1,6 @@
 <?php
 require_once('../includes/databaseConnection.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,6 +8,9 @@ require_once('../includes/databaseConnection.php');
   <!-- Style meta data -->
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- End of style meta data -->
+
+  <!-- JavaScript at end of body for optimized loading -->
+  <?php include "../includes/js-meta-data.inc.php"; ?>
 
 
   <link rel='stylesheet' href='../includes/fullcalendar/fullcalendar.css' />
@@ -36,10 +40,6 @@ require_once('../includes/databaseConnection.php');
     <?php include "../includes/footer.inc.php"; ?>
   </footer>
   <!-- End of footer-->
-
-
-  <!-- JavaScript at end of body for optimized loading -->
-  <?php include "../includes/js-meta-data.inc.php"; ?>
 
   <script type="text/JavaScript">
     $(document).ready(function() {
