@@ -59,7 +59,7 @@ session_start();
         },
 
         height: "auto",
-        // events: './getCalendarEvents.php'
+        events: './getCalendarEvents.php'
       }),
 
 

@@ -3,7 +3,7 @@
 function dbConnection() {
 	$servername = "localhost";
 	$username = "root";
-	$password = "root";
+	$password = "";
 	$database = "group_calendar";
 
   try {

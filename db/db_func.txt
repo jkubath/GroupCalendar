@@ -36,5 +36,8 @@ CREATE TABLE calendar_events (
 	start_date DATETIME,
 	end_date DATETIME,
 	all_day BIT,
+	description VARCHAR(255),
+	color VARCHAR(128),
+	text_color VARCHAR(128),
 	CONSTRAINT FK_calendar_events_calendar_id FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
 );

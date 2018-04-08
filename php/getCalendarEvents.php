@@ -80,7 +80,7 @@
 				// echo $row['calendar_id'];
 				$results[] = array(
 					"id"	=> $row['event_id'], 
-					"title"	=> $row['name'], 
+					"title"	=> $row['title'], 
 					"start"	=> $row['start_date'], 
 					"end"	=> $row['end_date']);
 		}
