@@ -8,6 +8,9 @@
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- End of style meta data -->
 
+  <!--JavaScript at end of body for optimized loading-->
+  <?php include "../includes/js-meta-data.inc.php"; ?>
+
   <title>My Calendar</title>
 </head>
 
@@ -137,10 +140,6 @@
     </footer>
     <!-- End of footer-->
 
-
-
-    <!--JavaScript at end of body for optimized loading-->
-    <?php include "../includes/js-meta-data.inc.php"; ?>
     <script>
       $(document).ready(function () {
       // Init Sidenav

@@ -12,11 +12,11 @@
 		$endDate = $startDate;
 	}
 
-	if ($allDay) {
-		$allDay = 1;
-	} else {
-		$allDay = 0;
-	}
+	// if ($allDay) {
+	// 	$allDay = 1;
+	// } else {
+	// 	$allDay = 0;
+	// }
 
 	try {
 		$stmt = $pdo->prepare("

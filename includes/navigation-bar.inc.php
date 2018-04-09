@@ -73,6 +73,7 @@
 
 <!-- Log out function -->
 <script type='text/javascript'>
+  $(document).ready(function() {
     $("#logOutButton").click(function logOut() {
       $.ajax({
         type: "POST",
@@ -89,4 +90,5 @@
          }
       });
     });
+  });
 </script>
