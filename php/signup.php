@@ -29,7 +29,7 @@
               <div class="row transparent">
 
                 <div class="col s12 m6 offset-m3 transparent">
-                  <form>
+                  <form method="POST" action="./handle-signup.php">
                     <div class="input-field">
                       <input type="text" id="first-name" name="firstName">
                       <label for="first-name" id="first-name-label">First Name</label>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="input-field">
                       <input type="text" id="username" name="username">
-                      <label for="username" id="username-label">First Name</label>
+                      <label for="username" id="username-label">Username</label>
                     </div>
                     <div class="input-field">
                       <input type="password" id="password" name="password">

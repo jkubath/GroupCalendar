@@ -32,8 +32,8 @@
 	$range_end = parseDateTime($_GET['end']);
 
 	//Set the $_SESSION parameters for the side bar in calendar.php
-	$_SESSION['start'] = $_GET['start'];
-	$_SESSION['end'] = $_GET['end'];
+	// $_SESSION['start'] = $_GET['start'];
+	// $_SESSION['end'] = $_GET['end'];
 
 	/* Test start and end ranges */
 	// $range_start = parseDateTime("2018-04-01");
@@ -82,7 +82,9 @@
 					"id"	=> $row['event_id'], 
 					"title"	=> $row['title'], 
 					"start"	=> $row['start_date'], 
-					"end"	=> $row['end_date']);
+					"end"	=> $row['end_date'],
+					"allDay"=> $row['all_day']
+				);
 		}
 
 	}

@@ -35,130 +35,158 @@ session_start();
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="page-footer blue-grey darken-1">
-    <?php include "../includes/footer.inc.php"; ?>
-  </footer>
-  <!-- End of footer-->
+  <!-- Modal Trigger -->
 
-  <script type="text/JavaScript">
-    $(document).ready(function() {
-      $("#navbar-switch").removeClass("navbar-fixed");
-      $("#navbar-switch").addClass("navbar");
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+   <div class="modal-content">
 
+     <h4 >Modal Header</h4>
+     <p >A bunch of text</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect  btn blue">Add</a>
+     <a href="#!" class="modal-action modal-close waves-effect  btn red">Remove</a>
+     <a href="#!" class="modal-action modal-close waves-effect  btn black">Close</a>
 
-      // page is now ready, initialize the calendar...
-      // $('#calendar-left').fullCalendar({
-      //   header :{
-      //     left: 'title',
-      //     right: 'prev,next'
-      //   },
-      //   dayClick: function(date, jsEvent, view) {
-      //     // FOR TESTING
-      //     $(this).css('background-color', 'grey');
-      //   },
-
-      //   height: "auto",
-      //   events: './getCalendarEvents.php'
-      // }),
+   </div>
+ </div>
 
 
-      $('#calendar-right').fullCalendar({
-        header :{
-          left: 'today,prev,next',
-          center: 'addEventButton',
-          right: 'month,agendaWeek,agendaDay, basicDay,basicWeek'
-        },
-        customButtons: {
-          addEventButton: {
-            text: 'add event...',
-            click: function() {
-              var dateStr = prompt("Enter a date in YYYY-MM-DD format");
-              var titleStr = prompt("Enter a name for the event");
-              var date = moment(dateStr);
-              var allDayBool = true;
 
-              if (date.isValid()) {
-                $("#calendar-right").fullCalendar("renderEvent", {
-                  title: titleStr,
-                  start: date,
-                  allDay: allDayBool
-                });
-                alert("Great. Now, update your database...");
-                $.ajax({
-                  url: "./addCalendarEvents.php",
-                  type: "POST",
-                  data: {"dateStr": dateStr, "title": titleStr, "allDay": allDayBool },
-                  success: function () {
-                    alert("Added successfully!");
-                  },
-                  error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    alert("some error");
-                  }
-                });
-              } else {
-                alert('Invalid date.');
-              }
+ <!-- Modal Structure -->
+ <div id="modal2" class="modal">
+   <div class="modal-content">
+
+     <h4 id="titleEvent">Modal 2</h4>
+     <p id="descriptionEvent">A bunch of text 2</p>
+   </div>
+   <div class="modal-footer">
+     <a href="#!" class="modal-action modal-close waves-effect  btn green">Modify</a>
+     <a href="#!" class="modal-action modal-close waves-effect  btn red">Remove</a>
+     <a href="#!" class="modal-action modal-close waves-effect  btn black">Close</a>
+
+   </div>
+ </div>
+ <!-- Footer -->
+ <footer class="page-footer blue-grey darken-1">
+  <?php include "../includes/footer.inc.php"; ?>
+</footer>
+<!-- End of footer-->
+
+<script type="text/JavaScript">
+  $(document).ready(function() {
+    $("#navbar-switch").removeClass("navbar-fixed");
+    $("#navbar-switch").addClass("navbar");
+
+    $('#calendar-right').fullCalendar({
+      header :{
+        left: 'today,prev,next',
+        center: 'addEventButton',
+        right: 'month,agendaWeek,agendaDay, basicDay,basicWeek'
+      },
+      customButtons: {
+        addEventButton: {
+          text: 'add event...',
+          click: function() {
+            var dateStr = prompt("Enter a date in YYYY-MM-DD format");
+            var titleStr = prompt("Enter a name for the event");
+            var date = moment(dateStr);
+            var allDayBool = true;
+
+            if (date.isValid()) {
+              $("#calendar-right").fullCalendar("renderEvent", {
+                title: titleStr,
+                start: date,
+                allDay: allDayBool
+              });
+              alert("Great. Now, update your database...");
+              $.ajax({
+                url: "./addCalendarEvents.php",
+                type: "POST",
+                data: {"dateStr": dateStr, "title": titleStr, "allDay": allDayBool },
+                success: function () {
+                  alert("Added successfully!");
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("some error");
+                }
+              });
+            } else {
+              alert('Invalid date.');
             }
           }
+        }
+      },
+      dayClick: function(date, jsEvent, view) {
+
+          //$(this).css('background-color', 'grey');
+          $('#modal1').modal();
+          $('#modal1').modal('open');
+          //var elem = document.querySelector('.modal');
+          //var instance = M.Modal.init(elem, options);
+          //instance.open();
         },
-        dayClick: function(date, jsEvent, view) {
-          // FOR TESTING
-          $(this).css('background-color', 'grey');
-        },
+          //events: 'http://localhost:8887/GroupCalendar/php/events.php',
 
-        height: "auto",
-        events: './getCalendarEvents.php'
-      })
-
-      /* Query the list of events for the left side of the screen */
-      var start_date = '2018-04-01';
-      var end_date = '2018-04-30';
-      
-
-      $.ajax({
-          url: "./getCalendarEvents.php",
-          type: "GET",
-          data: {"start": start_date, "end": end_date},
-          dataType: 'json',
-          success: function(data) {
-            //alert('start');
-            //alert(data);
-            /* Add each element to the calendar-left-list */
-            $("#calendar-left").append("<table id='calendar-left-table'></table>");
-            $("#calendar-left-table").append("<tr id='tableHeader'></tr>");
-            $("#tableHeader").append("<th>Title</th>");
-            $("#tableHeader").append("<th>Start</th>");
-
-            var table = document.getElementById("calendar-left-table");
-            var caption = table.createCaption();
-            caption.innerHTML = "Event List";
-
-            $.each(data, function(key, value) {
-
-              var title = data[key]['title'];
-              var start = data[key]['start'];
-
-              //key + 1 to start enterting after the table header
-              var row = table.insertRow(key + 1);
-
-              var titleCell = row.insertCell(0);
-              var startCell = row.insertCell(1);
-
-              titleCell.innerHTML = title;
-              startCell.innerHTML = start;
-
-            });
-
+          eventClick: function(calEvent, jsEvent, view){
+            $('#titleEvent').html(calEvent.title);
+            $('#descriptionEvent').html(calEvent.description);
+            $('#modal2').modal();
+            $('#modal2').modal('open');
+            //$('#modal2').modal();
+            //$('#modal2').modal('open');
           },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
-            alert("some error");
+          viewRender: function (view, element) {
+            /* Each time the view changes, the table is deleted and recreated */
+            
+            // Delete
+            $("#calendar-left-table").remove();
+
+            // Create
+            $("#calendar-left").append("<table class='highlight' id='calendar-left-table'></table>");
+            $("#calendar-left-table").append("<caption>Event List</caption>");
+            $("#calendar-left-table").append("<thead id='table-head'></thead>");
+            $("#table-head").append("<tr id='head-row'></tr>");
+            $("#head-row").append("<th>Title</th>");
+            $("#head-row").append("<th>Start</th>");
+            $("#head-row").append("<th>End</th>");
+            $("<tbody id='table-body'></tbody>").insertAfter("#table-head");
+          },
+
+          height: "auto",
+          events: {
+            url: './getCalendarEvents.php',
+            success: function(data) {
+
+              var table = $("#calendar-left-table")[0];
+
+              /* We need to give each row a different id/class to prevent duplicate entries */
+              var i = 0;
+
+              $.each(data, function(key, value) {
+
+                var title = data[key]['title'];
+                var start = data[key]['start'];
+                var end = data[key]['end'];
+
+                $("#table-body").append("<tr id='table-row-"+i+"'></tr>");
+                $("#table-row-"+i).append("<td>" + title + "</td>");
+                $("#table-row-"+i).append("<td>" + start + "</td>");
+                $("#table-row-"+i).append("<td>" + end + "</td>");
+
+                i++;
+              });
+
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("some error");
+            }
           }
-        });      
+        });
+  });
 
-    });
-    
 
-  </script>
+</script>
 </body>
 </html>

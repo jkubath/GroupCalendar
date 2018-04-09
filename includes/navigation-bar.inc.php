@@ -26,12 +26,12 @@
             <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
               //echo '<li><div class="btn blue" ">' . $_SESSION['username']. '</div></li>';
 
-              echo '<li ><a href="#" id="logOutButton">Log Out</a></li>';
+              echo '<li ><a href="../php/logout.php" id="logOutButton">Log out</a></li>';
               echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
             }
             else {
-              echo '<li><a href="../php/signup.php">Sign Up</a></li>';
-              echo '<li><a href="../php/new-login.php" class="btn blue">Log In</a></li>';
+              echo '<li><a href="../php/signup.php">Sign up</a></li>';
+              echo '<li><a href="../php/login.php" class="btn blue">Log In</a></li>';
             }
             ?>
         </ul>
@@ -60,7 +60,7 @@
     <a href="#contact">Contact</a>
   </li>
   <li>
-    <a href="signup.php">Sign Up</a>
+    <a href="signup.php">Sign up</a>
   </li>
   <li>
     <div class="divider"></div>
@@ -73,22 +73,22 @@
 
 <!-- Log out function -->
 <script type='text/javascript'>
-  $(document).ready(function() {
-    $("#logOutButton").click(function logOut() {
-      $.ajax({
-        type: "POST",
-         url: './resetSessionUsername.php',
-         dataType: "JSON", //tell jQuery to expect JSON encoded response
-         success: function (response){
-          if(response.success === 'success'){
-            //alert("User Logged Out");
-            window.location.href = "../php/new-login.php";
-          }
-          else {
-            alert("Log out failed");
-          }
-         }
-      });
-    });
-  });
+  // $(document).ready(function() {
+  //   $("#logOutButton").click(function logOut() {
+  //     $.ajax({
+  //       type: "POST",
+  //        url: './resetSessionUsername.php',
+  //        dataType: "JSON", //tell jQuery to expect JSON encoded response
+  //        success: function (response){
+  //         if(response.success === 'success'){
+  //           //alert("User Logged Out");
+  //           window.location.href = "../php/new-login.php";
+  //         }
+  //         else {
+  //           alert("Log out failed");
+  //         }
+  //        }
+  //     });
+  //   });
+  // });
 </script>
