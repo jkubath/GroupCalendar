@@ -21,9 +21,9 @@
 	
 	/* Step 1: Set variables for start and end date ranges */
 	//Short-circuit if the client did not give us a date range.
-	// if (!isset($_GET['start']) || !isset($_GET['end'])) {
-	// 	die("Please provide a date range.");
-	// }
+	if (!isset($_GET['start']) || !isset($_GET['end'])) {
+		die("Please provide a date range.");
+	}
 
 	// Parse the start/end parameters.
 	// These are assumed to be ISO8601 strings with no time nor timezone, like "2013-12-29".

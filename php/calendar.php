@@ -48,19 +48,19 @@ session_start();
 
 
       // page is now ready, initialize the calendar...
-      $('#calendar-left').fullCalendar({
-        header :{
-          left: 'title',
-          right: 'prev,next'
-        },
-        dayClick: function(date, jsEvent, view) {
-          // FOR TESTING
-          $(this).css('background-color', 'grey');
-        },
+      // $('#calendar-left').fullCalendar({
+      //   header :{
+      //     left: 'title',
+      //     right: 'prev,next'
+      //   },
+      //   dayClick: function(date, jsEvent, view) {
+      //     // FOR TESTING
+      //     $(this).css('background-color', 'grey');
+      //   },
 
-        height: "auto",
-        events: './getCalendarEvents.php'
-      }),
+      //   height: "auto",
+      //   events: './getCalendarEvents.php'
+      // }),
 
 
       $('#calendar-right').fullCalendar({
@@ -111,13 +111,54 @@ session_start();
         events: './getCalendarEvents.php'
       })
 
+      /* Query the list of events for the left side of the screen */
+      var start_date = '2018-04-01';
+      var end_date = '2018-04-30';
       
+
+      $.ajax({
+          url: "./getCalendarEvents.php",
+          type: "GET",
+          data: {"start": start_date, "end": end_date},
+          dataType: 'json',
+          success: function(data) {
+            //alert('start');
+            //alert(data);
+            /* Add each element to the calendar-left-list */
+            $("#calendar-left").append("<table id='calendar-left-table'></table>");
+            $("#calendar-left-table").append("<tr id='tableHeader'></tr>");
+            $("#tableHeader").append("<th>Title</th>");
+            $("#tableHeader").append("<th>Start</th>");
+
+            var table = document.getElementById("calendar-left-table");
+            var caption = table.createCaption();
+            caption.innerHTML = "Event List";
+
+            $.each(data, function(key, value) {
+
+              var title = data[key]['title'];
+              var start = data[key]['start'];
+
+              //key + 1 to start enterting after the table header
+              var row = table.insertRow(key + 1);
+
+              var titleCell = row.insertCell(0);
+              var startCell = row.insertCell(1);
+
+              titleCell.innerHTML = title;
+              startCell.innerHTML = start;
+
+            });
+
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            alert("some error");
+          }
+        });      
 
     });
     
 
   </script>
 </body>
-
-
 </html>
