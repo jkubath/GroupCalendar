@@ -139,7 +139,7 @@ session_start();
           },
           viewRender: function (view, element) {
             /* Each time the view changes, the table is deleted and recreated */
-            
+
             // Delete
             $("#calendar-left-table").remove();
 

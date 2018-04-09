@@ -24,7 +24,7 @@ if (!empty($_POST)) {
 
 	if (!empty($error)) {
 		header('Location: ./login.php?'.$error.'');
-		exit();  
+		exit();
 	} else {
 		$statement = $pdo->prepare("SELECT * FROM users, user_info WHERE users.username = :username AND users.password = :password AND users.username = user_info.username");
 
@@ -37,7 +37,8 @@ if (!empty($_POST)) {
 			$_SESSION['lastName'] = $row['last_name'];
 			$_SESSION['email'] = $row['email'];
 
-			header('Location: ./homepage.php?success=1');
+		
+			header('Location: ./calendar.php?success=1');
 		} else {
 			header('Location: ./login.php?usernotfound=1');
 			exit();
