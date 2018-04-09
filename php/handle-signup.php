@@ -11,6 +11,7 @@ if (!empty($_POST)) {
 	$email = strtolower($_POST['email']);
 	$username = $_POST['username'];
 	$password = $_POST['password'];
+	$calendarName = $_POST['calendarName'];
 	$error;
 
 	if (empty($first)) {
@@ -42,6 +43,13 @@ if (!empty($_POST)) {
 			$error = 'emptypass=1';
 		} else {
 			$error .= '&emptypass=1';
+		}
+	}
+	if (empty($calendarName)) {
+		if (empty($error)) {
+			$error = 'emptycalendarname=1';
+		} else {
+			$error .= '&emptycalendarname=1';
 		}
 	}
 	if (!empty($error)) {
@@ -76,23 +84,43 @@ if (!empty($_POST)) {
 			header('Location: ./signup.php?'.$error.'');
 			exit();  
 		} else {
-			$sql = "
-			INSERT INTO users(username, password) VALUES (:username, :password);
-			INSERT INTO user_info(username, first_name, last_name, email) VALUES (:username, :first, :last, :email);
-			";
+			try {
+				$pdo->beginTransaction();
+				$sql = "
+				INSERT INTO users(username, password) VALUES(:username, :password);
+				INSERT INTO user_info(username, first_name, last_name, email) VALUES(:username, :first, :last, :email);
+				";
 
-			$statement = $pdo->prepare($sql);
-			
-			$statement->bindParam(":username", $username);
-			$statement->bindParam(":password", $password);
-			$statement->bindParam(":first", $first);
-			$statement->bindParam(":last", $last);
-			$statement->bindParam(":email", $email);
+				$statement = $pdo->prepare($sql);
 
-			$statement->execute();
+				$statement->bindParam(":username", $username);
+				$statement->bindParam(":password", $password);
+				$statement->bindParam(":first", $first);
+				$statement->bindParam(":last", $last);
+				$statement->bindParam(":email", $email);
 
-			header('Location: ./homepage.php?success=1');
+				$statement->execute();
 
+
+				$statement = $pdo->prepare("INSERT INTO calendar(calendar_name) VALUES(:calendarName);");
+				$statement->bindParam(":calendarName", $calendarName);
+				$statement->execute();
+
+				$id = $pdo->lastInsertId();
+
+				$statement = $pdo->prepare("INSERT INTO calendar_rights(calendar_id, username, permission) VALUES(:id, :username, 1);");
+				$statement->bindParam(":username", $username);
+				$statement->bindParam(":id", $id);
+				$statement->execute();
+
+				$pdo->commit();
+
+				header('Location: ./homepage.php?success=1');
+
+			} catch (PDOException $e) {
+				$pdo->rollback();
+				echo "Error $e";
+			}
 		}
 	}
 }

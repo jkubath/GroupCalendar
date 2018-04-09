@@ -50,6 +50,10 @@
                       <input type="password" id="password" name="password">
                       <label for="password" id="password-label">Password</label>
                     </div>
+                    <div class="input-field">
+                      <input type="text" id="calendar-name" name="calendarName">
+                      <label for="calendar-name" id="calendar-name-label">Calendar Name</label>
+                    </div>
 
                     <input type="submit" value="Sign up" class="btn btn-large purple btn-extend">
                   </form>
@@ -152,6 +156,16 @@
       $("#password").focusout(function() {
         if ($("#password").val() == '') {
           $("#password-label").removeClass("active");
+        }
+      });
+
+      // Calendar Name field
+      $("#calendar-name").focus(function() {
+        $("#calendar-name-label").addClass("active");
+      }); 
+      $("#calendar-name").focusout(function() {
+        if ($("#calendar-name").val() == '') {
+          $("#calendar-name-label").removeClass("active");
         }
       }); 
     });
