@@ -3,14 +3,14 @@
 function dbConnection() {
 	$servername = "localhost";
 	$username = "root";
-	$password = "root";// Axel password is root
+	$password = "";// Axel password is root.
 	$database = "group_calendar";
 
   try {
     return new PDO("mysql:host=$servername;dbname=$database", $username, $password);
   } catch(PDOException $e) {
     // handle exceptions accordingly
-    echo "<h1>Database Error</h1>";
+    echo $e;
   }
 
 }
