@@ -82,7 +82,7 @@ session_start();
     $('#calendar-right').fullCalendar({
       editable: true, //Allows for drag and drop events
       eventLimit: true,
-      googleCalendarApiKey: 'AIzaSyCTsqrwq81z9cpRL8utVvSDAywz2zkBZ1s',
+      googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo',
       //Their api key
       //googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
 
@@ -97,20 +97,23 @@ session_start();
           click: function() {
             var dateStr = prompt("Enter a date in YYYY-MM-DD format");
             var titleStr = prompt("Enter a name for the event");
-            var date = moment(dateStr);
+            var start_date = moment(dateStr);
+            var end_date = moment(dateStr);
+            end_date.add(1, "days");
             var allDayBool = true;
 
-            if (date.isValid()) {
+            if (start_date.isValid()) {
               $("#calendar-right").fullCalendar("renderEvent", {
                 title: titleStr,
-                start: date,
+                start: start_date,
+                end: end_date,
                 allDay: allDayBool
               });
               alert("Great. Now, update your database...");
               $.ajax({
                 url: "./addCalendarEvents.php",
                 type: "POST",
-                data: {"dateStr": dateStr, "title": titleStr, "allDay": allDayBool },
+                data: {"start_date": start_date.format(), "end_date": end_date.format(), "title": titleStr, "allDay": allDayBool },
                 success: function () {
                   alert("Added successfully!");
                 },
@@ -164,7 +167,8 @@ session_start();
           eventSources: [
             {
               //Get google holiday events
-              googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com' },
+              googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com' 
+            },
             {
               url: './getCalendarEvents.php',
               success: function(data) {
