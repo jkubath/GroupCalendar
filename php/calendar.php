@@ -116,6 +116,7 @@ session_start();
                 data: {"start_date": start_date.format(), "end_date": end_date.format(), "title": titleStr, "allDay": allDayBool },
                 success: function () {
                   alert("Added successfully!");
+                  $('#calendar-right').fullCalendar('rerenderEvents');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                   alert("some error");
@@ -213,13 +214,17 @@ session_start();
                 type: "POST",
                 data: {"id": event.id, "start": event.start.format(), "end": event.end.format()},
                 success: function () {
+                  //refresh the events in the calendar and the left list
                   //alert(event.title + " updated successfully!");
+                  $('#calendar-right').fullCalendar('rerenderEvents');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                   alert("Update failed");
                   revertFunc();
                 }
               });
+
+              
             }
           },
         eventResize: function(event, delta, revertFunc) {
@@ -250,12 +255,16 @@ session_start();
               data: {"id": event.id, "start": event.start.format(), "end": event.end.format()},
               success: function () {
                 //alert(event.title + " updated successfully!");
+                //refresh the events in the calendar and left list
+                $('#calendar-right').fullCalendar('rerenderEvents');
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Update failed");
                 revertFunc();
               }
             });
+
+            
           }
         }
 
