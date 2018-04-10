@@ -80,6 +80,12 @@ session_start();
     $("#navbar-switch").addClass("navbar");
 
     $('#calendar-right').fullCalendar({
+      editable: true, //Allows for drag and drop events
+      eventLimit: true,
+      googleCalendarApiKey: 'AIzaSyCTsqrwq81z9cpRL8utVvSDAywz2zkBZ1s',
+      //Their api key
+      //googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
+
       header :{
         left: 'today,prev,next',
         center: 'addEventButton',
@@ -155,34 +161,101 @@ session_start();
           },
 
           height: "auto",
-          events: {
-            url: './getCalendarEvents.php',
-            success: function(data) {
+          eventSources: [
+            {
+              //Get google holiday events
+              googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com' },
+            {
+              url: './getCalendarEvents.php',
+              success: function(data) {
 
-              var table = $("#calendar-left-table")[0];
+                var table = $("#calendar-left-table")[0];
 
-              /* We need to give each row a different id/class to prevent duplicate entries */
-              var i = 0;
+                /* We need to give each row a different id/class to prevent duplicate entries */
+                var i = 0;
 
-              $.each(data, function(key, value) {
+                $.each(data, function(key, value) {
 
-                var title = data[key]['title'];
-                var start = data[key]['start'];
-                var end = data[key]['end'];
+                  var title = data[key]['title'];
+                  var start = data[key]['start'];
+                  var end = data[key]['end'];
 
-                $("#table-body").append("<tr id='table-row-"+i+"'></tr>");
-                $("#table-row-"+i).append("<td>" + title + "</td>");
-                $("#table-row-"+i).append("<td>" + start + "</td>");
-                $("#table-row-"+i).append("<td>" + end + "</td>");
+                  $("#table-body").append("<tr id='table-row-"+i+"'></tr>");
+                  $("#table-row-"+i).append("<td>" + title + "</td>");
+                  $("#table-row-"+i).append("<td>" + start + "</td>");
+                  $("#table-row-"+i).append("<td>" + end + "</td>");
 
-                i++;
-              });
+                  i++;
+                });
 
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
-              alert("some error");
-            }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("some error");
+              }
           }
+         ],// Second source
+         eventDrop: function(event, delta, revertFunc) {
+            alert(event.title + " was dropped on " + event.start.format());
+
+            //Confirm with the user
+            if (!confirm("Are you sure about this change?")) {
+              //Revert the changes
+              revertFunc();
+            }
+            //Change the date in the database
+            else {
+              $.ajax({
+                url: "./updateCalendarEvents.php",
+                type: "POST",
+                data: {"id": event.id, "start": event.start.format(), "end": event.end.format()},
+                success: function () {
+                  //alert(event.title + " updated successfully!");
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  alert("Update failed");
+                  revertFunc();
+                }
+              });
+            }
+          },
+        eventResize: function(event, delta, revertFunc) {
+          /* Full calendar makes an all day event on 2018-04-29 end on 2018-04-30
+           * This just subtracts on so it ends on 2018-04-29 
+           * This prevents the user from being confused by the date
+           */
+          if(event.allDay){
+            event.end.subtract(1, "days");
+          }
+          
+          alert(event.title + " end is now " + event.end.format());
+
+          /* Re-add the subtracted day */
+          if(event.allDay){
+            event.end.add(1, "days");
+          }
+          //Confirm with the user
+          if (!confirm("Are you sure about this change?")) {
+            //Revert the changes
+            revertFunc();
+          }
+          //Change the date in the database
+          else {
+            $.ajax({
+              url: "./updateCalendarEvents.php",
+              type: "POST",
+              data: {"id": event.id, "start": event.start.format(), "end": event.end.format()},
+              success: function () {
+                //alert(event.title + " updated successfully!");
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Update failed");
+                revertFunc();
+              }
+            });
+          }
+        }
+
+
         });
   });
 
