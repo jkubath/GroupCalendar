@@ -79,11 +79,13 @@
 				// echo $row['name'];
 				// echo $row['calendar_id'];
 				$results[] = array(
-					"id"	=> $row['event_id'], 
-					"title"	=> $row['title'], 
-					"start"	=> $row['start_date'], 
-					"end"	=> $row['end_date'],
-					"allDay"=> $row['all_day']
+					"id"		=> $row['event_id'], 
+					"title"		=> $row['title'], 
+					"start"		=> $row['start_date'], 
+					"end"		=> $row['end_date'],
+					"allDay"	=> $row['all_day'],
+					"color" 	=> $row['color'],
+					"textColor" => $row['text_color']
 				);
 		}
 

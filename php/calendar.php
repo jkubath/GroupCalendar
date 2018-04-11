@@ -30,7 +30,7 @@ session_start();
     <div class="container" id="container-width">
       <div class="row" id="calendar-container">
         <!-- <div class="col s3 purple accent-4" id="calendar-left"></div> -->
-        <div class="col s12 white" id="calendar-right"></div>
+        <div class="col s12" id="calendar-right"></div>
       </div>
     </div>
   </section>
@@ -122,6 +122,8 @@ session_start();
   $(document).ready(function() {
     $("#navbar-switch").removeClass("navbar-fixed");
     $("#navbar-switch").addClass("navbar");
+    $("#navbar").removeClass("transparent");
+    $("#navbar").css("background-color", "rgba(55, 71, 79, 1.0)");
 
     var globalClickedEvent = null;
 
@@ -129,51 +131,52 @@ session_start();
       editable: true, //Allows for drag and drop events
       eventLimit: true,
       googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo',
+
       //Their api key
       //googleCalendarApiKey: 'AIzaSyDcnW6WejpTOCffshGDDb4neIrXVUA1EAE',
 
       header :{
         left: 'today,prev,next',
         center: 'addEventButton',
-        right: 'month,agendaWeek,agendaDay'//, basicDay,basicWeek'
+        right: 'month,agendaWeek,agendaDay,listMonth'//, basicDay,basicWeek'
       },
-      customButtons: {
-        addEventButton: {
-          text: 'add event...',
-          click: function() {
-            var dateStr     = prompt("Enter a date in YYYY-MM-DD format");
-            var titleStr    = prompt("Enter a name for the event");
-            var start_date  = moment(dateStr);
-            var end_date    = moment(dateStr);
-            end_date.add(1, "days");
-            var allDayBool  = true;
+      // customButtons: {
+      //   addEventButton: {
+      //     text: 'add event...',
+      //     click: function() {
+      //       var dateStr     = prompt("Enter a date in YYYY-MM-DD format");
+      //       var titleStr    = prompt("Enter a name for the event");
+      //       var start_date  = moment(dateStr);
+      //       var end_date    = moment(dateStr);
+      //       end_date.add(1, "days");
+      //       var allDayBool  = true;
 
-            if (start_date.isValid()) {
-              $("#calendar-right").fullCalendar("renderEvent", {
-                title: titleStr,
-                start: start_date,
-                end: end_date,
-                allDay: allDayBool
-              });
-              alert("Great. Now, update your database...");
-              $.ajax({
-                url: "./addCalendarEvents.php",
-                type: "POST",
-                data: {"start": start_date.format(), "end": end_date.format(), "title": titleStr, "allDay": allDayBool },
-                success: function () {
-                  alert("Added successfully!");
-                  $('#calendar-right').fullCalendar('rerenderEvents');
-                },
-                error: function(XMLHttpRequest, textStatus, errorThrown) {
-                  alert("some error");
-                }
-              });
-            } else {
-              alert('Invalid date.');
-            }
-          }
-        }
-      },
+      //       if (start_date.isValid()) {
+      //         $("#calendar-right").fullCalendar("renderEvent", {
+      //           title: titleStr,
+      //           start: start_date,
+      //           end: end_date,
+      //           allDay: allDayBool
+      //         });
+      //         alert("Great. Now, update your database...");
+      //         $.ajax({
+      //           url: "./addCalendarEvents.php",
+      //           type: "POST",
+      //           data: {"start": start_date.format(), "end": end_date.format(), "title": titleStr, "allDay": allDayBool },
+      //           success: function () {
+      //             alert("Added successfully!");
+      //             $('#calendar-right').fullCalendar('rerenderEvents');
+      //           },
+      //           error: function(XMLHttpRequest, textStatus, errorThrown) {
+      //             alert("some error");
+      //           }
+      //         });
+      //       } else {
+      //         alert('Invalid date.');
+      //       }
+      //     }
+      //   }
+      // },
       dayClick: function(date, jsEvent, view) {
 
 
@@ -182,19 +185,21 @@ session_start();
 
           //$("#txtDateStart").val(date.format("MMM DD, YYYY"));
 
-          $('#txtTitle').val('');
-          $('#txtColor').val('');
-          $('#txtDescription').val('');
+          // $('#txtTitle').val('');
+          // $('#txtColor').val('');
+          // $('#txtDescription').val('');
 
           $('#dayStart').addClass('active');
           $('#dayEnd').addClass('active');
 
 
 
-          $('#txtHourStart').val('');
+          // $('#txtHourStart').val('');
 
-          $('#txtDateEnd').val('');
-          $('#txtHourEnd').val('');
+          // $('#txtDateEnd').val('');
+          // $('#txtHourEnd').val('');
+
+
 
           var elem = document.querySelector('#txtDateStart');
           var instance = M.Datepicker.init(elem, options = {
@@ -268,56 +273,22 @@ session_start();
             $("#btnAdd").hide();
           //eventClick end
         },
-        viewRender: function (view, element) {
-          /* Each time the view changes, the table is deleted and recreated */
 
-            // Delete
-            //$("#calendar-left-table").remove();
+        height: "auto",
 
-            // Create
-            // $("#calendar-left").append("<table class='highlight' id='calendar-left-table'></table>");
-            // $("#calendar-left-table").append("<caption>Event List</caption>");
-            // $("#calendar-left-table").append("<thead id='table-head'></thead>");
-            // $("#table-head").append("<tr id='head-row'></tr>");
-            // $("#head-row").append("<th>Title</th>");
-            // $("#head-row").append("<th>Start</th>");
-            // $("#head-row").append("<th>End</th>");
-            // $("<tbody id='table-body'></tbody>").insertAfter("#table-head");
-          },
-
-          height: "auto",
-
-          eventSources: [
-          {
+        eventSources: [
+        {
               //Get google holiday events
-              googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com'
+              googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
+              editable: false
             },
             {
               url: './getCalendarEvents.php',
               success: function(data) {
-
-                // var table = $("#calendar-left-table")[0];
-
-                // /* We need to give each row a different id/class to prevent duplicate entries */
-                // var i = 0;
-
-                // $.each(data, function(key, value) {
-
-                //   var title = data[key]['title'];
-                //   var start = data[key]['start'];
-                //   var end = data[key]['end'];
-
-                //   $("#table-body").append("<tr id='table-row-"+i+"'></tr>");
-                //   $("#table-row-"+i).append("<td>" + title + "</td>");
-                //   $("#table-row-"+i).append("<td>" + start + "</td>");
-                //   $("#table-row-"+i).append("<td>" + end + "</td>");
-
-                //   i++;
-                // });
-
+                console.log("fetch succesful (./getCalendarEvents.php)");
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("some error");
+                console.log("fetch unsuccessful (./getCalendarEvents.php)");
               }
             }
          ],// Second source
@@ -359,12 +330,11 @@ session_start();
               "textColor": event.textColor
             },
             success: function () {
-                  //refresh the events in the calendar and the left list
-                  //alert(event.title + " updated successfully!");
-                  $('#calendar-right').fullCalendar('refetchEvents');
+                  console.log(event.title + " updated successful (./updateCalendarEvents.php)");
+                  // $('#calendar-right').fullCalendar('refetchEvents');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
-                  alert("Update failed");
+                  console.log("updated unsuccessful (./updateCalendarEvents.php)");
                   revertFunc();
                 }
               });
@@ -374,50 +344,33 @@ session_start();
            * This just subtracts on so it ends on 2018-04-29
            * This prevents the user from being confused by the date
            */
-          //  if(event.allDay){
-          //   event.end.subtract(1, "days");
-          // }
-
-          console.log(" title: " + event.title + " was dropped on " + event.start.format() + " ends on: " + event.end.format() + " allday: " + event.allDay);
-
-          /* Re-add the subtracted day */
-          // if(event.allDay){
-          //   event.end.add(1, "days");
-          // }
-          //Confirm with the user
-          // if (!confirm("Are you sure about this change?")) {
-          //   //Revert the changes
-          //   revertFunc();
-          // }
-          //Change the date in the database
-          // else {
-            if (event.allDay) {
-              allDayBoolean = 1;
-            } else {
-              allDayBoolean = 0;
+           console.log(" title: " + event.title + " was dropped on " + event.start.format() + " ends on: " + event.end.format() + " allday: " + event.allDay);
+           if (event.allDay) {
+            allDayBoolean = 1;
+          } else {
+            allDayBoolean = 0;
+          }
+          $.ajax({
+            url: "./updateCalendarEvents.php",
+            type: "POST",
+            data: {
+              "id": event.id, 
+              "title": event.title,
+              "start": event.start.format(), 
+              "end": event.end.format(),
+              "allDay": allDayBoolean,
+              "color": event.color,
+              "textColor": event.textColor
+            },
+            success: function () {
+              console.log(event.title + " updated successfully!");
+              $('#calendar-right').fullCalendar('refetchEvents');
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              alert("Update failed");
+              revertFunc();
             }
-            $.ajax({
-              url: "./updateCalendarEvents.php",
-              type: "POST",
-              data: {
-                "id": event.id, 
-                "title": event.title,
-                "start": event.start.format(), 
-                "end": event.end.format(),
-                "allDay": allDayBoolean,
-                "color": event.color,
-                "textColor": event.textColor
-              },
-              success: function () {
-                //alert(event.title + " updated successfully!");
-                //refresh the events in the calendar and left list
-                $('#calendar-right').fullCalendar('refetchEvents');
-              },
-              error: function(XMLHttpRequest, textStatus, errorThrown) {
-                alert("Update failed");
-                revertFunc();
-              }
-            });
+          });
           // }
         }
 
@@ -425,7 +378,6 @@ session_start();
       });
 
 function getEventData() {
-  console.log()
   newEvent = {
     id: globalClickedEvent,
     title: $("#txtTitle").val(),
@@ -447,7 +399,7 @@ function sendEventDataToDB(action, objEvent) {
   } else if (action == "modify") {
     php = "./updateCalendarEvents.php";
   } else if (action == "remove") {
-
+    php = "./deleteCalendarEvents.php";
   }
 
   $.ajax({

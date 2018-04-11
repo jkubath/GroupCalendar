@@ -1,6 +1,6 @@
 /*****GLOBAL*****/
 body, html {
-	background:linear-gradient(0deg,rgba(63, 57,77, 0.7),rgba(63, 57, 77, 0.7)), url(../img/dance.jpg);
+	background-color: rgba(106,27,154, 1.0);
 	background-size: cover;
 	background-position: center;
 }
@@ -9,6 +9,9 @@ body, html {
 .main-header {
 }
 
+.fc th, .fc td {
+	border-color: rgba(181,137,0, 1.0) !important;
+}
 
 
 /*****IDs*****/
