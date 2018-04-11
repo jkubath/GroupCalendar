@@ -280,6 +280,7 @@ session_start();
           },
 
           height: "auto",
+
           eventSources: [
           {
               //Get google holiday events
@@ -314,6 +315,7 @@ session_start();
               }
             }
          ],// Second source
+
          eventDrop: function(event, delta, revertFunc) {
           console.log("event id: " + event.id + " title: " + event.title + " was dropped on " + event.start.format() + " and ends on " + event.end + " allday: " + event.allDay);
           var end;

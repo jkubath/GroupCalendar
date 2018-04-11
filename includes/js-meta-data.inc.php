@@ -7,3 +7,4 @@
 <!-- Calendar -->
 <script src='../includes/moment.min.js'></script>
 <script src='../includes/fullcalendar/fullcalendar.js'></script>
+<script src='../includes/gcal.min.js'></script>
