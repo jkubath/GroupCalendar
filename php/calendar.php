@@ -29,8 +29,8 @@ session_start();
   <section class="section center scrollspy" id="calendar-section">
     <div class="container" id="container-width">
       <div class="row" id="calendar-container">
-        <div class="col s3 purple accent-4" id="calendar-left"></div>
-        <div class="col s9 deep-orange darken-2" id="calendar-right"></div>
+        <!-- <div class="col s3 purple accent-4" id="calendar-left"></div> -->
+        <div class="col s12 white" id="calendar-right"></div>
       </div>
     </div>
   </section>
@@ -135,7 +135,7 @@ session_start();
       header :{
         left: 'today,prev,next',
         center: 'addEventButton',
-        right: 'month,agendaWeek,agendaDay, basicDay,basicWeek'
+        right: 'month,agendaWeek,agendaDay'//, basicDay,basicWeek'
       },
       customButtons: {
         addEventButton: {
@@ -272,17 +272,17 @@ session_start();
           /* Each time the view changes, the table is deleted and recreated */
 
             // Delete
-            $("#calendar-left-table").remove();
+            //$("#calendar-left-table").remove();
 
             // Create
-            $("#calendar-left").append("<table class='highlight' id='calendar-left-table'></table>");
-            $("#calendar-left-table").append("<caption>Event List</caption>");
-            $("#calendar-left-table").append("<thead id='table-head'></thead>");
-            $("#table-head").append("<tr id='head-row'></tr>");
-            $("#head-row").append("<th>Title</th>");
-            $("#head-row").append("<th>Start</th>");
-            $("#head-row").append("<th>End</th>");
-            $("<tbody id='table-body'></tbody>").insertAfter("#table-head");
+            // $("#calendar-left").append("<table class='highlight' id='calendar-left-table'></table>");
+            // $("#calendar-left-table").append("<caption>Event List</caption>");
+            // $("#calendar-left-table").append("<thead id='table-head'></thead>");
+            // $("#table-head").append("<tr id='head-row'></tr>");
+            // $("#head-row").append("<th>Title</th>");
+            // $("#head-row").append("<th>Start</th>");
+            // $("#head-row").append("<th>End</th>");
+            // $("<tbody id='table-body'></tbody>").insertAfter("#table-head");
           },
 
           height: "auto",
@@ -296,24 +296,24 @@ session_start();
               url: './getCalendarEvents.php',
               success: function(data) {
 
-                var table = $("#calendar-left-table")[0];
+                // var table = $("#calendar-left-table")[0];
 
-                /* We need to give each row a different id/class to prevent duplicate entries */
-                var i = 0;
+                // /* We need to give each row a different id/class to prevent duplicate entries */
+                // var i = 0;
 
-                $.each(data, function(key, value) {
+                // $.each(data, function(key, value) {
 
-                  var title = data[key]['title'];
-                  var start = data[key]['start'];
-                  var end = data[key]['end'];
+                //   var title = data[key]['title'];
+                //   var start = data[key]['start'];
+                //   var end = data[key]['end'];
 
-                  $("#table-body").append("<tr id='table-row-"+i+"'></tr>");
-                  $("#table-row-"+i).append("<td>" + title + "</td>");
-                  $("#table-row-"+i).append("<td>" + start + "</td>");
-                  $("#table-row-"+i).append("<td>" + end + "</td>");
+                //   $("#table-body").append("<tr id='table-row-"+i+"'></tr>");
+                //   $("#table-row-"+i).append("<td>" + title + "</td>");
+                //   $("#table-row-"+i).append("<td>" + start + "</td>");
+                //   $("#table-row-"+i).append("<td>" + end + "</td>");
 
-                  i++;
-                });
+                //   i++;
+                // });
 
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
