@@ -123,6 +123,8 @@ session_start();
     $("#navbar-switch").removeClass("navbar-fixed");
     $("#navbar-switch").addClass("navbar");
 
+    var globalClickedEvent = null;
+
     $('#calendar-right').fullCalendar({
       editable: true, //Allows for drag and drop events
       eventLimit: true,
@@ -221,12 +223,15 @@ session_start();
 
 
           $("#btnAdd").show();
+          $("#btnRemove").hide();
           $("#btnModify").hide();
         //dayClick end
       },
           //events: 'http://localhost:8887/GroupCalendar/php/events.php',
 
           eventClick: function(calEvent, jsEvent, view){
+            globalClickedEvent = calEvent.id;
+            console.log("Clicked event id: " + globalClickedEvent);
 
             $('#modal1').modal();
             $('#modal1').modal('open');
@@ -259,6 +264,7 @@ session_start();
             }
 
             $("#btnModify").show();
+            $("#btnRemove").show();
             $("#btnAdd").hide();
           //eventClick end
         },
@@ -341,8 +347,15 @@ session_start();
           $.ajax({
             url: "./updateCalendarEvents.php",
             type: "POST",
-            data: {"id": event.id, "title": event.title, "start": event.start.format("YYYY-MM-DD HH:mm:ss"), "end": end.format(),
-            "allDay": allDayBoolean, "color": event.color, "textColor": event.textColor},
+            data: {
+              "id": event.id, 
+              "title": event.title,
+              "start": event.start.format(), 
+              "end": end.format(),
+              "allDay": allDayBoolean,
+              "color": event.color,
+              "textColor": event.textColor
+            },
             success: function () {
                   //refresh the events in the calendar and the left list
                   //alert(event.title + " updated successfully!");
@@ -363,7 +376,7 @@ session_start();
           //   event.end.subtract(1, "days");
           // }
 
-          console.log(" title: " + event.title + " was dropped on " + event.start.format() + "ends on: " + event.end.format() + " allday: " + event.allDay);
+          console.log(" title: " + event.title + " was dropped on " + event.start.format() + " ends on: " + event.end.format() + " allday: " + event.allDay);
 
           /* Re-add the subtracted day */
           // if(event.allDay){
@@ -376,14 +389,27 @@ session_start();
           // }
           //Change the date in the database
           // else {
+            if (event.allDay) {
+              allDayBoolean = 1;
+            } else {
+              allDayBoolean = 0;
+            }
             $.ajax({
               url: "./updateCalendarEvents.php",
               type: "POST",
-              data: {"id": event.id, "start": event.start.format(), "end": event.end.format()},
+              data: {
+                "id": event.id, 
+                "title": event.title,
+                "start": event.start.format(), 
+                "end": event.end.format(),
+                "allDay": allDayBoolean,
+                "color": event.color,
+                "textColor": event.textColor
+              },
               success: function () {
                 //alert(event.title + " updated successfully!");
                 //refresh the events in the calendar and left list
-                $('#calendar-right').fullCalendar('rerenderEvents');
+                $('#calendar-right').fullCalendar('refetchEvents');
               },
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("Update failed");
@@ -395,90 +421,81 @@ session_start();
 
 
       });
+
+function getEventData() {
+  console.log()
+  newEvent = {
+    id: globalClickedEvent,
+    title: $("#txtTitle").val(),
+    start:moment($("#txtDateStart").val() + " " + $("#txtHourStart").val() ).format('YYYY-MM-DD HH:mm:ss'),
+    end:moment($("#txtDateEnd").val() + " " + $("#txtHourEnd").val() ).format('YYYY-MM-DD HH:mm:ss'),
+    allDay: $("#switchAllday").prop("checked")? 1 : 0,// $("#txtColor").val()
+    description: $("#txtDescription").val(),
+    color: $("#txtColor").val(),
+    textColor: 'black'
+  };
+}
+
+function sendEventDataToDB(action, objEvent) {
+  console.log(newEvent);
+  var php = null;
+  console.log(action);
+  if (action == 1) {
+    php = "./addCalendarEvents.php";
+  } else if (action == "modify") {
+    php = "./updateCalendarEvents.php";
+  } else if (action == "remove") {
+
+  }
+
+  $.ajax({
+    type: 'POST',
+        url: php,//?action=+action
+        data: objEvent,
+        success:function (msg) {
+          console.log(msg);
+          //if (msg) {
+            console.log("111");
+            $("#calendar-right").fullCalendar('refetchEvents');
+            console.log("222");
+            $('#modal1').modal('close');
+        //  }
+        alert("Added successfully!");
+      },
+      error:function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus);
+        console.log(errorThrown);
+        alert("some error");
+      }
+    });
+}
+
+$("#btnAdd").click(function(){
+  getEventData();
+
+      //$('#calendar-right').fullCalendar('renderEvent', newEvent);
+      sendEventDataToDB(1, newEvent);
+      //$('#txtDateStart').datepicker('destroy');
+      $("#txtDateStart").val('');
+
+    });
+$("#switchAllday").click(function() {
+  if ($("#switchAllday").is(":checked")) {
+    $('#txtHourStart').prop("disabled", true);
+    $('#txtDateEnd').prop("disabled", true);
+    $('#txtHourEnd').prop("disabled", true);
+    console.log()
+    $('#txtDateEnd').val(moment($("#txtDateStart").val()).add(1, "days").format("MMM DD, YYYY"));
+  } else {
+    $('#txtHourStart').prop("disabled", false);
+    $('#txtDateEnd').prop("disabled", false);
+    $('#txtHourEnd').prop("disabled", false);
+  }
+});
 });
 
 
 </script>
-
-
-<script type="text/javascript">
-// id	Optional. Useful for getEventSourceById.
-// https://fullcalendar.io/docs/event-source-object#options
-var newEvent;
-
-
-function getEventData() {
-  newEvent = {
-    title: $("#txtTitle").val(),
-    color: $("#txtColor").val(),
-    description: $("#txtDescription").val(),
-    start:moment($("#txtDateStart").val() + " " + $("#txtHourStart").val() ).format('YYYY-MM-DD HH:mm:ss'),
-    end:moment($("#txtDateEnd").val() + " " + $("#txtHourEnd").val() ).format('YYYY-MM-DD HH:mm:ss'),
-    textColor: 'black',
-      allDay: $("#switchAllday").prop("checked")? 1 : 0 // $("#txtColor").val()
-    };
-  }
-
-  function sendEventDataToDB(action, objEvent) {
-    console.log(newEvent);
-    var php = null;
-    console.log(action);
-    if (action == 1) {
-      php = "./addCalendarEvents.php";
-    } else if (action == "modify") {
-      php = "./updateCalendarEvents.php";
-    } else if (action == "remove") {
-
-    }
-
-    $.ajax({
-      type: 'POST',
-      url: php,//?action=+action
-      data: objEvent,
-      success:function (msg) {
-        console.log(msg);
-        //if (msg) {
-          console.log("111");
-          $("#calendar-right").fullCalendar('refetchEvents');
-          console.log("222");
-          $('#modal1').modal('close');
-      //  }
-      alert("Added successfully!");
-    },
-    error:function(XMLHttpRequest, textStatus, errorThrown) {
-      console.log(textStatus);
-      console.log(errorThrown);
-      alert("some error");
-    }
-  });
-  }
-
-  $("#btnAdd").click(function(){
-    getEventData();
-
-    //$('#calendar-right').fullCalendar('renderEvent', newEvent);
-    sendEventDataToDB(1, newEvent);
-    //$('#txtDateStart').datepicker('destroy');
-    $("#txtDateStart").val('');
-
-  });
-  $("#switchAllday").click(function() {
-    if ($("#switchAllday").is(":checked")) {
-      $('#txtHourStart').prop("disabled", true);
-      $('#txtDateEnd').prop("disabled", true);
-      $('#txtHourEnd').prop("disabled", true);
-      console.log()
-      $('#txtDateEnd').val(moment($("#txtDateStart").val()).add(1, "days").format("MMM DD, YYYY"));
-    } else {
-      $('#txtHourStart').prop("disabled", false);
-      $('#txtDateEnd').prop("disabled", false);
-      $('#txtHourEnd').prop("disabled", false);
-    }
-  });
-
-
-</script>
-
 
 </body>
 </html>
