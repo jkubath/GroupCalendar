@@ -319,15 +319,22 @@ session_start();
           var end;
           var allDayBoolean;
           if (event.allDay) {
-            end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "days");
-            console.log("end = " + end);
-            $("#calendar-right").fullCalendar("updateEvent", event);
+            if (event.end == null) {
+              end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "days");
+              console.log("end = " + end);
+              $("#calendar-right").fullCalendar("updateEvent", event);
+            } else {
+              end = event.end;
+            }
             allDayBoolean = 1;
           } else {
             console.log("start----->"+event.start.format());
-            end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "h");
-            //event.start.subtract(1, "hours");
-            console.log("end ----->"+end.format());
+            if (event.end == null) {
+              end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "h");
+              console.log("end ----->"+end.format());
+            } else {
+              end = event.end;
+            }
             allDayBoolean = 0;
           }
           console.log(event.allDay);
@@ -352,16 +359,16 @@ session_start();
            * This just subtracts on so it ends on 2018-04-29
            * This prevents the user from being confused by the date
            */
-           if(event.allDay){
-            event.end.subtract(1, "days");
-          }
+          //  if(event.allDay){
+          //   event.end.subtract(1, "days");
+          // }
 
-          console.log("event id: " + event.id + " title: " + event.title + " was dropped on " + event.start.format("YYYY-MM-DD HH:mm:ss")  + " allday: " + event.allDay);
+          console.log(" title: " + event.title + " was dropped on " + event.start.format() + "ends on: " + event.end.format() + " allday: " + event.allDay);
 
           /* Re-add the subtracted day */
-          if(event.allDay){
-            event.end.add(1, "days");
-          }
+          // if(event.allDay){
+          //   event.end.add(1, "days");
+          // }
           //Confirm with the user
           // if (!confirm("Are you sure about this change?")) {
           //   //Revert the changes
