@@ -1,7 +1,11 @@
 <!--Import Google Icon Font-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <!--Import css files -->
-<link type="text/css" rel="stylesheet" href="../css/materialize.min.css" media="screen,projection" />
+<!-- Compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="../css/materialize.min.css"> -->
+<!-- Compiled and minified CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 <link type="text/css" rel="stylesheet" href="../css/style.css" />
 
 <!--Let browser know website is optimized for mobile-->

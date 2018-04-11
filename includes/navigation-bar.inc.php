@@ -4,9 +4,7 @@
     <div class="container">
       <div class="nav-wrapper">
         <a href="../php/calendar.php" class="brand-logo">Calendar</a>
-        <a href="#" data-activates="mobile-nav" class="button-collapse">
-          <i class="material-icons">menu</i>
-        </a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li>
             <a href="../index.php">Home</a>
@@ -23,17 +21,17 @@
           <!-- <li>
             <a href="../php/signup.php">Sign Up</a>
           </li> -->
-            <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
+          <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
               //echo '<li><div class="btn blue" ">' . $_SESSION['username']. '</div></li>';
 
-              echo '<li ><a href="../php/logout.php" id="logOutButton">Log out</a></li>';
-              echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
-            }
-            else {
-              echo '<li><a href="../php/signup.php">Sign up</a></li>';
-              echo '<li><a href="../php/login.php" class="btn blue">Log In</a></li>';
-            }
-            ?>
+            echo '<li ><a href="../php/logout.php" id="logOutButton">Log out</a></li>';
+            echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
+          }
+          else {
+            echo '<li><a href="../php/signup.php">Sign up</a></li>';
+            echo '<li><a href="../php/login.php" class="btn blue">Log In</a></li>';
+          }
+          ?>
         </ul>
       </div>
     </div>
@@ -42,53 +40,62 @@
 <!-- End of Naviagation bar-->
 
 <!-- Side nav for mobile devices-->
-<ul class="side-nav " id="mobile-nav">
+<!-- <ul class="sidenav" id="mobile-demo">
+  <li><a href="sass.html">Sass</a></li>
+  <li><a href="badges.html">Components</a></li>
+  <li><a href="collapsible.html">Javascript</a></li>
+  <li><a href="mobile.html">Mobile</a></li>
+</ul> -->
+<ul class="sidenav " id="mobile-demo">
   <h4 class="black-text center">Calendar</h4>
   <li>
     <div class="divider"></div>
   </li>
   <li>
-    <a href="#home">Home</a>
+    <a href="../php/homepage.php">Home</a>
   </li>
   <li>
-    <a href="#about">About</a>
+    <a href="../php/homepage.php#about">About</a>
   </li>
   <li>
-    <a href="#features">Features</a>
+    <a href="../php/homepage.php#features">Features</a>
   </li>
   <li>
-    <a href="#contact">Contact</a>
+    <a href="../php/homepage.php#contact">Contact</a>
   </li>
-  <li>
-    <a href="signup.php">Sign up</a>
-  </li>
-  <li>
-    <div class="divider"></div>
-  </li>
-  <li>
-    <a href="login.php" class="btn blue">Login</a>
-  </li>
+  <?php
+  if (isset($_SESSION["username"]) && $_SESSION != "") {
+    ?> 
+    <li>
+      <a href="../php/logout.php">Log out</a>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li>
+      <a href="../php/calendar.php" class="btn blue"><?php echo $_SESSION["username"]; ?></a>
+    </li>
+    <?php
+  } else {
+    ?>
+    <li>
+      <a href="../php/signup.php">Sign up</a>
+    </li>
+    <li>
+      <div class="divider"></div>
+    </li>
+    <li>
+      <a href="../php/login.php" class="btn blue">Login</a>
+    </li>
+    <?php
+  }
+  ?>
 </ul>
 <!-- End of side nav for mobile devies-->
 
 <!-- Log out function -->
 <script type='text/javascript'>
-  // $(document).ready(function() {
-  //   $("#logOutButton").click(function logOut() {
-  //     $.ajax({
-  //       type: "POST",
-  //        url: './resetSessionUsername.php',
-  //        dataType: "JSON", //tell jQuery to expect JSON encoded response
-  //        success: function (response){
-  //         if(response.success === 'success'){
-  //           //alert("User Logged Out");
-  //           window.location.href = "../php/new-login.php";
-  //         }
-  //         else {
-  //           alert("Log out failed");
-  //         }
-  //        }
-  //     });
-  //   });
-  // });
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
 </script>

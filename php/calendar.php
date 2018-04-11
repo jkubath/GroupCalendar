@@ -38,38 +38,82 @@ session_start();
   <!-- Modal Trigger -->
 
   <!-- Modal Structure -->
+
+  <!-- Modal -->
   <div id="modal1" class="modal">
-   <div class="modal-content">
+    <div class="modal-content">
 
-     <h4 >Modal Header</h4>
-     <p >A bunch of text</p>
-   </div>
-   <div class="modal-footer">
-     <a href="#!" class="modal-action modal-close waves-effect  btn blue">Add</a>
-     <a href="#!" class="modal-action modal-close waves-effect  btn red">Remove</a>
-     <a href="#!" class="modal-action modal-close waves-effect  btn black">Close</a>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s9">
+              <input id="txtTitle" type="text" data-length="128">
+              <label for="txtTitle" id="title">Title</label>
+            </div>
+            <div class="input-field col s3">
+              <input id="txtColor" type="text" > <!-- Picker Of Colors Later -->
+              <label for="txtColor" id="color">Color</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s10">
+              <textarea id="txtDescription" class="materialize-textarea" data-length="255"></textarea>
+              <label for="txtDescription" id="descrip">Description</label>
+            </div>
+            <div class="input-field col s2">
+              <!-- Switch -->
+              <div class="switch">
+                <label>
+                  Off
+                  <input id="switchAllday" type="checkbox" name="switch">
+                  <span class="lever"></span>
+                  On
+                </label>
+              </div>
+              <label class="active" for="switchAllday" id="allday">All Day</label> <!-- Conditions missing for now -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <input id="txtDateStart" type="text" class="datepicker">
+              <label class="active" for="txtDateStart" id="dayStart">Start Date</label>
+            </div>
+            <div class="input-field col s6">
+             <input id="txtHourStart" type="text" class="timepicker">
+             <label for="txtHourStart" id="hourStart">Start Hour</label>
+           </div>
+         </div>
+         <div class="row">
+          <div class="input-field col s6">
+            <input id="txtDateEnd" type="text" class="datepicker">
+            <label class="active" for="txtDateEnd" id="dayEnd">End Date</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="txtHourEnd" type="text" class="timepicker">
+            <label for="txtHourEnd" id ="hourEnd">End Hour</label>
+          </div>
+        </div>
 
-   </div>
- </div>
+
+      </form>
+    </div>
+
+
+  </div>
+  <div class="modal-footer">
+    <a href="#!" id="btnAdd" class="modal-action modal-close waves-effect  btn blue">Add</a>
+    <a href="#!" id="btnModify" class="modal-action modal-close waves-effect  btn green">Modify</a>
+    <a href="#!" id="btnRemove" class="modal-action modal-close waves-effect  btn red">Remove</a>
+    <a href="#!" id="btnClose" class="modal-action modal-close waves-effect  btn black">Close</a>
+
+  </div>
+</div>
 
 
 
- <!-- Modal Structure -->
- <div id="modal2" class="modal">
-   <div class="modal-content">
 
-     <h4 id="titleEvent">Modal 2</h4>
-     <p id="descriptionEvent">A bunch of text 2</p>
-   </div>
-   <div class="modal-footer">
-     <a href="#!" class="modal-action modal-close waves-effect  btn green">Modify</a>
-     <a href="#!" class="modal-action modal-close waves-effect  btn red">Remove</a>
-     <a href="#!" class="modal-action modal-close waves-effect  btn black">Close</a>
-
-   </div>
- </div>
- <!-- Footer -->
- <footer class="page-footer blue-grey darken-1">
+<!-- Footer -->
+<footer class="page-footer blue-grey darken-1">
   <?php include "../includes/footer.inc.php"; ?>
 </footer>
 <!-- End of footer-->
@@ -95,12 +139,12 @@ session_start();
         addEventButton: {
           text: 'add event...',
           click: function() {
-            var dateStr = prompt("Enter a date in YYYY-MM-DD format");
-            var titleStr = prompt("Enter a name for the event");
-            var start_date = moment(dateStr);
-            var end_date = moment(dateStr);
+            var dateStr     = prompt("Enter a date in YYYY-MM-DD format");
+            var titleStr    = prompt("Enter a name for the event");
+            var start_date  = moment(dateStr);
+            var end_date    = moment(dateStr);
             end_date.add(1, "days");
-            var allDayBool = true;
+            var allDayBool  = true;
 
             if (start_date.isValid()) {
               $("#calendar-right").fullCalendar("renderEvent", {
@@ -113,7 +157,7 @@ session_start();
               $.ajax({
                 url: "./addCalendarEvents.php",
                 type: "POST",
-                data: {"start_date": start_date.format(), "end_date": end_date.format(), "title": titleStr, "allDay": allDayBool },
+                data: {"start": start_date.format(), "end": end_date.format(), "title": titleStr, "allDay": allDayBool },
                 success: function () {
                   alert("Added successfully!");
                   $('#calendar-right').fullCalendar('rerenderEvents');
@@ -130,25 +174,96 @@ session_start();
       },
       dayClick: function(date, jsEvent, view) {
 
-          //$(this).css('background-color', 'grey');
-          $('#modal1').modal();
-          $('#modal1').modal('open');
-          //var elem = document.querySelector('.modal');
-          //var instance = M.Modal.init(elem, options);
-          //instance.open();
-        },
+
+        $('#modal1').modal();
+        $('#modal1').modal('open');
+
+          //$("#txtDateStart").val(date.format("MMM DD, YYYY"));
+
+          $('#txtTitle').val('');
+          $('#txtColor').val('');
+          $('#txtDescription').val('');
+
+          $('#dayStart').addClass('active');
+          $('#dayEnd').addClass('active');
+
+
+
+          $('#txtHourStart').val('');
+
+          $('#txtDateEnd').val('');
+          $('#txtHourEnd').val('');
+
+          var elem = document.querySelector('#txtDateStart');
+          var instance = M.Datepicker.init(elem, options = {
+            defaultDate: new Date(date.format("MMM DD, YYYY")),
+            setDefaultDate: true,
+            //format: "yyyy-mm-dd",
+            //firstDay: 0
+          });
+
+          $('#txtDateStart').val(date.format("MMM DD, YYYY"));
+
+          //var elem2 = document.querySelector('#txtHourStart');
+          //var instance2 = M.Timepicker.init(elem, options);
+          $('#txtHourStart').timepicker();
+          $('#txtHourEnd').timepicker();
+
+
+          $("#txtDateEnd").val(date.format("MMM DD, YYYY"));
+          $("#txtDateEnd").click(function(){
+            console.log("Click ... !");
+            $(document).ready(function(){
+              $('#txtDateEnd').datepicker();
+              $('#txtDateEnd').datepicker('open');
+            });
+          })
+
+
+          $("#btnAdd").show();
+          $("#btnModify").hide();
+        //dayClick end
+      },
           //events: 'http://localhost:8887/GroupCalendar/php/events.php',
 
           eventClick: function(calEvent, jsEvent, view){
-            $('#titleEvent').html(calEvent.title);
-            $('#descriptionEvent').html(calEvent.description);
-            $('#modal2').modal();
-            $('#modal2').modal('open');
-            //$('#modal2').modal();
-            //$('#modal2').modal('open');
-          },
-          viewRender: function (view, element) {
-            /* Each time the view changes, the table is deleted and recreated */
+
+            $('#modal1').modal();
+            $('#modal1').modal('open');
+
+            console.log(calEvent);
+
+            $('#title').removeClass('active').addClass('active');
+            $('#descrip').removeClass('active').addClass('active');
+            $('#descrip').removeClass('active').addClass('active');
+            $('#hourStart').removeClass('active').addClass('active');
+            $('#hourEnd').removeClass('active').addClass('active');
+
+            $('#dayStart').addClass('active');
+            $('#dayEnd').addClass('active');
+
+            $('#txtTitle').val(calEvent.title);
+            $('#txtColor').val(calEvent.color);
+            $('#txtDescription').val(calEvent.description);
+
+            $('#txtDateStart').val(moment(calEvent.start).format("MMM DD, YYYY"));
+            $('#txtHourStart').val(moment(calEvent.start).format("h:mm A"));
+
+            $('#txtDateEnd').val(moment(calEvent.end).format("MMM DD, YYYY"));
+            $('#txtHourEnd').val(moment(calEvent.end).format("h:mm A"));
+
+            if (calEvent.allDay == true) {
+              $("#switchAllday").prop("checked", true);
+            } else {
+              $("#switchAllday").prop("checked", false);
+            }
+
+            $("#btnModify").show();
+            $("#btnAdd").hide();
+          //eventClick end
+        },
+        viewRender: function (view, element) {
+          /* Each time the view changes, the table is deleted and recreated */
 
             // Delete
             $("#calendar-left-table").remove();
@@ -166,9 +281,9 @@ session_start();
 
           height: "auto",
           eventSources: [
-            {
+          {
               //Get google holiday events
-              googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com' 
+              googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com'
             },
             {
               url: './getCalendarEvents.php',
@@ -197,58 +312,61 @@ session_start();
               error: function(XMLHttpRequest, textStatus, errorThrown) {
                 alert("some error");
               }
-          }
+            }
          ],// Second source
          eventDrop: function(event, delta, revertFunc) {
-            alert(event.title + " was dropped on " + event.start.format());
-
-            //Confirm with the user
-            if (!confirm("Are you sure about this change?")) {
-              //Revert the changes
-              revertFunc();
-            }
-            //Change the date in the database
-            else {
-              $.ajax({
-                url: "./updateCalendarEvents.php",
-                type: "POST",
-                data: {"id": event.id, "start": event.start.format(), "end": event.end.format()},
-                success: function () {
+          console.log("event id: " + event.id + " title: " + event.title + " was dropped on " + event.start.format() + " and ends on " + event.end + " allday: " + event.allDay);
+          var end;
+          var allDayBoolean;
+          if (event.allDay) {
+            end = moment(event.start.format("YYYY-MM-DD").toString()).add(1, "days");
+            console.log("end = " + end);
+            $("#calendar-right").fullCalendar("updateEvent", event);
+            allDayBoolean = 1;
+          } else {
+            end = event.start.add(1, "h");
+            console.log(event.end);
+            allDayBoolean = 0;
+          }
+          console.log(event.allDay);
+          $.ajax({
+            url: "./updateCalendarEvents.php",
+            type: "POST",
+            data: {"id": event.id, "title": event.title, "start": event.start.format("YYYY-MM-DD HH:mm:ss"), "end": end.format(),
+            "allDay": allDayBoolean, "color": event.color, "textColor": event.textColor},
+            success: function () {
                   //refresh the events in the calendar and the left list
                   //alert(event.title + " updated successfully!");
-                  $('#calendar-right').fullCalendar('rerenderEvents');
+                  $('#calendar-right').fullCalendar('refetchEvents');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
                   alert("Update failed");
                   revertFunc();
                 }
               });
-
-              
-            }
-          },
+        },
         eventResize: function(event, delta, revertFunc) {
           /* Full calendar makes an all day event on 2018-04-29 end on 2018-04-30
-           * This just subtracts on so it ends on 2018-04-29 
+           * This just subtracts on so it ends on 2018-04-29
            * This prevents the user from being confused by the date
            */
-          if(event.allDay){
+           if(event.allDay){
             event.end.subtract(1, "days");
           }
-          
-          alert(event.title + " end is now " + event.end.format());
+
+          console.log("event id: " + event.id + " title: " + event.title + " was dropped on " + event.start.format("YYYY-MM-DD HH:mm:ss")  + " allday: " + event.allDay);
 
           /* Re-add the subtracted day */
           if(event.allDay){
             event.end.add(1, "days");
           }
           //Confirm with the user
-          if (!confirm("Are you sure about this change?")) {
-            //Revert the changes
-            revertFunc();
-          }
+          // if (!confirm("Are you sure about this change?")) {
+          //   //Revert the changes
+          //   revertFunc();
+          // }
           //Change the date in the database
-          else {
+          // else {
             $.ajax({
               url: "./updateCalendarEvents.php",
               type: "POST",
@@ -263,16 +381,95 @@ session_start();
                 revertFunc();
               }
             });
-
-            
-          }
+          // }
         }
 
 
-        });
-  });
+      });
+});
 
 
 </script>
+
+
+<script type="text/javascript">
+// id	Optional. Useful for getEventSourceById.
+// https://fullcalendar.io/docs/event-source-object#options
+var newEvent;
+
+
+function getEventData() {
+  newEvent = {
+    title: $("#txtTitle").val(),
+    color: $("#txtColor").val(),
+    description: $("#txtDescription").val(),
+    start:moment($("#txtDateStart").val() + " " + $("#txtHourStart").val() ).format('YYYY-MM-DD HH:mm:ss'),
+    end:moment($("#txtDateEnd").val() + " " + $("#txtHourEnd").val() ).format('YYYY-MM-DD HH:mm:ss'),
+    textColor: 'black',
+      allDay: $("#switchAllday").prop("checked")? 1 : 0 // $("#txtColor").val()
+    };
+  }
+
+  function sendEventDataToDB(action, objEvent) {
+    console.log(newEvent);
+    var php = null;
+    console.log(action);
+    if (action == 1) {
+      php = "./addCalendarEvents.php";
+    } else if (action == "modify") {
+      php = "./updateCalendarEvents.php";
+    } else if (action == "remove") {
+
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: php,//?action=+action
+      data: objEvent,
+      success:function (msg) {
+        console.log(msg);
+        //if (msg) {
+          console.log("111");
+          $("#calendar-right").fullCalendar('refetchEvents');
+          console.log("222");
+          $('#modal1').modal('close');
+      //  }
+      alert("Added successfully!");
+    },
+    error:function(XMLHttpRequest, textStatus, errorThrown) {
+      console.log(textStatus);
+      console.log(errorThrown);
+      alert("some error");
+    }
+  });
+  }
+
+  $("#btnAdd").click(function(){
+    getEventData();
+
+    //$('#calendar-right').fullCalendar('renderEvent', newEvent);
+    sendEventDataToDB(1, newEvent);
+    //$('#txtDateStart').datepicker('destroy');
+    $("#txtDateStart").val('');
+
+  });
+  $("#switchAllday").click(function() {
+    if ($("#switchAllday").is(":checked")) {
+      $('#txtHourStart').prop("disabled", true);
+      $('#txtDateEnd').prop("disabled", true);
+      $('#txtHourEnd').prop("disabled", true);
+      console.log()
+      $('#txtDateEnd').val(moment($("#txtDateStart").val()).add(1, "days").format("MMM DD, YYYY"));
+    } else {
+      $('#txtHourStart').prop("disabled", false);
+      $('#txtDateEnd').prop("disabled", false);
+      $('#txtHourEnd').prop("disabled", false);
+    } 
+  });
+  
+
+</script>
+
+
 </body>
 </html>

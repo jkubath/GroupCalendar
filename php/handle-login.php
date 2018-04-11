@@ -32,10 +32,10 @@ if (!empty($_POST)) {
 		$statement->bindParam(":password", $password);
 		$statement->execute();
 		if ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-			$_SESSION['username'] = $row['username'];
-			$_SESSION['firstName'] = $row['first_name'];
-			$_SESSION['lastName'] = $row['last_name'];
-			$_SESSION['email'] = $row['email'];
+			$_SESSION['username'] 	= $row['username'];
+			$_SESSION['firstName'] 	= $row['first_name'];
+			$_SESSION['lastName'] 	= $row['last_name'];
+			$_SESSION['email'] 		= $row['email'];
 
 		
 			header('Location: ./calendar.php?success=1');
