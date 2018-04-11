@@ -264,8 +264,16 @@ session_start();
 
             if (calEvent.allDay == true) {
               $("#switchAllday").prop("checked", true);
+
+              $('#txtHourStart').prop("disabled", true);
+              $('#txtDateEnd').prop("disabled", true);
+              $('#txtHourEnd').prop("disabled", true);
             } else {
               $("#switchAllday").prop("checked", false);
+
+              $('#txtHourStart').prop("disabled", false);
+              $('#txtDateEnd').prop("disabled", false);
+              $('#txtHourEnd').prop("disabled", false);
             }
 
             $("#btnModify").show();
@@ -330,7 +338,7 @@ session_start();
               "textColor": event.textColor
             },
             success: function () {
-                  console.log(event.title + " updated successful (./updateCalendarEvents.php)");
+              console.log(event.title + " updated successful (./updateCalendarEvents.php)");
                   // $('#calendar-right').fullCalendar('refetchEvents');
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -386,7 +394,7 @@ function getEventData() {
     allDay: $("#switchAllday").prop("checked")? 1 : 0,// $("#txtColor").val()
     description: $("#txtDescription").val(),
     color: $("#txtColor").val(),
-    textColor: 'black'
+    textColor: null
   };
 }
 
@@ -396,9 +404,9 @@ function sendEventDataToDB(action, objEvent) {
   console.log(action);
   if (action == 1) {
     php = "./addCalendarEvents.php";
-  } else if (action == "modify") {
+  } else if (action == 2) {
     php = "./updateCalendarEvents.php";
-  } else if (action == "remove") {
+  } else if (action == 3) {
     php = "./deleteCalendarEvents.php";
   }
 
@@ -424,14 +432,15 @@ function sendEventDataToDB(action, objEvent) {
     });
 }
 
-$("#btnAdd").click(function(){
-  getEventData();
-
-      //$('#calendar-right').fullCalendar('renderEvent', newEvent);
+    $("#btnAdd").click(function(){
+      getEventData();
       sendEventDataToDB(1, newEvent);
-      //$('#txtDateStart').datepicker('destroy');
       $("#txtDateStart").val('');
 
+    });
+    $("#btnModify").click(function(){
+      getEventData();
+      sendEventDataToDB(2, newEvent);
     });
 $("#switchAllday").click(function() {
   if ($("#switchAllday").is(":checked")) {
