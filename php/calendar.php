@@ -319,13 +319,15 @@ session_start();
           var end;
           var allDayBoolean;
           if (event.allDay) {
-            end = moment(event.start.format("YYYY-MM-DD").toString()).add(1, "days");
+            end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "days");
             console.log("end = " + end);
             $("#calendar-right").fullCalendar("updateEvent", event);
             allDayBoolean = 1;
           } else {
-            end = event.start.add(1, "h");
-            console.log(event.end);
+            console.log("start----->"+event.start.format());
+            end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "h");
+            //event.start.subtract(1, "hours");
+            console.log("end ----->"+end.format());
             allDayBoolean = 0;
           }
           console.log(event.allDay);
@@ -464,9 +466,9 @@ function getEventData() {
       $('#txtHourStart').prop("disabled", false);
       $('#txtDateEnd').prop("disabled", false);
       $('#txtHourEnd').prop("disabled", false);
-    } 
+    }
   });
-  
+
 
 </script>
 
