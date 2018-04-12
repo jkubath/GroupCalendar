@@ -277,10 +277,9 @@ session_start();
 
         /* Auto resize the calendar */
         height: "auto",
-
         /* Pull calendar events from multiple sources */
         eventSources: [
-        <?php include './getGoogleCalendars.php'; ?>
+        <?php include './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
         {
           //Get google holiday events
           googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
