@@ -41,3 +41,11 @@ CREATE TABLE calendar_events (
 	text_color VARCHAR(128) DEFAULT white,
 	CONSTRAINT FK_calendar_events_calendar_id FOREIGN KEY (calendar_id) REFERENCES calendar(calendar_id)
 );
+
+CREATE TABLE google_calendar (
+	username VARCHAR(128),
+	google_calendar VARCHAR(200),
+
+	PRIMARY KEY(username, google_calendar),
+	CONSTRAINT FK_google_calendar_username FOREIGN KEY (username) REFERENCES users(username)
+);
