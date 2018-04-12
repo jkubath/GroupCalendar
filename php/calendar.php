@@ -97,9 +97,8 @@ session_start();
 
       </form>
     </div>
-
-
   </div>
+
   <div class="modal-footer">
     <a href="#!" id="btnAdd" class="modal-action modal-close waves-effect  btn blue">Add</a>
     <a href="#!" id="btnModify" class="modal-action modal-close waves-effect  btn green">Modify</a>
@@ -107,7 +106,7 @@ session_start();
     <a href="#!" id="btnClose" class="modal-action modal-close waves-effect  btn black">Close</a>
 
   </div>
-</div>
+</div><!--  End of Modal1 -->
 
 
 
@@ -134,46 +133,42 @@ session_start();
 
       header :{
         left: 'today,prev,next',
-        center: 'addEventButton',
+        center: 'importGoogle',
         right: 'month,agendaWeek,agendaDay,listMonth'//, basicDay,basicWeek'
       },
-      // customButtons: {
-      //   addEventButton: {
-      //     text: 'add event...',
-      //     click: function() {
-      //       var dateStr     = prompt("Enter a date in YYYY-MM-DD format");
-      //       var titleStr    = prompt("Enter a name for the event");
-      //       var start_date  = moment(dateStr);
-      //       var end_date    = moment(dateStr);
-      //       end_date.add(1, "days");
-      //       var allDayBool  = true;
+      customButtons: {
+        /* Add a Google Calendar ID to the google_calendar table */
+        importGoogle: {
+          text: 'Import Google Calendar',
+          click: function() {
+            var calendarID = prompt("Enter the Google Calendar ID");
+            if(calendarID === ""){
+              alert("Calendar ID was empty");
+              console.log("Calendar ID was empty");
+              return;
+            }
 
-      //       if (start_date.isValid()) {
-      //         $("#calendar-right").fullCalendar("renderEvent", {
-      //           title: titleStr,
-      //           start: start_date,
-      //           end: end_date,
-      //           allDay: allDayBool
-      //         });
-      //         alert("Great. Now, update your database...");
-      //         $.ajax({
-      //           url: "./addCalendarEvents.php",
-      //           type: "POST",
-      //           data: {"start": start_date.format(), "end": end_date.format(), "title": titleStr, "allDay": allDayBool },
-      //           success: function () {
-      //             alert("Added successfully!");
-      //             $('#calendar-right').fullCalendar('rerenderEvents');
-      //           },
-      //           error: function(XMLHttpRequest, textStatus, errorThrown) {
-      //             alert("some error");
-      //           }
-      //         });
-      //       } else {
-      //         alert('Invalid date.');
-      //       }
-      //     }
-      //   }
-      // },
+            var username = <?php echo '"'.$_SESSION['username'].'"'; ?>;
+
+            console.log(username);
+            console.log("Add the Google Calendar ID to the database");
+            /* Add the calendar ID to the database */
+            $.ajax({
+              url: "./addGoogleCalendarID.php",
+              type: "POST",
+              data: {"username": username, "calendarID": calendarID},
+              success: function () {
+                console.log("Google Calendar was added");
+                //Re-render the calendar events
+                location.reload();
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                console.log("Error adding the Google Calendar to the database");
+              }
+            });
+          }
+        }
+      },
       /* Add an event to the calendar by clicking a day */
       dayClick: function(date, jsEvent, view) {
         $('#modal1').modal();
@@ -285,6 +280,7 @@ session_start();
 
         /* Pull calendar events from multiple sources */
         eventSources: [
+        <?php include './getGoogleCalendars.php'; ?>
         {
           //Get google holiday events
           googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
