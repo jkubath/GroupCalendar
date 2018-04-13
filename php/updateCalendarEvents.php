@@ -6,7 +6,7 @@
 	$startDate 		= $_POST["start"];
 	$endDate 		= $_POST["end"];
 	$allDay			= $_POST["allDay"];
-	// $description	= $_POST["description"];
+	$description	= $_POST["description"];
 	$color			= $_POST["color"];
 	$textColor		= $_POST["textColor"];
 
@@ -14,7 +14,7 @@
 		// $stmt->beginTransaction();
 		$stmt = $pdo->prepare("
 			UPDATE calendar_events
-			SET title = :title, start_date = :startDate, end_date = :endDate, all_day = :allDay, color = :color, text_color = :textColor
+			SET title = :title, start_date = :startDate, end_date = :endDate, all_day = :allDay, description = :description, color = :color, text_color = :textColor
 			WHERE event_id = (:event_id);
 			");	
 
@@ -23,11 +23,12 @@
 		$stmt->bindParam(":startDate", $startDate);
 		$stmt->bindParam(":endDate", $endDate);
 		$stmt->bindParam(":allDay", $allDay);
-		// $stmt->bindParam(":description", $description);
+		$stmt->bindParam(":description", $description);
 		$stmt->bindParam(":color", $color);
 		$stmt->bindParam(":textColor", $textColor);
 
 		$stmt->execute();
+		echo $allDay;	
 		// $stmt->commit();
 	} catch (PDOException $e) {
 		// $stmt->rollback();

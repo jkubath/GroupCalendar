@@ -56,7 +56,7 @@
 		$userCalendars = $pdo->query($sql);
 	}
 	catch(PDOException $e){
-		// echo "Error".$e;
+		echo "Error (./getCalendarEvents.php [infile]): $e";
 	}
 
 	// print_r($userCalendars);
@@ -71,7 +71,7 @@
 			$allEvents = $pdo->query($sql);
 		}
 		catch(PDOException $e){
-			//echo "Error".$e;
+			echo "Error (./getCalendarEvents.php [infile]): $e";
 		}
 
 		/* Step 3: Format the data as specified with key : value attributes in https://fullcalendar.io/docs/event-object */
@@ -79,13 +79,14 @@
 				// echo $row['name'];
 				// echo $row['calendar_id'];
 				$results[] = array(
-					"id"		=> $row['event_id'], 
-					"title"		=> $row['title'], 
-					"start"		=> $row['start_date'], 
-					"end"		=> $row['end_date'],
-					"allDay"	=> $row['all_day'],
-					"color" 	=> $row['color'],
-					"textColor" => $row['text_color']
+					"id"			=> $row['event_id'], 
+					"title"			=> $row['title'], 
+					"start"			=> $row['start_date'], 
+					"end"			=> $row['end_date'],
+					"allDay"		=> $row['all_day'],
+					"description" 	=> $row['description'],
+					"color" 		=> $row['color'],
+					"textColor" 	=> $row['text_color']
 				);
 		}
 

@@ -2,7 +2,7 @@
 	require_once('../includes/databaseConnection.php'); //Make the connection to the database
 
 	$calendarID = $_POST['calendarID'];
-	$username = $_POST['username'];
+	$username = $_SESSION['username'];
 
 	try {
 		// $stmt->beginTransaction();

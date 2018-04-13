@@ -3,10 +3,6 @@
 <html>
 
 <head>
-  
-  <!--JavaScript at end of body for optimized loading-->
-  <?php include "../includes/js-meta-data.inc.php"; ?>
-
   <!-- Style meta data -->
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- End of style meta data -->
@@ -140,6 +136,10 @@
       <?php include "../includes/footer.inc.php"; ?>
     </footer>
     <!-- End of footer-->
+    
+    <!--JavaScript at end of body for optimized loading-->
+    <?php include "../includes/js-meta-data.inc.php"; ?>
+
 
     <script>
       $(document).ready(function () {
@@ -169,14 +169,14 @@
     });
       $(document).ready(function() {
           // First name field
-      $("#name").focus(function() {
-        $("#name-label").addClass("active");
-      }); 
-      $("#name").focusout(function() {
-        if ($("#name").val() == '') {
-          $("#name-label").removeClass("active");
-        }
-      });
+          $("#name").focus(function() {
+            $("#name-label").addClass("active");
+          }); 
+          $("#name").focusout(function() {
+            if ($("#name").val() == '') {
+              $("#name-label").removeClass("active");
+            }
+          });
 
       // Email field
       $("#email").focus(function() {
@@ -208,7 +208,7 @@
         }
       }); 
 
-      });
+    });
   </script>
 </body>
 
