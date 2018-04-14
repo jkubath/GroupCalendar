@@ -34,28 +34,33 @@
     <div class="user-view">
 
       <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
-          //echo '<li><div class="btn blue" ">' . $_SESSION['username']. '</div></li>';
-        echo  '<div class="background">
+          ?>
+          <div class="background">
             <img src="../img/lion.jpg" alt="">
           </div>
           <a href="#">
             <img src="../img/iron2.jpg" alt="" class="circle">
-          </a>';
+          </a>
 
-        echo '<a href="../php/calendar.php">
-          <span class="name white-text">' . $_SESSION['username'] . '</span>
-        </a>';
-        echo '<a href="#">
-          <span class="email white-text">' . $_SESSION['email'] . '</span>
-        </a>';
+          <a href="#">
+          <span class="name white-text"><?php echo $_SESSION['username']; ?></span>
+        </a>
+        <a href="#">
+          <span class="email white-text"><?php echo $_SESSION['email']; ?></span>
+        </a>
+        <?php
       }
       else {
-      echo '<ul><li>
+        ?>
+      <ul>
+      <li>
         <a href="../php/homepage.php#about">About</a>
       </li>
       <li>
         <a href="../php/homepage.php#features">Features</a>
-      </li></ul>';
+      </li>
+      </ul>
+      <?php
       }
         ?>
     </div>
