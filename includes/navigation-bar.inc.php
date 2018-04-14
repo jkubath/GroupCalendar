@@ -3,9 +3,19 @@
   <nav class="transparent" id="navbar">
     <div class="container">
       <div class="nav-wrapper">
-        <a href="../php/calendar.php" class="brand-logo">Calendar</a>
+
+<ul class="'left hide-on-med-and-down">
+  <li>
+    <a class="waves-effect waves-teal btn" id="zo"><i class="material-icons">zoom_out_map</i></a>
+
+  </li>
+    </ul>
+
+<a href="../php/calendar.php" class="brand-logo">  Calendar</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+
         <ul class="right hide-on-med-and-down">
+
           <li>
             <a href="../index.php">Home</a>
           </li>

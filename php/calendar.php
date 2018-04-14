@@ -40,8 +40,8 @@ session_start();
                   <p> This will be a list </p>
 
                   <div class="col s12">
-                    <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn blue">Add User</a>
-                  <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn red ">Remove User</a>
+                    <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue">Add User</a>
+                  <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn-small red ">Remove User</a>
                   </div>
 
                 </div>
@@ -153,9 +153,7 @@ session_start();
 
 
 <!-- Footer -->
-<footer class="page-footer blue-grey darken-1">
-  <?php include "../includes/footer.inc.php"; ?>
-</footer>
+
 <!-- End of footer-->
 
 <script type="text/JavaScript">
@@ -182,6 +180,7 @@ session_start();
     var globalClickedEvent = null;
 
     $('#calendar-right').fullCalendar({
+      
       editable: true, //Allows for drag and drop events
       eventLimit: true, //When there are more events than the day can hold, compress to a list
       googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo', //pull Google Calendar Events
