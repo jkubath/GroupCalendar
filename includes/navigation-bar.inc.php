@@ -6,7 +6,7 @@
 
 <ul class="'left hide-on-med-and-down">
   <li>
-    <a class="waves-effect waves-teal btn" id="zo"><i class="material-icons">zoom_out_map</i></a>
+    <a class="waves-effect waves-teal btn-flat" id="zo"><i class="material-icons">zoom_out_map</i></a>
 
   </li>
     </ul>
