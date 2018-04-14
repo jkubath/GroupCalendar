@@ -46,3 +46,9 @@
 #zoom-button{
   color: #fafafa;
 }
+
+#lista {
+	/* padding: 0.4rem; */
+	/* margin-top: 0.4rem; */
+	border-radius: 0 0 5px 5px ;
+}
