@@ -278,7 +278,7 @@ session_start();
             }
 
             /* Probably better to call session in the file itself */
-            // var username = <?php //echo '"'.$_SESSION['username'].'"'; ?>;
+            // var username = <?php //echo '"'.$_SESSION['username'].'"';?>;
             // console.log(username);
 
             console.log("Add the Google Calendar ID to the database");
@@ -757,7 +757,9 @@ $(window).resize(function() {
     $('#calendar-right').addClass("col s12 m10 l10");
   }
 
-  var isClick = 0;
+});
+
+var isClick = 0;
   $('#zoom-button').click(function(){
     if (isClick == 0) {
       $('#calendar-left-Main').hide();
@@ -772,8 +774,6 @@ $(window).resize(function() {
     }
 
   });
-
-});
 </script>
 
 

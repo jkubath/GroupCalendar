@@ -77,7 +77,7 @@
 
 
   <!-- Footer -->
-  <footer class="page-footer blue-grey darken-1">  
+  <footer class="page-footer blue-grey darken-1">
     <?php include "../includes/footer.inc.php"; ?>
   </footer>
   <!-- End of footer-->
@@ -107,54 +107,54 @@
       ];
 
       M.scrollFire(options);
-      
+
     });
 
     $(document).ready(function () {
       // First name field
       $("#first-name").focus(function() {
         $("#first-name-label").addClass("active");
-      }); 
+      });
       $("#first-name").focusout(function() {
         if ($("#first-name").val() == '') {
           $("#first-name-label").removeClass("active");
         }
-      }); 
+      });
 
       // Last name field
       $("#last-name").focus(function() {
         $("#last-name-label").addClass("active");
-      }); 
+      });
       $("#last-name").focusout(function() {
         if ($("#last-name").val() == '') {
           $("#last-name-label").removeClass("active");
         }
-      }); 
+      });
 
       // Email field
       $("#email").focus(function() {
         $("#email-label").addClass("active");
-      }); 
+      });
       $("#email").focusout(function() {
         if ($("#email").val() == '') {
           $("#email-label").removeClass("active");
         }
-      }); 
+      });
 
       // Username field
       $("#username").focus(function() {
         $("#username-label").addClass("active");
-      }); 
+      });
       $("#username").focusout(function() {
         if ($("#username").val() == '') {
           $("#username-label").removeClass("active");
         }
-      }); 
-      
+      });
+
       // Password field
       $("#password").focus(function() {
         $("#password-label").addClass("active");
-      }); 
+      });
       $("#password").focusout(function() {
         if ($("#password").val() == '') {
           $("#password-label").removeClass("active");
@@ -164,12 +164,12 @@
       // Calendar Name field
       $("#calendar-name").focus(function() {
         $("#calendar-name-label").addClass("active");
-      }); 
+      });
       $("#calendar-name").focusout(function() {
         if ($("#calendar-name").val() == '') {
           $("#calendar-name-label").removeClass("active");
         }
-      }); 
+      });
     });
   </script>
 </body>

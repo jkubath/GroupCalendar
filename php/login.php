@@ -12,7 +12,7 @@
 
   <!--JavaScript at end of body for optimized loading-->
   <?php include "../includes/js-meta-data.inc.php"; ?>
-  
+
   <title>Sign in</title>
 </head>
 
@@ -89,5 +89,3 @@
 </script>
 </body>
 </html>
-
-

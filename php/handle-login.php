@@ -9,30 +9,30 @@ require_once '../includes/databaseConnection.php';
 
 
 if (!empty($_POST)) {
-	$id = '';
-	$first = '';
-	$last = '';
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-	$error;
+    $id = '';
+    $first = '';
+    $last = '';
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $error;
 
-	if (empty($username)) {
-		$error = 'emptyusername=1';
-	}
+    if (empty($username)) {
+        $error = 'emptyusername=1';
+    }
 
-	if (empty($password)) {
-		if (empty($error)) {
-			$error = 'emptypass=1';
-		} else {
-			$error .= '&emptypass=1';
-		}
-	}
+    if (empty($password)) {
+        if (empty($error)) {
+            $error = 'emptypass=1';
+        } else {
+            $error .= '&emptypass=1';
+        }
+    }
 
-	if (!empty($error)) {
-		header('Location: ./login.php?'.$error.'');
-		exit();
-	} else {
-		$statement = $pdo->prepare("SELECT * FROM users, user_info WHERE users.username = :username AND users.password = :password AND users.username = user_info.username");
+    if (!empty($error)) {
+        header('Location: ./login.php?'.$error.'');
+        exit();
+    } else {
+        $statement = $pdo->prepare("SELECT * FROM users, user_info WHERE users.username = :username AND users.password = :password AND users.username = user_info.username");
 
 		$statement->bindParam(":username", $username);
 		$statement->bindParam(":password", $password);
@@ -51,7 +51,10 @@ if (!empty($_POST)) {
 			exit();
 		}
 
-	}
+            header('Location: ./calendar.php?success=1');
+        } else {
+            header('Location: ./login.php?usernotfound=1');
+            exit();
+        }
+    }
 }
-
-?>
