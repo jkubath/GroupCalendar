@@ -6,7 +6,6 @@
   <!-- Style meta data -->
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- Specific css for login.php -->
-
   <link rel="stylesheet" type="text/css" href="../css/login.css">
 
   <!-- End of style meta data -->
