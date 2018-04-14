@@ -784,13 +784,13 @@ var isClick = 0;
   $('#zoom-button').click(function(){
     if (isClick == 0) {
       $('#calendar-left-Main').hide(400);
-      $('#calendar-right').animate(removeClass("col s12 m12 l10"), {duration:200});
-      $('#calendar-right').animate(addClass("col s12 m12 l12"), {duration:200});
+      $('#calendar-right').removeClass("col s12 m12 l10");
+      $('#calendar-right').addClass("col s12 m12 l12");
       isClick = 1;
     }else{
       $('#calendar-left-Main').show(400);
-      $('#calendar-right').removeClass("col s12 m12 l12", {duration:400});
-      $('#calendar-right').addClass("col s12 m10 l10", {duration:400});
+      $('#calendar-right').removeClass("col s12 m12 l12");
+      $('#calendar-right').addClass("col s12 m10 l10");
       isClick = 0;
     }
 
