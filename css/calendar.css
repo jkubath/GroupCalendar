@@ -1,6 +1,6 @@
 /*****GLOBAL*****/
 body, html {
-	background-color: rgba(106,27,154, 1.0);
+	background-color: rgb(250, 250, 250);
 	background-size: cover;
 	background-position: center;
 }
@@ -9,8 +9,11 @@ body, html {
 .main-header {
 }
 
+.fc-day-header {
+	color: white !important;
+}
 .fc th, .fc td {
-	border-color: rgba(181,137,0, 1.0) !important;
+	border-color: rgb(134, 134, 134) !important;
 }
 
 
@@ -40,5 +43,6 @@ body, html {
 	padding: 0;
 }
 
-.page-footer {
+#navbar {
+	background-color: rgba(60, 60, 78, 1.0);
 }

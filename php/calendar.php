@@ -178,7 +178,6 @@ session_start();
     $("#navbar-switch").removeClass("navbar-fixed");
     $("#navbar-switch").addClass("navbar");
     $("#navbar").removeClass("transparent");
-    $("#navbar").css("background-color", "rgba(55, 71, 79, 1.0)");
 
     var globalClickedEvent = null;
 
