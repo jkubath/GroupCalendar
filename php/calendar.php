@@ -30,7 +30,7 @@ session_start();
   <section class="section center scrollspy" id="calendar-section">
     <div class="container" id="container-width">
       <div class="row" id="calendar-container">
-        <div class="col m2 l2">
+        <div class="col m2 l2" id="calendar-left">
 
           <div class="row" id="calendar-container">
 
@@ -153,6 +153,9 @@ session_start();
 
 
 <!-- Footer -->
+<!-- <footer class="page-footer blue-grey darken-1"> -->
+  <?php include "./footer.php"; ?>
+<!-- </footer> -->
 
 <!-- End of footer-->
 
@@ -180,7 +183,7 @@ session_start();
     var globalClickedEvent = null;
 
     $('#calendar-right').fullCalendar({
-      
+
       editable: true, //Allows for drag and drop events
       eventLimit: true, //When there are more events than the day can hold, compress to a list
       googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo', //pull Google Calendar Events
@@ -368,6 +371,7 @@ session_start();
       /* Auto resize the calendar */
       windowResizeDelay: 20,
       height: "auto",
+      aspectRatio: 1.8,
       /* Pull calendar events from multiple sources */
       eventSources: [
         <?php include_once './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
@@ -603,10 +607,10 @@ $("#btnRemoveUser").click(function(){
 
 // css
 
-$('#calendar-right').addClass('blue-grey lighten-1').css('opacity', '0.85');
+// $('#calendar-right').addClass('blue-grey lighten-1').css('opacity', '0.85');
 
-$('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
-$('#calendar-left').addClass("fc fc-unthemed fc-ltr");
+// $('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
+// $('#calendar-left').addClass("fc fc-unthemed fc-ltr");
 $('#calendar-left').css("font-size","0.7em");
 $('#calendar-left .fc-center h2').css("font-size","1em");
 //$('#calendar-left .fc-day-number').css("font-size","7px");
@@ -638,29 +642,33 @@ $('#calendar-right .fc-today-button').click(function() {
   $('#calendar-right').fullCalendar('today');
 });
 
+});
 
+/* Hides the left calendar when the screen
+ * is less than 1024
+ */
+if ($(this).width() < 1024) {
+    $('#calendar-left').hide();
+    $('#calendar-right').removeClass("col s12 m10 l10");
+    $('#calendar-right').addClass("col s12 m12 l10");
+  } else {
+    $('#calendar-left').show();
+    $('#calendar-right').removeClass("col s12 m12 l10");
+    $('#calendar-right').addClass("col s12 m10 l10");
+  }
+$(window).resize(function() {
+  if ($(this).width() < 1024) {
+    $('#calendar-left').hide();
+    $('#calendar-right').removeClass("col s12 m10 l10");
+    $('#calendar-right').addClass("col s12 m12 l10");
+  } else {
+    $('#calendar-left').show();
+    $('#calendar-right').removeClass("col s12 m12 l10");
+    $('#calendar-right').addClass("col s12 m10 l10");
+  }
 
 });
 </script>
-
-
-
-</script>
-
-<style>
-a.fc-day-number, a.fc-list-heading-alt, a.fc-list-heading-main, th.fc-day-header a{
-  color: black !important;
-}
-span.fc-event-dot{
-  background-color: black;
-}
-button.fc-next-button.fc-button{
-  opacity: 0.5 !important;
-}
-span.fc-icon.fc-icon-right-single-arrow{
-
-}
-</style>
 
 
 
