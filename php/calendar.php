@@ -23,7 +23,7 @@ session_start();
   <header>
     <div>
       <!-- Navigation Bar -->
-      <?php //include "../includes/navigation-bar.inc.php"; ?>
+      <?php include "../includes/navigation-bar.inc.php"; ?>
       <!-- End of Navigation Bar -->
     </div>
   </header>
@@ -153,9 +153,10 @@ session_start();
 
 
 <!-- Footer -->
-<footer class="page-footer blue-grey darken-1">
-  <?php //include "../includes/footer.inc.php"; ?>
-</footer>
+<!-- <footer class="page-footer blue-grey darken-1"> -->
+  <?php include "./footer.php"; ?>
+<!-- </footer> -->
+
 <!-- End of footer-->
 
 <script type="text/JavaScript">
