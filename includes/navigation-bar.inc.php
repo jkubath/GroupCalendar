@@ -10,12 +10,6 @@
             <a href="../index.php">Home</a>
           </li>
           <li>
-            <a href="../index.php#about">About</a>
-          </li>
-          <li>
-            <a href="../index.php#features">Features</a>
-          </li>
-          <li>
             <a href="../index.php#contact">Contact</a>
           </li>
           <!-- <li>
@@ -40,12 +34,6 @@
 <!-- End of Naviagation bar-->
 
 <!-- Side nav for mobile devices-->
-<!-- <ul class="sidenav" id="mobile-demo">
-  <li><a href="sass.html">Sass</a></li>
-  <li><a href="badges.html">Components</a></li>
-  <li><a href="collapsible.html">Javascript</a></li>
-  <li><a href="mobile.html">Mobile</a></li>
-</ul> -->
 <ul class="sidenav " id="mobile-demo">
   <h4 class="black-text center">Calendar</h4>
   <li>
@@ -53,12 +41,6 @@
   </li>
   <li>
     <a href="../php/homepage.php">Home</a>
-  </li>
-  <li>
-    <a href="../php/homepage.php#about">About</a>
-  </li>
-  <li>
-    <a href="../php/homepage.php#features">Features</a>
   </li>
   <li>
     <a href="../php/homepage.php#contact">Contact</a>

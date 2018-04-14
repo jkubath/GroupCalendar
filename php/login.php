@@ -41,7 +41,7 @@
                       <label for="password" id="password-label">Password</label>
                     </div>
                     <!-- Added the onclick function to validate the form, onclick="validateFormLogin()"-->
-                    <input id="submitButton" onclick="validateFormLogin(); return false;" type="submit" value="Sign In" class="btn btn-large purple btn-extend">
+                    <input id="submitButton" type="submit" value="Sign In" class="btn btn-large purple btn-extend">
                   </form>
                 </div>
               </div>
@@ -83,54 +83,6 @@
         }
       });
     });
-
-  //   function validateFormLogin() {
-  //     var errorFlag = false;
-  //     //Only allow letters and numbers for the username and password
-  //     var usernameBoxTest = /^[a-zA-Z0-9]{1,40}$/;
-  //     var passwordBoxTest = /^[a-zA-Z0-9]{1,40}$/;
-
-  //     if(!usernameBoxTest.test(username.value)) {
-  //       document.getElementById('username').style.backgroundColor = '#bb3333';
-  //       document.getElementById('username').style.color = 'white';
-  //       // document.getElementById('usernameLoginError').innerHTML = 'Invalid Username.  Can only contain letters and numbers.';
-  //       // document.getElementById('usernameLoginError').style.color = '#FFFFFF';
-  //       errorFlag = true;
-  //     }
-
-  //     if(!passwordBoxTest.test(password.value)) {
-  //       document.getElementById('password').style.backgroundColor = '#bb3333';
-  //       document.getElementById('password').style.color = 'white';
-  //       // document.getElementById('passwordLoginError').innerHTML = 'Invalid Password.  Can only contain letters and numbers. Must be at least 8 characters in length.';
-  //       // document.getElementById('passwordLoginError').style.color = '#FFFFFF';
-  //       errorFlag = true;
-  //     }
-
-  //     if (!errorFlag) {
-  //       xmlhttp = new XMLHttpRequest();
-
-  //       xmlhttp.onreadystatechange = function() {
-  //         if (this.readyState == 4 && this.status == 200) {
-  //           if (this.responseText == "fail") {
-  //             //alert("failed");
-  //             document.getElementById('username').style.backgroundColor = '#bb3333';
-  //             document.getElementById('username').style.color = 'white';
-  //             // document.getElementById('usernameLoginError').innerHTML = 'Invalid Login.  Username/Password do not exist.';
-  //             // document.getElementById('usernameLoginError').style.color = '#FFFFFF';
-
-  //             document.getElementById('password').style.backgroundColor = '#bb3333';
-  //             document.getElementById('password').style.color = 'white'
-  //           } else {
-  //             document.location.href = "./calendar.php";
-  //           }
-  //         }
-  //       };
-
-  //       xmlhttp.open("GET", "CheckLogin.php?enteredUsername=" + username.value + "&enteredPassword=" + password.value, true);
-  //       xmlhttp.send();
-
-  //     }
-  // }
 </script>
 </body>
 </html>

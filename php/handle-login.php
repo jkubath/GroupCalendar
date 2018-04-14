@@ -1,6 +1,12 @@
 <?php
-require_once '../includes/databaseConnection.php';
+/* Called by login.php 
+ * Summary: This file queries the database for the user and username.
+ * If the query is successful, the page is redirected to calendar.php.
+ * Otherwise the page is redirected to login.php. 	
+ */
 session_start();
+require_once '../includes/databaseConnection.php';
+
 
 if (!empty($_POST)) {
 	$id = '';
