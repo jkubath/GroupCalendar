@@ -48,8 +48,8 @@
   <section id="about" class="section blue darken-3 center scrollspy">
     <div class="container">
       <h2>About Calendar</h2>
-      <p class="flow-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis odit, at repellendus consequatur neque placeat
-      esse explicabo voluptas reprehenderit nobis?</p>
+      <p class="flow-text">Group Calendar is a site that allows for the synchronization of multiple 
+      calendars into one.</p>
 
     </div>
   </section>
@@ -60,8 +60,8 @@
   <section id="features" class="section section-about grey lighten-3 center scrollspy">
     <div class="container">
       <h3>We bring you ...</h2>
-        <p class="flow-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis odit, at repellendus consequatur neque placeat
-        esse explicabo voluptas reprehenderit nobis?</p>
+        <p class="flow-text">A calendar that brings calendar events to multiple users, syncs with
+        public Google Calendars, and easily allows you to update or create events.</p>
         <div class="row">
           <div class="col s12 m6">
             <img src="../img/iron1.jpg" alt="" class="responsive-img circle">

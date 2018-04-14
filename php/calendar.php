@@ -30,7 +30,7 @@ session_start();
   <section class="section center scrollspy" id="calendar-section">
     <div class="container" id="container-width">
       <div class="row" id="calendar-container">
-        <div class="col m2 l2">
+        <div class="col m2 l2" id="calendar-left">
 
           <div class="row" id="calendar-container">
 
@@ -639,13 +639,23 @@ $('#calendar-right .fc-today-button').click(function() {
   $('#calendar-right').fullCalendar('today');
 });
 
+});
 
+/* Hides the left calendar when the screen
+ * is less than 1024 
+ */
+$(window).resize(function() {
+  if ($(this).width() < 1024) {
+    $('#calendar-left').hide();
+    $('#calendar-right').removeClass("col s12 m10 l10");
+    $('#calendar-right').addClass("col s12 m12 l10");
+  } else {
+    $('#calendar-left').show();
+    $('#calendar-right').removeClass("col s12 m12 l10");
+    $('#calendar-right').addClass("col s12 m10 l10");
+  }
 
 });
-</script>
-
-
-
 </script>
 
 <style>
