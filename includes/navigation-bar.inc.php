@@ -3,14 +3,17 @@
   <nav class="transparent" id="navbar">
     <div class="container">
       <div class="nav-wrapper">
+        <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
 
-<ul class="'left hide-on-med-and-down">
+echo '<ul class="left hide-on-med-and-down">
+
   <li>
     <a class="waves-effect waves-teal btn-flat" id="zo"><i class="material-icons">zoom_out_map</i></a>
 
   </li>
-    </ul>
-
+    </ul>';
+  }
+?>
 <a href="../php/calendar.php" class="brand-logo">  Calendar</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
