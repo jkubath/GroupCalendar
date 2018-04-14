@@ -757,7 +757,9 @@ $(window).resize(function() {
     $('#calendar-right').addClass("col s12 m10 l10");
   }
 
-  var isClick = 0;
+});
+
+var isClick = 0;
   $('#zoom-button').click(function(){
     if (isClick == 0) {
       $('#calendar-left-Main').hide();
@@ -772,8 +774,6 @@ $(window).resize(function() {
     }
 
   });
-
-});
 </script>
 
 
