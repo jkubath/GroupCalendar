@@ -176,7 +176,7 @@ session_start();
     //var instanceDown = M.FloatingActionButton.init(elem,options);
     //var instance = M.FloatingActionButton.getInstance(elem);
     //instanceDown.open();
-    $("#zoom-out-map").removeClass("hide");
+    $("#zoom-button").removeClass("hide");
     $('.fixed-action-btn').floatingActionButton();
     $('.fixed-action-btn').floatingActionButton('open');
 
