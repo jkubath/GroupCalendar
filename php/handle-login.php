@@ -1,8 +1,8 @@
 <?php
-/* Called by login.php 
+/* Called by login.php
  * Summary: This file queries the database for the user and username.
  * If the query is successful, the page is redirected to calendar.php.
- * Otherwise the page is redirected to login.php. 	
+ * Otherwise the page is redirected to login.php.
  */
 session_start();
 require_once '../includes/databaseConnection.php';
@@ -42,8 +42,9 @@ if (!empty($_POST)) {
 			$_SESSION['firstName'] 	= $row['first_name'];
 			$_SESSION['lastName'] 	= $row['last_name'];
 			$_SESSION['email'] 		= $row['email'];
+			
 
-		
+
 			header('Location: ./calendar.php?success=1');
 		} else {
 			header('Location: ./login.php?usernotfound=1');

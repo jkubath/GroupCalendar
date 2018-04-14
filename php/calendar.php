@@ -30,7 +30,7 @@ session_start();
   <section class="section center scrollspy" id="calendar-section">
     <div class="container" id="container-width">
       <div class="row" id="calendar-container">
-        <div class="col m2 l2" id="calendar-left">
+        <div class="col m2 l2" id="calendar-left-Main">
 
           <div class="row" id="calendar-container">
 
@@ -257,7 +257,7 @@ session_start();
       editable: true, //Allows for drag and drop events
       eventLimit: true, //When there are more events than the day can hold, compress to a list
       googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo', //pull Google Calendar Events
-     
+
       defaultView: 'agendaWeek',
       header: {
         left: 'today,prev,next',
@@ -703,7 +703,7 @@ $("#btnRemoveUser").click(function(){
   });
 
   $('#calendar-right .fc-next-button.fc-button.fc-state-default.fc-corner-right').click(function(){
-    
+
     var viewLeft = $("#calendar-left").fullCalendar("getView");
     var viewRight = $("#calendar-right").fullCalendar("getView");
     $("#calendar-left").fullCalendar("changeView", viewRight.name);
@@ -712,7 +712,7 @@ $("#btnRemoveUser").click(function(){
   });
 
   $('#calendar-right .fc-prev-button.fc-button.fc-state-default').click(function(){
-    
+
     var viewLeft = $("#calendar-left").fullCalendar("getView");
     var viewRight = $("#calendar-right").fullCalendar("getView");
     $("#calendar-left").fullCalendar("changeView", viewRight.name);
@@ -731,24 +731,40 @@ $("#btnRemoveUser").click(function(){
  * is less than 1024
  */
 if ($(this).width() < 1024) {
-    $('#calendar-left').hide();
+    $('#calendar-left-Main').hide();
     $('#calendar-right').removeClass("col s12 m10 l10");
     $('#calendar-right').addClass("col s12 m12 l10");
   } else {
-    $('#calendar-left').show();
+    $('#calendar-left-Main').show();
     $('#calendar-right').removeClass("col s12 m12 l10");
     $('#calendar-right').addClass("col s12 m10 l10");
   }
 $(window).resize(function() {
   if ($(this).width() < 1024) {
-    $('#calendar-left').hide();
+    $('#calendar-left-Main').hide();
     $('#calendar-right').removeClass("col s12 m10 l10");
     $('#calendar-right').addClass("col s12 m12 l10");
   } else {
-    $('#calendar-left').show();
+    $('#calendar-left-Main').show();
     $('#calendar-right').removeClass("col s12 m12 l10");
     $('#calendar-right').addClass("col s12 m10 l10");
   }
+
+  var isClick = 0;
+  $('#zoom-button').click(function(){
+    if (isClick == 0) {
+      $('#calendar-left-Main').hide();
+      $('#calendar-right').removeClass("col s12 m12 l10");
+      $('#calendar-right').addClass("col s12 m12 l12");
+      isClick = 1;
+    }else{
+      $('#calendar-left-Main').show();
+      $('#calendar-right').removeClass("col s12 m12 l12");
+      $('#calendar-right').addClass("col s12 m10 l10");
+      isClick = 0;
+    }
+
+  });
 
 });
 </script>
