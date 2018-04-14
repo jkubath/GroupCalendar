@@ -235,6 +235,7 @@ session_start();
           success: function () {
             console.log(event.title + " updated successful (./updateCalendarEvents.php)");
             $('#calendar-right').fullCalendar('refetchEvents');
+            $('#calendar-left').fullCalendar('refetchEvents');
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("updated unsuccessful (./updateCalendarEvents.php)");
@@ -262,7 +263,7 @@ session_start();
       header: {
         left: 'today,prev,next',
         center: 'importGoogle',
-        right: 'agendaWeek,agendaDay, listMonth'//, basicDay,basicWeek'
+        right: 'month,agendaWeek,agendaDay, listMonth'//, basicDay,basicWeek'
       },
       customButtons: {
         /* Add a Google Calendar ID to the google_calendar table */
@@ -436,7 +437,7 @@ session_start();
       /* Auto resize the calendar */
       windowResizeDelay: 20,
       height: "auto",
-      aspectRatio: 1.8,
+      // aspectRatio: 1.8,
       /* Pull calendar events from multiple sources */
       eventSources: [
         <?php include_once './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
@@ -503,6 +504,7 @@ session_start();
           success: function () {
             console.log(event.title + " updated successful (./updateCalendarEvents.php)");
             $('#calendar-right').fullCalendar('refetchEvents');
+            $('#calendar-left').fullCalendar('refetchEvents');
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log("updated unsuccessful (./updateCalendarEvents.php)");
@@ -538,6 +540,7 @@ session_start();
             success: function () {
               console.log(event.title + " updated successfully (./updateCalendarEvents.php)");
               $('#calendar-right').fullCalendar('refetchEvents');
+              $('#calendar-left').fullCalendar('refetchEvents');
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               console.log("Update failed (./updateCalendarEvents.php)");
@@ -584,7 +587,9 @@ session_start();
     data: objEvent,
     success:function (msg) {
       console.log(msg);
-      $("#calendar-right").fullCalendar('refetchEvents');
+      $('#calendar-right').fullCalendar('refetchEvents');
+      $('#calendar-left').fullCalendar('refetchEvents');
+          
       $('#modal').modal('close');
       console.log("Operation (" + php + ") successful.");
     },
@@ -651,7 +656,9 @@ $("#btnAddUserModal").click(function () {
         console.log(msg);
         console.log("Go!");
 
-        $("#calendar-right").fullCalendar('refetchEvents');
+        $('#calendar-right').fullCalendar('refetchEvents');
+        $('#calendar-left').fullCalendar('refetchEvents');
+          
         $('#modalUser').modal('close');
 
       },
