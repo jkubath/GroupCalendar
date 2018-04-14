@@ -589,7 +589,7 @@ session_start();
       console.log(msg);
       $('#calendar-right').fullCalendar('refetchEvents');
       $('#calendar-left').fullCalendar('refetchEvents');
-          
+
       $('#modal').modal('close');
       console.log("Operation (" + php + ") successful.");
     },
@@ -658,7 +658,7 @@ $("#btnAddUserModal").click(function () {
 
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
-          
+
         $('#modalUser').modal('close');
 
       },
