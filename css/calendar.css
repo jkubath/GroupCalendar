@@ -61,8 +61,15 @@ button:focus {
 	width: 100%;
 }
 
+#calendar-left {
+	padding: 0.4rem;
+	margin-top: 0.4rem;
+	border-radius: 5px 5px 0 0;
+}
 
-#calendar-right, #calendar-left {
+
+
+#calendar-right {
 	border-radius: 1px;
 	padding: 0.4rem;
 }
