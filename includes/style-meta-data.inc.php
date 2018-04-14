@@ -1,6 +1,5 @@
 <!--Import Google Icon Font-->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="../includes/jquery-ui-1.12.1/jquery-ui.min">
 
 <!--Import css files -->
 <!-- Compiled and minified CSS -->

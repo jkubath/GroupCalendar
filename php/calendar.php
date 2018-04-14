@@ -762,12 +762,12 @@ $(window).resize(function() {
 var isClick = 0;
   $('#zoom-button').click(function(){
     if (isClick == 0) {
-      $('#calendar-left-Main').hide();
+      $('#calendar-left-Main').hide(400);
       $('#calendar-right').removeClass("col s12 m12 l10");
       $('#calendar-right').addClass("col s12 m12 l12");
       isClick = 1;
     }else{
-      $('#calendar-left-Main').show();
+      $('#calendar-left-Main').show(400);
       $('#calendar-right').removeClass("col s12 m12 l12");
       $('#calendar-right').addClass("col s12 m10 l10");
       isClick = 0;
