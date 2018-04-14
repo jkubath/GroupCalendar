@@ -278,7 +278,7 @@ session_start();
             }
 
             /* Probably better to call session in the file itself */
-            // var username = <?php //echo '"'.$_SESSION['username'].'"'; ?>;
+            // var username = <?php //echo '"'.$_SESSION['username'].'"';?>;
             // console.log(username);
 
             console.log("Add the Google Calendar ID to the database");
@@ -589,7 +589,7 @@ session_start();
       console.log(msg);
       $('#calendar-right').fullCalendar('refetchEvents');
       $('#calendar-left').fullCalendar('refetchEvents');
-          
+
       $('#modal').modal('close');
       console.log("Operation (" + php + ") successful.");
     },
@@ -658,7 +658,7 @@ $("#btnAddUserModal").click(function () {
 
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
-          
+
         $('#modalUser').modal('close');
 
       },

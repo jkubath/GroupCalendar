@@ -48,7 +48,7 @@
   <section id="about" class="section blue darken-3 center scrollspy">
     <div class="container">
       <h2>About Calendar</h2>
-      <p class="flow-text">Group Calendar is a site that allows for the synchronization of multiple 
+      <p class="flow-text">Group Calendar is a site that allows for the synchronization of multiple
       calendars into one.</p>
 
     </div>
@@ -170,7 +170,7 @@
           // First name field
           $("#name").focus(function() {
             $("#name-label").addClass("active");
-          }); 
+          });
           $("#name").focusout(function() {
             if ($("#name").val() == '') {
               $("#name-label").removeClass("active");
@@ -180,32 +180,32 @@
       // Email field
       $("#email").focus(function() {
         $("#email-label").addClass("active");
-      }); 
+      });
       $("#email").focusout(function() {
         if ($("#email").val() == '') {
           $("#email-label").removeClass("active");
         }
-      }); 
+      });
 
       // Last name field
       $("#phone").focus(function() {
         $("#phone-label").addClass("active");
-      }); 
+      });
       $("#phone").focusout(function() {
         if ($("#phone").val() == '') {
           $("#phone-label").removeClass("active");
         }
-      }); 
-      
+      });
+
       // Username field
       $("#message").focus(function() {
         $("#message-label").addClass("active");
-      }); 
+      });
       $("#message").focusout(function() {
         if ($("#message").val() == '') {
           $("#message-label").removeClass("active");
         }
-      }); 
+      });
 
     });
   </script>

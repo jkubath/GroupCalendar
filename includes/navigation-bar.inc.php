@@ -3,8 +3,8 @@
   <nav class="transparent" id="navbar">
     <div class="container">
       <div class="nav-wrapper">
-        <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
-?>
+        <?php if (isset($_SESSION["username"]) && $_SESSION["username"] != "") {
+    ?>
 <ul class="left hide-on-med-and-down">
 
   <li>
@@ -13,7 +13,7 @@
   </li>
     </ul>
     <?php
-  }
+}
 ?>
 <a href="../php/calendar.php" class="brand-logo">  Calendar</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
@@ -26,14 +26,13 @@
           <li>
             <a href="../index.php#contact">Contact</a>
           </li>
-          <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
-            echo '<li ><a href="../php/logout.php" id="logOutButton">Log out</a></li>';
-            echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
-          }
-          else {
-            echo '<li><a href="../php/signup.php">Sign up</a></li>';
-            echo '<li><a href="../php/login.php" class="btn blue">Log In</a></li>';
-          }
+          <?php if (isset($_SESSION["username"]) && $_SESSION["username"] != "") {
+    echo '<li ><a href="../php/logout.php" id="logOutButton">Log out</a></li>';
+    echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
+} else {
+    echo '<li><a href="../php/signup.php">Sign up</a></li>';
+    echo '<li><a href="../php/login.php" class="btn blue">Log In</a></li>';
+}
           ?>
         </ul>
       </div>
@@ -47,8 +46,8 @@
   <li>
     <div class="user-view">
 
-      <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
-          ?>
+      <?php if (isset($_SESSION["username"]) && $_SESSION["username"] != "") {
+              ?>
           <div class="background">
             <img src="../img/lion.jpg" alt="">
           </div>
@@ -63,9 +62,8 @@
           <span class="email white-text"><?php echo $_SESSION['email']; ?></span>
         </a>
         <?php
-      }
-      else {
-        ?>
+          } else {
+              ?>
       <ul>
       <li>
         <a href="../php/homepage.php#about">About</a>
@@ -75,7 +73,7 @@
       </li>
       </ul>
       <?php
-      }
+          }
         ?>
     </div>
   </li>
@@ -94,7 +92,7 @@
   </li>
   <?php
   if (isset($_SESSION["username"]) && $_SESSION != "") {
-    ?>
+      ?>
     <li>
       <a href="../php/logout.php" class="btn red">Log out</a>
     </li>
@@ -102,7 +100,7 @@
 
     <?php
   } else {
-    ?>
+      ?>
     <li>
       <a href="../php/signup.php">Sign up</a>
     </li>
