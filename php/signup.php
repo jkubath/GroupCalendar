@@ -7,6 +7,8 @@
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- End of style meta data -->
 
+  <link rel="stylesheet" type="text/css" href="../css/signup.css">
+
   <!--JavaScript at end of body for optimized loading-->
   <?php include "../includes/js-meta-data.inc.php"; ?>
 
