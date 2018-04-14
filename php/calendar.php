@@ -153,10 +153,7 @@ session_start();
 
 
 <!-- Footer -->
-<!-- <footer class="page-footer blue-grey darken-1"> -->
   <?php include "./footer.php"; ?>
-<!-- </footer> -->
-
 <!-- End of footer-->
 
 <script type="text/JavaScript">
@@ -171,7 +168,80 @@ session_start();
         right: ''
       },
       dayNamesShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-      height: "auto"
+      height: "auto",
+      editable: true,
+      eventLimit: true,
+      eventSources: [
+        <?php include_once './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
+        {
+          //Get google holiday events
+          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
+          editable: false
+        },
+        {
+          url: './getCalendarEvents.php',
+          success: function(data) {
+            console.log("fetch succesful (./getCalendarEvents.php)");
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("fetch unsuccessful (./getCalendarEvents.php)");
+          }
+        }], // End of event sources
+      /* Handle when the user drag and drops an event */
+      eventDrop: function(event, delta, revertFunc) {
+          console.log("event id: " + event.id + " title: " + event.title + " was dropped on " + event.start.format() + " and ends on " + event.end + " allday: " + event.allDay);
+          var end;
+          var allDayBoolean;
+        /* (event.end == null) -> start + 1 day
+         * (event.end != null) -> end
+         */
+         if (event.allDay) {
+          if (event.end == null) {
+            end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "days");
+          } else {
+            end = event.end;
+          }
+          allDayBoolean = 1;
+        /* (event.end == null) -> start + 1 hour
+         * (event.end != null) -> end
+         */
+        } else {
+          if (event.end == null) {
+            end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "h");
+          } else {
+            end = event.end;
+          }
+          allDayBoolean = 0;
+        }
+
+        //console.log(event.allDay);
+
+        var description = $("#description").val();
+
+        /* Update the database with the new information */
+        $.ajax({
+          url: "./updateCalendarEvents.php",
+          type: "POST",
+          data: {
+            "id": event.id,
+            "title": event.title,
+            "start": event.start.format(),
+            "end": end.format(),
+            "allDay": allDayBoolean,
+            "description": description,
+            "color": event.color,
+            "textColor": event.textColor
+          },
+          success: function () {
+            console.log(event.title + " updated successful (./updateCalendarEvents.php)");
+            $('#calendar-right').fullCalendar('refetchEvents');
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            console.log("updated unsuccessful (./updateCalendarEvents.php)");
+            revertFunc();
+          }
+        });
+        } //End of event Drop
     });
 
 
@@ -187,17 +257,12 @@ session_start();
       editable: true, //Allows for drag and drop events
       eventLimit: true, //When there are more events than the day can hold, compress to a list
       googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo', //pull Google Calendar Events
-      // themeSystem: 'jquery-ui',
-      // themeButtonIcons: {
-      //   prev: 'circle-triangle-w',
-      //   next: 'circle-triangle-e',
-      //   prevYear: 'seek-prev',
-      //   nextYear: 'seek-next'
-      // },
+     
+      defaultView: 'agendaWeek',
       header: {
         left: 'today,prev,next',
         center: 'importGoogle',
-        right: 'month,agendaWeek,agendaDay, listMonth'//, basicDay,basicWeek'
+        right: 'agendaWeek,agendaDay, listMonth'//, basicDay,basicWeek'
       },
       customButtons: {
         /* Add a Google Calendar ID to the google_calendar table */
@@ -408,14 +473,14 @@ session_start();
         /* (event.end == null) -> start + 1 hour
          * (event.end != null) -> end
          */
-       } else {
-        if (event.end == null) {
-          end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "h");
         } else {
-          end = event.end;
+          if (event.end == null) {
+            end = moment(event.start.format("YYYY-MM-DD HH:mm:ss").toString()).add(1, "h");
+          } else {
+            end = event.end;
+          }
+          allDayBoolean = 0;
         }
-        allDayBoolean = 0;
-      }
 
         //console.log(event.allDay);
 
@@ -605,42 +670,60 @@ $("#btnRemoveUser").click(function(){
 });
 
 
-// css
+  // css
 
-// $('#calendar-right').addClass('blue-grey lighten-1').css('opacity', '0.85');
+  // $('#calendar-right').addClass('blue-grey lighten-1').css('opacity', '0.85');
 
-// $('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
-// $('#calendar-left').addClass("fc fc-unthemed fc-ltr");
-$('#calendar-left').css("font-size","0.7em");
-$('#calendar-left .fc-center h2').css("font-size","1em");
-//$('#calendar-left .fc-day-number').css("font-size","7px");
-//$('#calendar-left tr').css("height","11px");
+  // $('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
+  // $('#calendar-left').addClass("fc fc-unthemed fc-ltr");
+  $('#calendar-left').css("font-size","0.7em");
+  $('#calendar-left .fc-center h2').css("font-size","1em");
+  //$('#calendar-left .fc-day-number').css("font-size","7px");
+  //$('#calendar-left tr').css("height","11px");
 
-$('#calendar-right .fc-today-button').html("Today");
-$('#calendar-right a').css("color","black");
+  $('#calendar-right .fc-today-button').html("Today");
+  $('#calendar-right a').css("color","black");
 
 
-$('#calendar-left .fc-next-button.fc-button.fc-state-default.fc-corner-right').click(function(){
-   $('#calendar-right').fullCalendar('next');
-});
+  $('#calendar-left .fc-next-button.fc-button.fc-state-default.fc-corner-right').click(function(){
+    var viewLeft = $("#calendar-left").fullCalendar("getView");
+    var viewRight = $("#calendar-right").fullCalendar("getView");
+    $("#calendar-right").fullCalendar("changeView", viewLeft.name);
+    $('#calendar-right').fullCalendar('next');
+    $("#calendar-right").fullCalendar("changeView", viewRight.name);
+  });
 
-$('#calendar-left .fc-prev-button.fc-button.fc-state-default.fc-corner-left').click(function(){
-   $('#calendar-right').fullCalendar('prev');
-});
+  $('#calendar-left .fc-prev-button.fc-button.fc-state-default.fc-corner-left').click(function(){
+    var viewLeft = $("#calendar-left").fullCalendar("getView");
+    var viewRight = $("#calendar-right").fullCalendar("getView");
+    $("#calendar-right").fullCalendar("changeView", viewLeft.name);
+    $('#calendar-right').fullCalendar('prev');
+    $("#calendar-right").fullCalendar("changeView", viewRight.name);
 
-$('#calendar-right .fc-next-button.fc-button.fc-state-default.fc-corner-right').click(function(){
-  console.log($(this).html());
-   $('#calendar-left').fullCalendar('next');
-});
+  });
 
-$('#calendar-right .fc-prev-button.fc-button.fc-state-default').click(function(){
-   $('#calendar-left').fullCalendar('prev');
-});
+  $('#calendar-right .fc-next-button.fc-button.fc-state-default.fc-corner-right').click(function(){
+    
+    var viewLeft = $("#calendar-left").fullCalendar("getView");
+    var viewRight = $("#calendar-right").fullCalendar("getView");
+    $("#calendar-left").fullCalendar("changeView", viewRight.name);
+    $('#calendar-left').fullCalendar('next');
+    $("#calendar-left").fullCalendar("changeView", viewLeft.name);
+  });
 
-$('#calendar-right .fc-today-button').click(function() {
-  $('#calendar-left').fullCalendar('today');
-  $('#calendar-right').fullCalendar('today');
-});
+  $('#calendar-right .fc-prev-button.fc-button.fc-state-default').click(function(){
+    
+    var viewLeft = $("#calendar-left").fullCalendar("getView");
+    var viewRight = $("#calendar-right").fullCalendar("getView");
+    $("#calendar-left").fullCalendar("changeView", viewRight.name);
+    $('#calendar-left').fullCalendar('prev');
+    $("#calendar-left").fullCalendar("changeView", viewLeft.name);
+  });
+
+  $('#calendar-right .fc-today-button').click(function() {
+    $('#calendar-left').fullCalendar('today');
+    $('#calendar-right').fullCalendar('today');
+  });
 
 });
 
