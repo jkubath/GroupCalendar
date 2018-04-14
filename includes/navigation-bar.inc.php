@@ -4,14 +4,15 @@
     <div class="container">
       <div class="nav-wrapper">
         <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
-
-echo '<ul class="left hide-on-med-and-down">
+?>
+<ul class="left hide-on-med-and-down">
 
   <li>
     <a class="waves-effect waves-teal btn-flat" id="zo"><i class="material-icons">zoom_out_map</i></a>
 
   </li>
-    </ul>';
+    </ul>
+    <?php
   }
 ?>
 <a href="../php/calendar.php" class="brand-logo">  Calendar</a>
