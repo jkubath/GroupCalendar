@@ -17,3 +17,4 @@
     } catch (PDOException $e) {
         echo "Erro: $e";
     }
+    ?>

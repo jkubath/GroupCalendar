@@ -102,3 +102,4 @@
     }
     /* Step 5:  Send JSON to the client */
     echo json_encode($output_arrays);
+?>

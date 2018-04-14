@@ -129,3 +129,4 @@ function stripTime($datetime)
 {
     return new DateTime($datetime->format('Y-m-d'));
 }
+?>

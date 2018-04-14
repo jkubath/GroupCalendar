@@ -51,10 +51,6 @@ if (!empty($_POST)) {
 			exit();
 		}
 
-            header('Location: ./calendar.php?success=1');
-        } else {
-            header('Location: ./login.php?usernotfound=1');
-            exit();
-        }
     }
 }
+?>
