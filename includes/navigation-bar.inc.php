@@ -12,12 +12,7 @@
           <li>
             <a href="../index.php#contact">Contact</a>
           </li>
-          <!-- <li>
-            <a href="../php/signup.php">Sign Up</a>
-          </li> -->
           <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
-              //echo '<li><div class="btn blue" ">' . $_SESSION['username']. '</div></li>';
-
             echo '<li ><a href="../php/logout.php" id="logOutButton">Log out</a></li>';
             echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
           }
