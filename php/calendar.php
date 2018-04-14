@@ -370,6 +370,7 @@ session_start();
       /* Auto resize the calendar */
       windowResizeDelay: 20,
       height: "auto",
+      aspectRatio: 1.8,
       /* Pull calendar events from multiple sources */
       eventSources: [
         <?php include_once './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
@@ -645,6 +646,15 @@ $('#calendar-right .fc-today-button').click(function() {
 /* Hides the left calendar when the screen
  * is less than 1024 
  */
+if ($(this).width() < 1024) {
+    $('#calendar-left').hide();
+    $('#calendar-right').removeClass("col s12 m10 l10");
+    $('#calendar-right').addClass("col s12 m12 l10");
+  } else {
+    $('#calendar-left').show();
+    $('#calendar-right').removeClass("col s12 m12 l10");
+    $('#calendar-right').addClass("col s12 m10 l10");
+  }
 $(window).resize(function() {
   if ($(this).width() < 1024) {
     $('#calendar-left').hide();
