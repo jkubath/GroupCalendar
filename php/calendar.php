@@ -23,7 +23,7 @@ session_start();
   <header>
     <div>
       <!-- Navigation Bar -->
-      <?php //include "../includes/navigation-bar.inc.php"; ?>
+      <?php include "../includes/navigation-bar.inc.php"; ?>
       <!-- End of Navigation Bar -->
     </div>
   </header>

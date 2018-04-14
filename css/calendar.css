@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
 /*****GLOBAL*****/
 body, html {
-	background-color: rgb(0,43,54);
+	font-family: 'Quicksand', sans-serif;
+	background-color: white; 
+	/* rgb(0,43,54); */
 	background-size: cover;
 	background-position: center;
 	color: rgb(131,148,150);
@@ -8,7 +11,7 @@ body, html {
 
 button:focus {
     outline: none;
-    background-color: rgba(181,137,0, 1.0);
+    background-color: rgb(120,194,173);
 }
 
 /*****CLASSES*****/
@@ -20,26 +23,25 @@ button:focus {
 	/* color: white !important; */
 }
 .fc th, .fc td {
-	border-color: rgb(101,118,120);
+	border-color: rgba(120, 120, 120, 0.2) !important; 
+	/* rgb(131,118,150); */
 }
-
-.fc-day-number, a.fc-list-heading-alt, a.fc-list-heading-main, th.fc-day-header a{
-	color: black !important;
-}
-.fc-event-dot{
-	background-color: black;
-}
+/* 
+.fc-event-dot:hover, .fc-event-dot:focus {
+	background-color: rgba(60, 60, 60, 1);
+} */
 
 .fc-state-default {
-	color: black;
+	font-family: 'Quicksand', sans-serif;
+	color: white;
 	background-image: unset;
-	background-color: rgba(181,137,0, 1.0);
+	background-color: rgb(120,194,173);
 	box-shadow: unset;
 	border: unset;
 }
 
 .fc-state-default:hover {
-	background-color: rgba(160, 120, 0, 1.0);
+	background-color: rgb(94, 170, 149);
 	transition-delay: 5000ms;
 }
 
