@@ -42,7 +42,7 @@
             <img src="../img/iron2.jpg" alt="" class="circle">
           </a>';
 
-        echo '<a href="#">
+        echo '<a href="../php/calendar.php">
           <span class="name white-text">' . $_SESSION['username'] . '</span>
         </a>';
         echo '<a href="#">
@@ -70,18 +70,17 @@
   <li>
     <a href="../php/homepage.php#contact">Contact</a>
   </li>
+  <li>
+    <div class="divider"></div>
+  </li>
   <?php
   if (isset($_SESSION["username"]) && $_SESSION != "") {
     ?>
     <li>
-      <a href="../php/logout.php">Log out</a>
+      <a href="../php/logout.php" class="btn red">Log out</a>
     </li>
-    <li>
-      <div class="divider"></div>
-    </li>
-    <li>
-      <a href="../php/calendar.php" class="btn blue"><?php echo $_SESSION["username"]; ?></a>
-    </li>
+
+
     <?php
   } else {
     ?>
