@@ -35,7 +35,37 @@
 
 <!-- Side nav for mobile devices-->
 <ul class="sidenav " id="mobile-demo">
-  <h4 class="black-text center">Calendar</h4>
+  <li>
+    <div class="user-view">
+
+      <?php if(isset($_SESSION["username"]) && $_SESSION["username"] != "") {
+          //echo '<li><div class="btn blue" ">' . $_SESSION['username']. '</div></li>';
+        echo  '<div class="background">
+            <img src="../img/lion.jpg" alt="">
+          </div>
+          <a href="#">
+            <img src="../img/iron2.jpg" alt="" class="circle">
+          </a>';
+
+        echo '<a href="#">
+          <span class="name white-text">' . $_SESSION['username'] . '</span>
+        </a>';
+        echo '<a href="#">
+          <span class="email white-text">' . $_SESSION['email'] . '</span>
+        </a>';
+      }
+      else {
+      echo '<li>
+        <a href="../php/homepage.php#about">About</a>
+      </li>
+      <li>
+        <a href="../php/homepage.php#features">Features</a>
+      </li>';
+      }
+        ?>
+    </div>
+  </li>
+
   <li>
     <div class="divider"></div>
   </li>
@@ -47,7 +77,7 @@
   </li>
   <?php
   if (isset($_SESSION["username"]) && $_SESSION != "") {
-    ?> 
+    ?>
     <li>
       <a href="../php/logout.php">Log out</a>
     </li>

@@ -5,10 +5,10 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-  
+
   <!-- JavaScript at end of body for optimized loading -->
   <?php include "../includes/js-meta-data.inc.php"; ?>
-  
+
   <!-- Style meta data -->
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- End of style meta data -->
@@ -30,15 +30,51 @@ session_start();
   <section class="section center scrollspy" id="calendar-section">
     <div class="container" id="container-width">
       <div class="row" id="calendar-container">
-        <!-- <div class="col s3 purple accent-4" id="calendar-left"></div> -->
-        <div class="col s12" id="calendar-right"></div>
+        <div class="col m2 l2">
+
+          <div class="row" id="calendar-container">
+
+              <div class="col s12  blue-grey lighten-5" id="calendar-left"></div>
+              <div class="col s12 blue lighten-5" id="lista">
+                <div class="row">
+                  <p> This will be a list </p>
+
+                  <div class="col s12">
+                    <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn blue">Add User</a>
+                  <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn red ">Remove User</a>
+                  </div>
+
+                </div>
+              </div>
+
+          </div>
+        </div>
+
+        <div class="col s12 m10 l10" id="calendar-right"></div>
       </div>
     </div>
   </section>
 
-  <!-- Modal Trigger -->
+  <!-- Modal User Permissions-->
+  <div id="modalUser" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <h4 id="textPrompt"> Enter userID to both share your calendars:</h4>
+        <div class="input-field col s12">
+          <input id="userID" type="text" data-length="128">
+          <label for="userID" id="userIDtext">UserID</label>
+        </div>
 
-  <!-- Modal Structure -->
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <a href="#!" id="btnAddUserModal" class="modal-action modal-close waves-effect btn blue">Add</a>
+      <a href="#!" id="btnRemoveUserModal" class="modal-action modal-close waves-effect btn red">Remove</a>
+      <a href="#!" id="btnCloseUserModal" class="modal-action modal-close waves-effect btn black">Close</a>
+    </div>
+  </div>
 
   <!-- Modal -->
   <div id="modal" class="modal">
@@ -124,6 +160,21 @@ session_start();
 
 <script type="text/JavaScript">
   $(document).ready(function() {
+
+    /// PART CALENDAR LEFT ###########################################################
+    $('#calendar-left').fullCalendar({
+      //themeSystem: 'jquery-ui',
+      header :{
+        left: 'prev,next',
+        center: 'title',
+        right: ''
+      },
+      dayNamesShort: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+      height: "auto"
+    });
+
+
+
     $("#navbar-switch").removeClass("navbar-fixed");
     $("#navbar-switch").addClass("navbar");
     $("#navbar").removeClass("transparent");
@@ -204,7 +255,7 @@ session_start();
         $('#modal').modal();
         $('#modal').modal('open');
 
-        
+
         /* Reset all day for dayclick */
         $('#switch-allday').prop("checked", false);
         $('#hour-start').prop("disabled", false);
@@ -251,7 +302,7 @@ session_start();
 
         /* Move the labels before opening the modal */
         if (calEvent.title) {
-          $('#label-title').addClass('active'); 
+          $('#label-title').addClass('active');
         }
 
         if ($("#description").val() != "" || $("#description").val() != null) {
@@ -373,9 +424,9 @@ session_start();
           url: "./updateCalendarEvents.php",
           type: "POST",
           data: {
-            "id": event.id, 
+            "id": event.id,
             "title": event.title,
-            "start": event.start.format(), 
+            "start": event.start.format(),
             "end": end.format(),
             "allDay": allDayBoolean,
             "description": description,
@@ -408,9 +459,9 @@ session_start();
             url: "./updateCalendarEvents.php",
             type: "POST",
             data: {
-              "id": event.id, 
+              "id": event.id,
               "title": event.title,
-              "start": event.start.format(), 
+              "start": event.start.format(),
               "end": event.end.format(),
               "allDay": allDayBoolean,
               "description": description,
@@ -430,7 +481,7 @@ session_start();
       });
 
 /* Used to modify or add an event.  This function will collect the
- * data in the form to be sent to the database for adding/updating 
+ * data in the form to be sent to the database for adding/updating
  */
  function getEventData() {
   newEvent = {
@@ -510,9 +561,110 @@ $("#switch-allday").click(function() {
     $('#hour-end').prop("disabled", false);
   }
 });
+
+////////////////////////////////////////////////////////////////////////
+$("#btnAddUser").click(function(){
+  $('#modalUser').modal();
+  $('#modalUser').modal('open');
+
+});
+
+$("#btnAddUserModal").click(function () {
+  var userID = {
+    userID:$('#userID').val()
+  };
+  console.log(userID);
+  console.log($('#userID').val());
+    $.ajax({
+      url: "./permissions.php",
+      type: "POST",
+      data: userID,
+      success: function (msg) {
+        //alert("Go!");
+        console.log(msg);
+        console.log("Go!");
+
+        $("#calendar-right").fullCalendar('refetchEvents');
+        $('#modalUser').modal('close');
+
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus);
+        console.log(errorThrown);
+        //alert("some error");
+      }
+    });
+
+});
+
+$("#btnRemoveUser").click(function(){
+  $('#modalUser').modal();
+  $('#modalUser').modal('open');
 });
 
 
+// css
+
+$('#calendar-right').addClass('blue-grey lighten-1').css('opacity', '0.85');
+
+$('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
+$('#calendar-left').addClass("fc fc-unthemed fc-ltr");
+$('#calendar-left').css("font-size","0.7em");
+$('#calendar-left .fc-center h2').css("font-size","1em");
+//$('#calendar-left .fc-day-number').css("font-size","7px");
+//$('#calendar-left tr').css("height","11px");
+
+$('#calendar-right .fc-today-button').html("Today");
+$('#calendar-right a').css("color","black");
+
+
+$('#calendar-left .fc-next-button.fc-button.fc-state-default.fc-corner-right').click(function(){
+   $('#calendar-right').fullCalendar('next');
+});
+
+$('#calendar-left .fc-prev-button.fc-button.fc-state-default.fc-corner-left').click(function(){
+   $('#calendar-right').fullCalendar('prev');
+});
+
+$('#calendar-right .fc-next-button.fc-button.fc-state-default.fc-corner-right').click(function(){
+  console.log($(this).html());
+   $('#calendar-left').fullCalendar('next');
+});
+
+$('#calendar-right .fc-prev-button.fc-button.fc-state-default').click(function(){
+   $('#calendar-left').fullCalendar('prev');
+});
+
+$('#calendar-right .fc-today-button').click(function() {
+  $('#calendar-left').fullCalendar('today');
+  $('#calendar-right').fullCalendar('today');
+});
+
+
+
+});
 </script>
+
+
+
+</script>
+
+<style>
+a.fc-day-number, a.fc-list-heading-alt, a.fc-list-heading-main, th.fc-day-header a{
+  color: black !important;
+}
+span.fc-event-dot{
+  background-color: black;
+}
+button.fc-next-button.fc-button{
+  opacity: 0.5 !important;
+}
+span.fc-icon.fc-icon-right-single-arrow{
+
+}
+</style>
+
+
+
 </body>
 </html>
