@@ -7,6 +7,9 @@
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- End of style meta data -->
 
+  <!--JavaScript at end of body for optimized loading-->
+  <?php include "../includes/js-meta-data.inc.php"; ?>
+  
   <title>Sign in</title>
 </head>
 
@@ -58,8 +61,6 @@
   </footer>
   <!-- End of footer-->
 
-  <!--JavaScript at end of body for optimized loading-->
-  <?php include "../includes/js-meta-data.inc.php"; ?>
   <script type="text/javascript">
     $(document).ready(function () {
       // Email field

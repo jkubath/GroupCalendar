@@ -5,12 +5,13 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
+  
+  <!-- JavaScript at end of body for optimized loading -->
+  <?php include "../includes/js-meta-data.inc.php"; ?>
+  
   <!-- Style meta data -->
   <?php include "../includes/style-meta-data.inc.php"; ?>
   <!-- End of style meta data -->
-
-  <!-- JavaScript at end of body for optimized loading -->
-  <?php include "../includes/js-meta-data.inc.php"; ?>
 
 
   <link rel='stylesheet' href='../includes/fullcalendar/fullcalendar.css' />
@@ -134,8 +135,14 @@ session_start();
       editable: true, //Allows for drag and drop events
       eventLimit: true, //When there are more events than the day can hold, compress to a list
       googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo', //pull Google Calendar Events
-
-      header :{
+      // themeSystem: 'jquery-ui',
+      // themeButtonIcons: {
+      //   prev: 'circle-triangle-w',
+      //   next: 'circle-triangle-e',
+      //   prevYear: 'seek-prev',
+      //   nextYear: 'seek-next'
+      // },
+      header: {
         left: 'today,prev,next',
         center: 'importGoogle',
         right: 'month,agendaWeek,agendaDay, listMonth'//, basicDay,basicWeek'
@@ -310,6 +317,7 @@ session_start();
       }, //eventClick end
 
       /* Auto resize the calendar */
+      windowResizeDelay: 20,
       height: "auto",
       /* Pull calendar events from multiple sources */
       eventSources: [
