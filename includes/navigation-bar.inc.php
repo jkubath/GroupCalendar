@@ -8,7 +8,7 @@
 <ul class="left hide-on-med-and-down">
 
   <li>
-    <a class="waves-effect waves-teal btn-flat" id="zoom-button"><i class="material-icons">zoom_out_map</i></a>
+    <a class="waves-effect waves-teal btn-flat" id="zoom-button"><i id="zoom-out-map" class="material-icons hide">zoom_out_map</i></a>
 
   </li>
     </ul>

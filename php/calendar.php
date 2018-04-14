@@ -176,9 +176,9 @@ session_start();
     //var instanceDown = M.FloatingActionButton.init(elem,options);
     //var instance = M.FloatingActionButton.getInstance(elem);
     //instanceDown.open();
-
-     $('.fixed-action-btn').floatingActionButton();
-     $('.fixed-action-btn').floatingActionButton('open');
+    $("#zoom-out-map").removeClass("hide");
+    $('.fixed-action-btn').floatingActionButton();
+    $('.fixed-action-btn').floatingActionButton('open');
 
     /// PART CALENDAR LEFT ###########################################################
     $('#calendar-left').fullCalendar({
