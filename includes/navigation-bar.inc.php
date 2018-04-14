@@ -50,12 +50,12 @@
         </a>';
       }
       else {
-      echo '<li>
+      echo '<ul><li>
         <a href="../php/homepage.php#about">About</a>
       </li>
       <li>
         <a href="../php/homepage.php#features">Features</a>
-      </li>';
+      </li></ul>';
       }
         ?>
     </div>
