@@ -23,7 +23,7 @@ session_start();
   <header>
     <div>
       <!-- Navigation Bar -->
-      <?php include "../includes/navigation-bar.inc.php"; ?>
+      <?php //include "../includes/navigation-bar.inc.php"; ?>
       <!-- End of Navigation Bar -->
     </div>
   </header>
@@ -154,7 +154,7 @@ session_start();
 
 <!-- Footer -->
 <footer class="page-footer blue-grey darken-1">
-  <?php include "../includes/footer.inc.php"; ?>
+  <?php //include "../includes/footer.inc.php"; ?>
 </footer>
 <!-- End of footer-->
 
@@ -604,10 +604,10 @@ $("#btnRemoveUser").click(function(){
 
 // css
 
-$('#calendar-right').addClass('blue-grey lighten-1').css('opacity', '0.85');
+// $('#calendar-right').addClass('blue-grey lighten-1').css('opacity', '0.85');
 
-$('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
-$('#calendar-left').addClass("fc fc-unthemed fc-ltr");
+// $('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
+// $('#calendar-left').addClass("fc fc-unthemed fc-ltr");
 $('#calendar-left').css("font-size","0.7em");
 $('#calendar-left .fc-center h2').css("font-size","1em");
 //$('#calendar-left .fc-day-number').css("font-size","7px");
@@ -657,21 +657,6 @@ $(window).resize(function() {
 
 });
 </script>
-
-<style>
-a.fc-day-number, a.fc-list-heading-alt, a.fc-list-heading-main, th.fc-day-header a{
-  color: black !important;
-}
-span.fc-event-dot{
-  background-color: black;
-}
-button.fc-next-button.fc-button{
-  opacity: 0.5 !important;
-}
-span.fc-icon.fc-icon-right-single-arrow{
-
-}
-</style>
 
 
 
