@@ -37,11 +37,11 @@ session_start();
               <div class="col s12  blue-grey lighten-5" id="calendar-left"></div>
               <div class="col s12 blue lighten-5" id="lista">
                 <div class="row">
-                  <p> This will be a list </p>
+                  <p>  </p>
 
                   <div class="col s12">
-                    <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue">Add User</a>
-                  <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn-small red ">Remove User</a>
+                    <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue"><i class="material-icons">person_add</i></a>
+                  <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn-small red "><i class="material-icons">delete_forever</i></a>
                   </div>
 
                 </div>
@@ -59,7 +59,7 @@ session_start();
   <div id="modalUser" class="modal">
     <div class="modal-content">
       <div class="row">
-        <h4 id="textPrompt"> Enter userID to both share your calendars:</h4>
+        <h4 id="textPrompt"> Enter username to obtain calendars:</h4>
         <div class="input-field col s12">
           <input id="userID" type="text" data-length="128">
           <label for="userID" id="userIDtext">UserID</label>
@@ -70,8 +70,8 @@ session_start();
     </div>
 
     <div class="modal-footer">
-      <a href="#!" id="btnAddUserModal" class="modal-action modal-close waves-effect btn blue">Add</a>
-      <a href="#!" id="btnRemoveUserModal" class="modal-action modal-close waves-effect btn red">Remove</a>
+      <a href="#!" id="btnAddUserModal" class="modal-action modal-close waves-effect btn blue"><i class="material-icons">person_add</i></a>
+      <a href="#!" id="btnRemoveUserModal" class="modal-action modal-close waves-effect btn red"><i class="material-icons">delete_forever</i></a>
       <a href="#!" id="btnCloseUserModal" class="modal-action modal-close waves-effect btn black">Close</a>
     </div>
   </div>
@@ -83,6 +83,9 @@ session_start();
       <div class="row">
         <form class="col s12">
           <div class="row">
+            <div class="s1">
+              <i class="material-icons" id="icon-user-share">people</i>
+            </div>
             <div class="input-field col s6">
               <input id="title" type="text" data-length="128">
               <label for="title" id="label-title">Title</label>
@@ -150,12 +153,12 @@ session_start();
 </div><!--  End of Modal -->
 
 
-<div class="fixed-action-btn">
+<div class="fixed-action-btn" id="btn-google">
   <a class="btn-floating btn-large red">
     <i class="large material-icons">mode_edit</i>
   </a>
   <ul>
-    <li><a class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+    <li><a class="btn-floating red" data-position="left" data-tooltip="Reply" ><i class="material-icons">insert_chart</i></a></li>
     <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
     <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
     <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
@@ -172,12 +175,11 @@ session_start();
 <script type="text/JavaScript">
   $(document).ready(function() {
 
-    //var buttonDown = document.querySelector('.fixed-action-btn');
-    //var instanceDown = M.FloatingActionButton.init(elem,options);
-    //var instance = M.FloatingActionButton.getInstance(elem);
-    //instanceDown.open();
+
     $("#zoom-button").removeClass("hide");
-    $('.fixed-action-btn').floatingActionButton();
+    $('.fixed-action-btn').floatingActionButton({
+    toolbarEnabled: false
+  });
     $('.fixed-action-btn').floatingActionButton('open');
 
     /// PART CALENDAR LEFT ###########################################################
@@ -443,10 +445,43 @@ session_start();
         $('#description').val(calEvent.description);
 
         $('#date-start').val(moment(calEvent.start).format("MMM DD, YYYY"));
+
+
+        $("#date-start").click(function(){
+          console.log("Click ... !");
+          $(document).ready(function(){
+            $('#date-start').datepicker();
+            $('#date-start').datepicker('open');
+          });
+        })
+
         $('#hour-start').val(moment(calEvent.start).format("h:mm A"));
+        $("#hour-start").click(function(){
+          console.log("Click ... !");
+          $(document).ready(function(){
+            $('#hour-start').timepicker();
+            $('#hour-start').timepicker('open');
+          });
+        })
 
         $('#date-end').val(moment(calEvent.end).format("MMM DD, YYYY"));
+        $("#date-end").click(function(){
+          console.log("Click ... !");
+          $(document).ready(function(){
+            $('#date-end').datepicker();
+            $('#date-end').datepicker('open');
+          });
+        })
+
         $('#hour-end').val(moment(calEvent.end).format("h:mm A"));
+        $("#hour-end").click(function(){
+          console.log("Click ... !");
+          $(document).ready(function(){
+            $('#hour-end').timepicker();
+            $('#hour-end').timepicker('open');
+          });
+        })
+
 
 
 
@@ -627,17 +662,20 @@ $("#btn-add").click(function(){
   getEventData();
   sendEventDataToDB(1, newEvent);
   $("#date-start").val('');
+  M.toast({html: 'New Event Added!'})
 });
 
 /* Add function when an event is modified */
 $("#btn-modify").click(function(){
   getEventData();
   sendEventDataToDB(2, newEvent);
+  M.toast({html: 'Event modified!'})
 });
 
 $("#btn-remove").click(function(){
   getEventData();
   sendEventDataToDB(3, newEvent);
+  M.toast({html: 'Event removed!'})
 });
 
 /* Add function when an event is changed to an all day event */
@@ -761,21 +799,47 @@ $("#btnRemoveUser").click(function(){
 if ($(this).width() < 1024) {
     $('#calendar-left-Main').hide();
     $('#calendar-right').removeClass("col s12 m10 l10");
-    $('#calendar-right').addClass("col s12 m12 l10");
+    $('#calendar-right').addClass("col s12 m12 l12");
+
+
+
+
+//   $('.fixed-action-btn').floatingActionButton({
+//   toolbarEnabled: true
+// });
+//   $('.fixed-action-btn').floatingActionButton('open');
+
+
   } else {
     $('#calendar-left-Main').show();
-    $('#calendar-right').removeClass("col s12 m12 l10");
+    $('#calendar-right').removeClass("col s12 m12 l12");
     $('#calendar-right').addClass("col s12 m10 l10");
+  //   $('.fixed-action-btn').floatingActionButton({
+  //   toolbarEnabled: false
+  // });
+  //   $('.fixed-action-btn').floatingActionButton('close');
+
   }
 $(window).resize(function() {
   if ($(this).width() < 1024) {
     $('#calendar-left-Main').hide();
     $('#calendar-right').removeClass("col s12 m10 l10");
-    $('#calendar-right').addClass("col s12 m12 l10");
+    $('#calendar-right').addClass("col s12 m12 l12");
+
+
+    // $('.fixed-action-btn').floatingActionButton({
+    // toolbarEnabled: true  });
+  console.log("???");
   } else {
     $('#calendar-left-Main').show();
-    $('#calendar-right').removeClass("col s12 m12 l10");
+    $('#calendar-right').removeClass("col s12 m12 l12");
     $('#calendar-right').addClass("col s12 m10 l10");
+
+  //   $('.fixed-action-btn').floatingActionButton({
+  //   toolbarEnabled: false
+  // });
+  // $('.fixed-action-btn').floatingActionButton('close');
+
   }
 
 });

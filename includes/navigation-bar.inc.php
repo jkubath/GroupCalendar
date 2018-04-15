@@ -20,16 +20,17 @@
 
         <ul class="right hide-on-med-and-down">
 
-          <li>
-            <a href="../index.php">Home</a>
-          </li>
-          <li>
-            <a href="../index.php#contact">Contact</a>
-          </li>
+          
           <?php if (isset($_SESSION["username"]) && $_SESSION["username"] != "") {
     echo '<li ><a href="../php/logout.php" id="logOutButton">Log out</a></li>';
     echo '<li><a href="../php/calendar.php" class="btn blue">' . $_SESSION['username'] . '</a></li>';
 } else {
+  echo '  <li>
+      <a href="../index.php">Home</a>
+    </li>';
+    echo '<li>
+      <a href="../index.php#contact">Contact</a>
+    </li>';
     echo '<li><a href="../php/signup.php">Sign up</a></li>';
     echo '<li><a href="../php/login.php" class="btn blue">Log In</a></li>';
 }
