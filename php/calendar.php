@@ -183,6 +183,7 @@ session_start();
     /// PART CALENDAR LEFT ###########################################################
     $('#calendar-left').fullCalendar({
       //themeSystem: 'jquery-ui',
+      googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo',
       header :{
         left: 'prev,next',
         center: 'title',
@@ -193,7 +194,7 @@ session_start();
       editable: true,
       eventLimit: true,
       eventSources: [
-        <?php include_once './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
+        <?php include './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
         {
           //Get google holiday events
           googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
@@ -461,7 +462,7 @@ session_start();
       // aspectRatio: 1.8,
       /* Pull calendar events from multiple sources */
       eventSources: [
-        <?php include_once './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
+        <?php include './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
         {
           //Get google holiday events
           googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
