@@ -1,7 +1,7 @@
 <?php
     require_once('../includes/databaseConnection.php'); //Make the connection to the database
 
-session_start();
+session_start();// essential for session variables
     $calendarID = $_POST['calendarID'];
     $username = $_SESSION['username'];
 echo json_encode([$calendarID,$username]);
@@ -18,5 +18,5 @@ echo json_encode([$calendarID,$username]);
     } catch (PDOException $e) {
         echo "Erro: $e";
     }
-
+// it adds correclty
 ?>
