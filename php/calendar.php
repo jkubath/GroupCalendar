@@ -728,6 +728,16 @@ $("#btnAddUser").click(function(){
 
 });
 
+$("#floating-add-user").click(function(){
+  $("#textPrompt").html("Enter username to obtain calendar:");
+  $("#btnAddUserModal").show();
+  $("#btnRemoveUserModal").hide();
+  $('#modalUser').modal();
+  $('#userID').val('');
+  $('#modalUser').modal('open');
+
+});
+
 $("#btnAddUserModal").click(function () {
 
   var userID = {
