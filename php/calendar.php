@@ -220,7 +220,7 @@ session_start();
         <?php include './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
         {
           //Get google holiday events
-          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
+          googleCalendarId: 'd5i61dle9965ji7d9kjhjnrmdo@group.calendar.google.com',
           editable: false
         },
         {
@@ -817,7 +817,8 @@ $("#import-google").click(function () {
       return;
   }
   console.log(txtCalendarID);
-//axel.jeremy.7@gmail.com
+// -> uu66j4qvvsq48tjgp1gde2j21c@group.calendar.google.com
+// -> d5i61dle9965ji7d9kjhjnrmdo@group.calendar.google.com
     /* Add the calendar ID to the database */
     $.ajax({
       url: "./addGoogleCalendarID.php",
