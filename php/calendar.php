@@ -41,7 +41,7 @@ session_start();
 
                   <div class="col s12">
                     <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue"><i class="material-icons">person_add</i></a>
-                  <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn-small red "><i class="material-icons">delete_forever</i></a>
+                    <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn-small red "><i class="material-icons">delete_forever</i></a>
                   </div>
 
                 </div>
@@ -59,7 +59,7 @@ session_start();
   <div id="modalUser" class="modal">
     <div class="modal-content">
       <div class="row">
-        <h4 id="textPrompt"> Enter username to obtain calendars:</h4>
+        <h4 id="textPrompt"></h4>
         <div class="input-field col s12">
           <input id="userID" type="text" data-length="128">
           <label for="userID" id="userIDtext">UserID</label>
@@ -696,12 +696,16 @@ $("#switch-allday").click(function() {
 
 ////////////////////////////////////////////////////////////////////////
 $("#btnAddUser").click(function(){
+  $("#textPrompt").html("Enter username to obtain calendar:");
+  $("#btnAddUserModal").show();
+  $("#btnRemoveUserModal").hide();
   $('#modalUser').modal();
   $('#modalUser').modal('open');
 
 });
 
 $("#btnAddUserModal").click(function () {
+
   var userID = {
     userID:$('#userID').val()
   };
@@ -732,6 +736,9 @@ $("#btnAddUserModal").click(function () {
 });
 
 $("#btnRemoveUser").click(function(){
+  $("#textPrompt").html("Enter username to remove calendar:");
+  $("#btnAddUserModal").hide();
+  $("#btnRemoveUserModal").show();
   $('#modalUser').modal();
   $('#modalUser').modal('open');
 });
