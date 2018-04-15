@@ -62,7 +62,7 @@ session_start();
         <h4 id="textPrompt"></h4>
         <div class="input-field col s12">
           <input id="userID" type="text" data-length="128">
-          <label for="userID" id="userIDtext">UserID</label>
+          <label for="userID" id="userIDtext">Username</label>
         </div>
 
       </div>
@@ -279,6 +279,8 @@ session_start();
 
     $('#calendar-right').fullCalendar({
 
+      navLinks:true,
+      //scrollTime: "06:00:00",
       editable: true, //Allows for drag and drop events
       eventLimit: true, //When there are more events than the day can hold, compress to a list
       googleCalendarApiKey: 'AIzaSyCb7F3cZOnQ-gmZCbFmjU6Z3DuBfe23jMo', //pull Google Calendar Events
@@ -712,7 +714,7 @@ $("#btnAddUserModal").click(function () {
   console.log(userID);
   console.log($('#userID').val());
     $.ajax({
-      url: "./permissions.php",
+      url: "./addUserCalendar.php",
       type: "POST",
       data: userID,
       success: function (msg) {
@@ -722,8 +724,8 @@ $("#btnAddUserModal").click(function () {
 
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
-
         $('#modalUser').modal('close');
+        M.toast({html: 'You add a new calendar!'})
 
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -750,7 +752,7 @@ $("#btnRemoveUser").click(function(){
 
   // $('#calendar-left').addClass('light-blue lighten-5').css('opacity', '0.9');
   // $('#calendar-left').addClass("fc fc-unthemed fc-ltr");
-  $('#calendar-left').css("font-size","0.7em");
+  $('#calendar-left').css("font-size","0.6em");
   $('#calendar-left .fc-center h2').css("font-size","1em");
   //$('#calendar-left .fc-day-number').css("font-size","7px");
   //$('#calendar-left tr').css("height","11px");
