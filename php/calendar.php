@@ -665,20 +665,20 @@ $("#btn-add").click(function(){
   getEventData();
   sendEventDataToDB(1, newEvent);
   $("#date-start").val('');
-  M.toast({html: 'New Event Added!'})
+  M.toast({html: 'New Event Added!', inDuration:5, outDuration:50});
 });
 
 /* Add function when an event is modified */
 $("#btn-modify").click(function(){
   getEventData();
   sendEventDataToDB(2, newEvent);
-  M.toast({html: 'Event modified!'})
+  M.toast({html: 'Event modified!', inDuration:5, outDuration:50});
 });
 
 $("#btn-remove").click(function(){
   getEventData();
   sendEventDataToDB(3, newEvent);
-  M.toast({html: 'Event removed!'})
+  M.toast({html: 'Event removed!', inDuration:5, outDuration:50});
 });
 
 /* Add function when an event is changed to an all day event */
@@ -725,7 +725,7 @@ $("#btnAddUserModal").click(function () {
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
         $('#modalUser').modal('close');
-        M.toast({html: 'You add a new calendar!'})
+        M.toast({html: 'You add a new calendar!', inDuration:5, outDuration:50});
 
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -744,6 +744,7 @@ $("#btnRemoveUser").click(function(){
   $('#modalUser').modal();
   $('#modalUser').modal('open');
 });
+
 
 
   // css
