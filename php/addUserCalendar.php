@@ -2,7 +2,7 @@
   session_start();
     require_once('../includes/databaseConnection.php'); //Make the connection to the database
 
-
+session_start();
 $textUser = $_POST["userID"];
 
 

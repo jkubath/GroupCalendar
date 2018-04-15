@@ -1,9 +1,10 @@
 <?php
     require_once('../includes/databaseConnection.php'); //Make the connection to the database
 
+session_start();
     $calendarID = $_POST['calendarID'];
     $username = $_SESSION['username'];
-
+echo json_encode([$calendarID,$username]);
     try {
         // $stmt->beginTransaction();
         $stmt = $pdo->prepare("
@@ -17,4 +18,5 @@
     } catch (PDOException $e) {
         echo "Erro: $e";
     }
-    ?>
+
+?>

@@ -158,12 +158,33 @@ session_start();
     <i class="large material-icons">mode_edit</i>
   </a>
   <ul>
-    <li><a class="btn-floating red" data-position="left" data-tooltip="Reply" ><i class="material-icons">insert_chart</i></a></li>
-    <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-    <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
-    <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+    <li><a class="btn-floating blue" data-position="left" data-tooltip="Reply" ><i class="material-icons">add</i></a></li>
+    <li><a class="btn-floating yellow darken-1"><i class="material-icons">person_add</i></a></li>
+    <li><a id="modal-import-google" class="btn-floating green"><i class="material-icons">publish</i></a></li>
   </ul>
 </div>
+
+<!-- Modal User Permissions-->
+
+
+
+  <div id="modal-google" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <h4 id="text-prompt-google">Enter the Google Calendar ID:</h4>
+        <div class="input-field col s12">
+          <input id="google-id" type="text" data-length="128">
+          <label for="google-id" id="google-id-text">Google ID</label>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <a id="import-google" class="modal-action modal-close waves-effect btn green"><i class="material-icons">publish</i></a>
+      <a href="#!" class="modal-action modal-close waves-effect btn black">Close</a>
+    </div>
+  </div>
 
 
 
@@ -702,6 +723,7 @@ $("#btnAddUser").click(function(){
   $("#btnAddUserModal").show();
   $("#btnRemoveUserModal").hide();
   $('#modalUser').modal();
+  $('#userID').val('');
   $('#modalUser').modal('open');
 
 });
@@ -742,6 +764,7 @@ $("#btnRemoveUser").click(function(){
   $("#btnAddUserModal").hide();
   $("#btnRemoveUserModal").show();
   $('#modalUser').modal();
+  $('#userID').val('');
   $('#modalUser').modal('open');
 });
 
@@ -764,7 +787,7 @@ $("#btnRemoveUserModal").click(function () {
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
         $('#modalUser').modal('close');
-        M.toast({html: 'You remove a calendar!', inDuration:5, outDuration:49});
+        M.toast({html: 'You remove a calendar!', inDuration:5, outDuration:5});
 
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -775,6 +798,47 @@ $("#btnRemoveUserModal").click(function () {
     });
 
 });
+
+$('#modal-import-google').click(function () {
+  $('#modal-google').modal();
+  $('#modal-google').modal('open');
+  $('#google-id').val('');
+});
+
+$("#import-google").click(function () {
+
+  var txtCalendarID = {
+    calendarID:$('#google-id').val()
+  };
+
+  if ($('#google-id').val() === ""){
+      M.toast({html: 'Calendar ID was empty!', inDuration:5, outDuration:50});
+      console.log("Calendar ID was empty");
+      return;
+  }
+  console.log(txtCalendarID);
+//axel.jeremy.7@gmail.com
+    /* Add the calendar ID to the database */
+    $.ajax({
+      url: "./addGoogleCalendarID.php",
+      type: "POST",
+      data: txtCalendarID,
+      success: function (msg) {
+        console.log(msg);
+        console.log("Google Calendar was added");
+
+        //Re-render the calendar events
+        //location.reload();
+        M.toast({html: 'Google Calendar was added!', inDuration:5, outDuration:50});
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        M.toast({html: 'Error adding the Google Calendar to the database!', inDuration:5, outDuration:5});
+        console.log("Error adding the Google Calendar to the database");
+      }
+    });
+
+});
+
 
 
 
@@ -871,7 +935,7 @@ $(window).resize(function() {
 
     // $('.fixed-action-btn').floatingActionButton({
     // toolbarEnabled: true  });
-  console.log("???");
+  //console.log("???");
   } else {
     $('#calendar-left-Main').show();
     $('#calendar-right').removeClass("col s12 m12 l12");
