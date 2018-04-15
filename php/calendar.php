@@ -764,7 +764,7 @@ $("#btnRemoveUserModal").click(function () {
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
         $('#modalUser').modal('close');
-        M.toast({html: 'You remove a calendar!', inDuration:5, outDuration:50});
+        M.toast({html: 'You remove a calendar!', inDuration:5, outDuration:49});
 
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
