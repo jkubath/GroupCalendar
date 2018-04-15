@@ -8,7 +8,7 @@
 <ul class="left hide-on-med-and-down">
 
   <li>
-    <a class="waves-effect waves-teal btn-flat hide" id="zoom-button" ><i class="material-icons">zoom_out_map</i></a>
+    <a class="waves-effect waves-teal btn-flat" id="zoom-button"><i class="material-icons">zoom_out_map</i></a>
 
   </li>
     </ul>
@@ -39,7 +39,6 @@
     </div>
   </nav>
 </div>
-<!-- End of Naviagation bar-->
 
 <!-- Side nav for mobile devices-->
 <ul class="sidenav " id="mobile-demo">
