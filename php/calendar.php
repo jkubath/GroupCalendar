@@ -745,6 +745,37 @@ $("#btnRemoveUser").click(function(){
   $('#modalUser').modal('open');
 });
 
+$("#btnRemoveUserModal").click(function () {
+
+  var userID = {
+    userID:$('#userID').val()
+  };
+  console.log(userID);
+  console.log($('#userID').val());
+    $.ajax({
+      url: "./removeUserCalendar.php",
+      type: "POST",
+      data: userID,
+      success: function (msg) {
+        //alert("Go!");
+        console.log(msg);
+        console.log("Go!");
+
+        $('#calendar-right').fullCalendar('refetchEvents');
+        $('#calendar-left').fullCalendar('refetchEvents');
+        $('#modalUser').modal('close');
+        M.toast({html: 'You remove a calendar!', inDuration:5, outDuration:50});
+
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus);
+        console.log(errorThrown);
+        //alert("some error");
+      }
+    });
+
+});
+
 
 
   // css
