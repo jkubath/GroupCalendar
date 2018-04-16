@@ -220,7 +220,7 @@ session_start();
         <?php include './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
         {
           //Get google holiday events
-          googleCalendarId: 'd5i61dle9965ji7d9kjhjnrmdo@group.calendar.google.com',
+          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
           editable: false
         },
         {
@@ -523,7 +523,7 @@ session_start();
         <?php include './getGoogleCalendars.php'; ?> //Adds all the user's public google calendars as eventSources
         {
           //Get google holiday events
-          googleCalendarId: 'd5i61dle9965ji7d9kjhjnrmdo@group.calendar.google.com',
+          googleCalendarId: 'en.usa#holiday@group.v.calendar.google.com',
           editable: false
         },
         {
