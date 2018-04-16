@@ -157,8 +157,8 @@ session_start();
   <a class="btn-floating btn-large red">
     <i class="large material-icons">mode_edit</i>
   </a>
-  <ul>
-    <li><a id="floating-add" class="btn-floating blue" data-position="left" data-tooltip="Reply" ><i class="material-icons">add</i></a></li>
+  <ul> 
+    <!-- <li><a id="floating-add" class="btn-floating blue" data-position="left" data-tooltip="Reply" ><i class="material-icons">add</i></a></li> -->
     <li><a id="floating-add-user" class="btn-floating yellow darken-1"><i class="material-icons">person_add</i></a></li>
     <li><a id="modal-import-google" class="btn-floating green"><i class="material-icons">publish</i></a></li>
   </ul>
