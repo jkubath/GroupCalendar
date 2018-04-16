@@ -841,6 +841,7 @@ $("#import-google").click(function () {
         //Re-render the calendar events
         //location.reload(); this works but i commented to see the logs
         M.toast({html: 'Google Calendar was added!', inDuration:5, outDuration:50});
+        location.reload();
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         M.toast({html: 'Error adding the Google Calendar to the database!', inDuration:5, outDuration:5});

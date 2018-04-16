@@ -28,6 +28,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `calendar`
 --
 
+CREATE DATABASE  `group_calendar` ;
+
+USE `group_calendar`;
+
 CREATE TABLE `calendar` (
   `calendar_id` int(11) NOT NULL,
   `calendar_name` varchar(128) NOT NULL,
