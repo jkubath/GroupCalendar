@@ -37,13 +37,23 @@ session_start();
               <div class="col s12  blue-grey lighten-5" id="calendar-left"></div>
               <div class="col s12 blue lighten-5" id="lista">
                 <div class="row">
-                  <p>  </p>
+
 
                   <div class="col s12">
-                    <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue"><i class="material-icons">person_add</i></a>
-                    <a id="btnRemoveUser" class="modal-action modal-close waves-effect waves-light btn-small red "><i class="material-icons">delete_forever</i></a>
+                    <!-- <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue"><i class="material-icons">person_add</i></a> -->
                   </div>
 
+                  <div class="col s12">
+                    <div class="card" style="padding:0;">
+                      <div class="card-content" style="padding:0.2em;">
+                        <span class="card-title" style="font-size:0.9em;">Added users's calendar:</span>
+                        <ul class="collection todos" id="user-list">
+
+                            <?php include './userlist.php'; ?>
+                        </ul>
+                        </div>
+                      </div>
+                  </div>
                 </div>
               </div>
 
@@ -157,9 +167,10 @@ session_start();
   <a class="btn-floating btn-large red">
     <i class="large material-icons">mode_edit</i>
   </a>
-  <ul> 
+  <ul>
     <!-- <li><a id="floating-add" class="btn-floating blue" data-position="left" data-tooltip="Reply" ><i class="material-icons">add</i></a></li> -->
     <li><a id="floating-add-user" class="btn-floating yellow darken-1"><i class="material-icons">person_add</i></a></li>
+    <li><a id="btnRemoveUser" class="btn-floating red "><i class="material-icons">delete_forever</i></a></li>
     <li><a id="modal-import-google" class="btn-floating green"><i class="material-icons">publish</i></a></li>
   </ul>
 </div>
@@ -198,6 +209,7 @@ session_start();
 
 
     $("#zoom-button").removeClass("hide");
+
     $('.fixed-action-btn').floatingActionButton({
     toolbarEnabled: false
   });
@@ -743,6 +755,9 @@ $("#btnAddUserModal").click(function () {
   var userID = {
     userID:$('#userID').val()
   };
+
+  var userid=$('#userID').val();
+
   console.log(userID);
   console.log($('#userID').val());
     $.ajax({
@@ -756,7 +771,12 @@ $("#btnAddUserModal").click(function () {
 
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
+
+
         $('#modalUser').modal('close');
+        location.reload();
+
+        $(output).prependTo("#user-list");
         M.toast({html: 'You add a new calendar!', inDuration:5, outDuration:50});
 
       },
@@ -766,6 +786,52 @@ $("#btnAddUserModal").click(function () {
         //alert("some error");
       }
     });
+
+
+return false;
+
+});
+
+
+
+
+
+
+// Delete users
+$('#user-list').on('click', '.delete', function (e) {
+
+  var str = $('#user-name').text();
+  str = str.replace("close", "");
+  str = str.replace(/\s+/g, "");
+  console.log("=>"+str);
+  var userID = {
+    userID:str
+  };
+  console.log(userID);
+  $(this).parent().parent().remove();
+    $.ajax({
+      url: "./removeUserCalendar.php",
+      type: "POST",
+      data: userID,
+      success: function (msg) {
+        //alert("Go!");
+        console.log(msg);
+        console.log("Go!");
+
+        $('#calendar-right').fullCalendar('refetchEvents');
+        $('#calendar-left').fullCalendar('refetchEvents');
+
+        M.toast({html: 'You remove a calendar!', inDuration:5, outDuration:5});
+
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.log(textStatus);
+        console.log(errorThrown);
+        //alert("some error");
+      }
+    });
+
+
 
 });
 
@@ -793,10 +859,22 @@ $("#btnRemoveUserModal").click(function () {
         //alert("Go!");
         console.log(msg);
         console.log("Go!");
+        //$('#user-list')
+        $( "#user-list").each(function() {
+          console.log($( this).find("#user-name").text());
+          var str = $( this).find("#user-name").text();
+          str = str.replace("close", "");
+          str = str.replace(/\s+/g, "");
+          if (str ===  $('#userID').val() ){
+            $(this).remove();
+            return false;
+          }
+        });
 
+        $('#modalUser').modal('close');
         $('#calendar-right').fullCalendar('refetchEvents');
         $('#calendar-left').fullCalendar('refetchEvents');
-        $('#modalUser').modal('close');
+
         M.toast({html: 'You remove a calendar!', inDuration:5, outDuration:5});
 
       },
