@@ -42,21 +42,7 @@ session_start();
                   <div class="col s12">
                     <!-- <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue"><i class="material-icons">person_add</i></a> -->
                   </div>
-
-
-
                     <?php include './userlist.php'; ?>
-                  <!-- <div class="col s12" >
-                    <div class="card" style="padding:0;">
-                      <div class="card-content" style="padding:0.2em;">
-                        <span class="card-title" style="font-size:0.9em;">Added users's calendar:</span>
-                        <ul class="collection todos" id="user-list">
-
-                            <?php include './userlist.php'; ?>
-                        </ul>
-                        </div>
-                      </div>
-                  </div> -->
                 </div>
               </div>
 
@@ -314,7 +300,7 @@ session_start();
     var globalClickedEvent = null;
 
     $('#calendar-right').fullCalendar({
-
+      weekNumbers: true,
       navLinks:true,
       //scrollTime: "06:00:00",
       editable: true, //Allows for drag and drop events

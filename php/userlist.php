@@ -51,7 +51,7 @@ if (!empty($results)) {
 echo '<ul class="collection with-header" id="user-list">';
 echo '<li class="collection-header" style="padding:0.4em;">
   <h5 style="font-size:0.9em">';
-  echo "Added users's calendar:</h5>
+  echo "Added users' calendar:</h5>
 </li>";
   foreach ($results as $value) {
 
