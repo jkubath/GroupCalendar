@@ -1,8 +1,8 @@
 <?php
-  session_start();
+  //session_start();
     require_once('../includes/databaseConnection.php'); //Make the connection to the database
 
-session_start();
+//session_start();
 $username = $_SESSION['username'];
 
 
@@ -43,22 +43,36 @@ try {
     echo "Error: $e";
 }
 //echo json_encode($results);
-foreach ($results as $value) {
-
-  echo '<li class="collection-item">
-        <div id="user-name" style="font-size:0.8em;">';
-
-  echo $value;
-
-  echo  '<a href="#!" class="secondary-content delete" >
-            <i class="material-icons">close</i>
-          </a>
-        </div>
-      </li>';
+if (!empty($results)) {
+  echo '<div class="col s12" >
+    <div class="card" style="padding:0;">';//style="font-size:0.9em"
 
 
+echo '<ul class="collection with-header" id="user-list">';
+echo '<li class="collection-header" style="padding:0.4em;">
+  <h5 style="font-size:0.9em">';
+  echo "Added users's calendar:</h5>
+</li>";
+  foreach ($results as $value) {
 
+    echo '<li class="collection-item">
+          <div id="user-name" style="font-size:0.8em;">';
+
+    echo $value;
+
+    echo  '<a href="#!" class="secondary-content delete" >
+              <i class="material-icons">close</i>
+            </a>
+          </div>
+        </li>';
+
+  }
+  echo "  </ul>
+
+  </div>
+</div>";
 }
+
 
 
 ?>

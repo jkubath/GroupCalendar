@@ -43,7 +43,10 @@ session_start();
                     <!-- <a id="btnAddUser" class="modal-action modal-close waves-effect waves-light btn-small blue"><i class="material-icons">person_add</i></a> -->
                   </div>
 
-                  <div class="col s12">
+
+
+                    <?php include './userlist.php'; ?>
+                  <!-- <div class="col s12" >
                     <div class="card" style="padding:0;">
                       <div class="card-content" style="padding:0.2em;">
                         <span class="card-title" style="font-size:0.9em;">Added users's calendar:</span>
@@ -53,7 +56,7 @@ session_start();
                         </ul>
                         </div>
                       </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
 
@@ -788,7 +791,7 @@ $("#btnAddUserModal").click(function () {
     });
 
 
-return false;
+
 
 });
 
@@ -808,7 +811,7 @@ $('#user-list').on('click', '.delete', function (e) {
     userID:str
   };
   console.log(userID);
-  $(this).parent().parent().remove();
+  $(this).parent().parent().parent().parent().remove();
     $.ajax({
       url: "./removeUserCalendar.php",
       type: "POST",
